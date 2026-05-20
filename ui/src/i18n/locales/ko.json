@@ -678,7 +678,17 @@
     "selectCompany": "조직도를 보려면 회사를 선택하세요.",
     "empty": "조직에 에이전트가 없습니다. 에이전트를 만들어 조직도를 구성하세요.",
     "expandReports": "보고 대상 펼치기",
-    "collapseReports": "보고 대상 접기"
+    "collapseReports": "보고 대상 접기",
+    "chart": {
+      "selectCompany": "조직도를 보려면 회사를 선택하세요.",
+      "empty": "정의된 조직 계층이 없습니다.",
+      "importCompany": "회사 가져오기",
+      "exportCompany": "회사 내보내기",
+      "zoomIn": "확대",
+      "zoomOut": "축소",
+      "fitToScreen": "화면에 맞추기",
+      "fitToScreenAria": "조직도를 화면에 맞추기"
+    }
   },
   "auth": {
     "loading": "불러오는 중…",

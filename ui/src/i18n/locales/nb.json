@@ -678,7 +678,17 @@
     "selectCompany": "Select a company to view org chart.",
     "empty": "No agents in the organization. Create agents to build your org chart.",
     "expandReports": "Expand reports",
-    "collapseReports": "Collapse reports"
+    "collapseReports": "Collapse reports",
+    "chart": {
+      "selectCompany": "Select a company to view the org chart.",
+      "empty": "No organizational hierarchy defined.",
+      "importCompany": "Import company",
+      "exportCompany": "Export company",
+      "zoomIn": "Zoom in",
+      "zoomOut": "Zoom out",
+      "fitToScreen": "Fit to screen",
+      "fitToScreenAria": "Fit chart to screen"
+    }
   },
   "auth": {
     "loading": "Loading…",
