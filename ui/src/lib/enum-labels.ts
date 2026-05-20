@@ -50,3 +50,23 @@ export function goalStatusKey(status: string): string {
 export function goalLevelKey(level: string): string {
   return `goalLevel.${level}`;
 }
+
+/** i18n key for a routine lifecycle status (`active` | `paused` | `archived` | `draft`). */
+export function routineStatusKey(status: string): string {
+  return `routineStatus.${status}`;
+}
+
+/** i18n key for a routine run status (`succeeded`, `failed`, `coalesced`, …). */
+export function routineRunStatusKey(status: string): string {
+  return `routineRunStatus.${status}`;
+}
+
+/** i18n key for a routine concurrency policy (`coalesce_if_active`, …). */
+export function routineConcurrencyPolicyKey(policy: string): string {
+  return `routinePolicy.concurrency.${policy}`;
+}
+
+/** i18n key for a routine catch-up policy (`skip_missed`, `enqueue_missed_with_cap`). */
+export function routineCatchUpPolicyKey(policy: string): string {
+  return `routinePolicy.catchUp.${policy}`;
+}

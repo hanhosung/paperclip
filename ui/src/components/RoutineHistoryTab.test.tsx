@@ -250,7 +250,7 @@ describe("RoutineHistoryTab", () => {
       "Restoring this revision creates a new revision 3 with the same content. History stays append-only.",
     );
     expect(container.textContent).toContain("Status");
-    expect(container.textContent).toContain("paused");
+    expect(container.textContent).toContain("Paused");
     expect(container.textContent).toContain("Restore as new revision");
   });
 
