@@ -143,6 +143,18 @@
     "debit": "차변",
     "credit": "대변"
   },
+  "goalStatus": {
+    "planned": "계획됨",
+    "active": "진행 중",
+    "achieved": "달성됨",
+    "cancelled": "취소됨"
+  },
+  "goalLevel": {
+    "company": "회사",
+    "team": "팀",
+    "agent": "에이전트",
+    "task": "작업"
+  },
   "common": {
     "none": "없음"
   },
@@ -504,5 +516,48 @@
     "switchToSignIn": "로그인",
     "fillRequired": "필수 항목을 모두 입력하세요.",
     "genericError": "인증에 실패했습니다"
+  },
+  "goals": {
+    "list": {
+      "breadcrumb": "목표",
+      "selectCompany": "목표를 보려면 회사를 선택하세요.",
+      "empty": "아직 목표가 없습니다.",
+      "addGoal": "목표 추가",
+      "newGoal": "새 목표"
+    },
+    "detail": {
+      "showProperties": "속성 보기",
+      "addDescription": "설명을 추가하세요...",
+      "goalFallback": "목표",
+      "subGoalsTab": "하위 목표 ({{count}})",
+      "projectsTab": "프로젝트 ({{count}})",
+      "subGoal": "하위 목표",
+      "noSubGoals": "하위 목표가 없습니다.",
+      "noLinkedProjects": "연결된 프로젝트가 없습니다.",
+      "noCompanySelected": "선택된 회사가 없습니다"
+    },
+    "tree": {
+      "empty": "목표가 없습니다."
+    },
+    "props": {
+      "status": "상태",
+      "level": "수준",
+      "owner": "담당자",
+      "parentGoal": "상위 목표",
+      "created": "생성일",
+      "updated": "수정일"
+    },
+    "newDialog": {
+      "newGoal": "새 목표",
+      "newSubGoal": "새 하위 목표",
+      "titlePlaceholder": "목표 제목",
+      "descriptionPlaceholder": "설명을 추가하세요...",
+      "parentGoal": "상위 목표",
+      "noParent": "상위 목표 없음",
+      "creating": "만드는 중…",
+      "createGoal": "목표 만들기",
+      "createSubGoal": "하위 목표 만들기",
+      "noCompanySelected": "선택된 회사가 없습니다"
+    }
   }
 }

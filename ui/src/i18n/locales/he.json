@@ -143,6 +143,18 @@
     "debit": "Debit",
     "credit": "Credit"
   },
+  "goalStatus": {
+    "planned": "Planned",
+    "active": "Active",
+    "achieved": "Achieved",
+    "cancelled": "Cancelled"
+  },
+  "goalLevel": {
+    "company": "Company",
+    "team": "Team",
+    "agent": "Agent",
+    "task": "Task"
+  },
   "common": {
     "none": "None"
   },
@@ -504,5 +516,48 @@
     "switchToSignIn": "Sign in",
     "fillRequired": "Please fill in all required fields.",
     "genericError": "Authentication failed"
+  },
+  "goals": {
+    "list": {
+      "breadcrumb": "Goals",
+      "selectCompany": "Select a company to view goals.",
+      "empty": "No goals yet.",
+      "addGoal": "Add Goal",
+      "newGoal": "New Goal"
+    },
+    "detail": {
+      "showProperties": "Show properties",
+      "addDescription": "Add a description...",
+      "goalFallback": "Goal",
+      "subGoalsTab": "Sub-Goals ({{count}})",
+      "projectsTab": "Projects ({{count}})",
+      "subGoal": "Sub Goal",
+      "noSubGoals": "No sub-goals.",
+      "noLinkedProjects": "No linked projects.",
+      "noCompanySelected": "No company selected"
+    },
+    "tree": {
+      "empty": "No goals."
+    },
+    "props": {
+      "status": "Status",
+      "level": "Level",
+      "owner": "Owner",
+      "parentGoal": "Parent Goal",
+      "created": "Created",
+      "updated": "Updated"
+    },
+    "newDialog": {
+      "newGoal": "New goal",
+      "newSubGoal": "New sub-goal",
+      "titlePlaceholder": "Goal title",
+      "descriptionPlaceholder": "Add description...",
+      "parentGoal": "Parent goal",
+      "noParent": "No parent",
+      "creating": "Creating…",
+      "createGoal": "Create goal",
+      "createSubGoal": "Create sub-goal",
+      "noCompanySelected": "No company selected"
+    }
   }
 }

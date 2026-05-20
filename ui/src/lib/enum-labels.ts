@@ -40,3 +40,13 @@ export function financeEventKindKey(eventKind: string): string {
 export function financeDirectionKey(direction: string): string {
   return `financeDirection.${direction}`;
 }
+
+/** i18n key for a goal status (`planned` | `active` | `achieved` | `cancelled`). */
+export function goalStatusKey(status: string): string {
+  return `goalStatus.${status}`;
+}
+
+/** i18n key for a goal level (`company` | `team` | `agent` | `task`). */
+export function goalLevelKey(level: string): string {
+  return `goalLevel.${level}`;
+}
