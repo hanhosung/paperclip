@@ -459,6 +459,33 @@
       "activity": "활동"
     }
   },
+  "activity": {
+    "selectCompany": "활동을 보려면 회사를 선택하세요.",
+    "filterByType": "유형별 필터",
+    "allTypes": "모든 유형",
+    "empty": "아직 활동이 없습니다.",
+    "entityType": {
+      "issue": "이슈",
+      "project": "프로젝트",
+      "goal": "목표",
+      "agent": "에이전트",
+      "approval": "승인",
+      "heartbeat_run": "하트비트 실행",
+      "routine": "루틴",
+      "routine_run": "루틴 실행",
+      "company": "회사",
+      "comment": "댓글",
+      "join_request": "참여 요청",
+      "cost_event": "비용 이벤트"
+    }
+  },
+  "org": {
+    "breadcrumb": "조직도",
+    "selectCompany": "조직도를 보려면 회사를 선택하세요.",
+    "empty": "조직에 에이전트가 없습니다. 에이전트를 만들어 조직도를 구성하세요.",
+    "expandReports": "보고 대상 펼치기",
+    "collapseReports": "보고 대상 접기"
+  },
   "auth": {
     "loading": "불러오는 중…",
     "signInTitle": "Paperclip 로그인",

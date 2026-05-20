@@ -11,6 +11,7 @@ import { queryKeys } from "../lib/queryKeys";
 import { EmptyState } from "../components/EmptyState";
 import { ActivityRow } from "../components/ActivityRow";
 import { PageSkeleton } from "../components/PageSkeleton";
+import { useTranslation } from "@/i18n";
 import {
   Select,
   SelectContent,
@@ -21,6 +22,21 @@ import {
 import { History } from "lucide-react";
 
 const ACTIVITY_PAGE_LIMIT = 200;
+
+const KNOWN_ENTITY_TYPES = new Set([
+  "issue",
+  "project",
+  "goal",
+  "agent",
+  "approval",
+  "heartbeat_run",
+  "routine",
+  "routine_run",
+  "company",
+  "comment",
+  "join_request",
+  "cost_event",
+]);
 
 function detailString(event: ActivityEvent, ...keys: string[]) {
   const details = event.details;
@@ -44,13 +60,19 @@ function activityEntityTitle(event: ActivityEvent) {
 }
 
 export function Activity() {
+  const { t } = useTranslation();
   const { selectedCompanyId } = useCompany();
   const { setBreadcrumbs } = useBreadcrumbs();
   const [filter, setFilter] = useState("all");
 
+  const entityTypeLabel = (type: string) =>
+    KNOWN_ENTITY_TYPES.has(type)
+      ? t(`activity.entityType.${type}`)
+      : type.charAt(0).toUpperCase() + type.slice(1);
+
   useEffect(() => {
-    setBreadcrumbs([{ label: "Activity" }]);
-  }, [setBreadcrumbs]);
+    setBreadcrumbs([{ label: t("nav.activity") }]);
+  }, [setBreadcrumbs, t]);
 
   const { data, isLoading, error } = useQuery({
     queryKey: [...queryKeys.activity(selectedCompanyId!), { limit: ACTIVITY_PAGE_LIMIT }],
@@ -101,7 +123,7 @@ export function Activity() {
   }, [data]);
 
   if (!selectedCompanyId) {
-    return <EmptyState icon={History} message="Select a company to view activity." />;
+    return <EmptyState icon={History} message={t("activity.selectCompany")} />;
   }
 
   if (isLoading) {
@@ -122,13 +144,13 @@ export function Activity() {
       <div className="flex items-center justify-end">
         <Select value={filter} onValueChange={setFilter}>
           <SelectTrigger className="w-[140px] h-8 text-xs">
-            <SelectValue placeholder="Filter by type" />
+            <SelectValue placeholder={t("activity.filterByType")} />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">All types</SelectItem>
+            <SelectItem value="all">{t("activity.allTypes")}</SelectItem>
             {entityTypes.map((type) => (
               <SelectItem key={type} value={type}>
-                {type.charAt(0).toUpperCase() + type.slice(1)}
+                {entityTypeLabel(type)}
               </SelectItem>
             ))}
           </SelectContent>
@@ -138,7 +160,7 @@ export function Activity() {
       {error && <p className="text-sm text-destructive">{error.message}</p>}
 
       {filtered && filtered.length === 0 && (
-        <EmptyState icon={History} message="No activity yet." />
+        <EmptyState icon={History} message={t("activity.empty")} />
       )}
 
       {filtered && filtered.length > 0 && (
