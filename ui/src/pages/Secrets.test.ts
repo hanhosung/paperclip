@@ -8,7 +8,11 @@ import {
   getDefaultProviderConfigId,
   getProviderConfigBlockReason,
 } from "./Secrets";
+import { i18n } from "@/i18n";
 import type { SecretProviderHealthResponse } from "../api/secrets";
+
+/** Resolve i18n keys against the default (English) locale for assertions. */
+const t = i18n.t.bind(i18n);
 
 const awsProvider: SecretProviderDescriptor = {
   id: "aws_secrets_manager",
@@ -51,6 +55,7 @@ describe("Secrets page provider helpers", () => {
         { ...awsProvider, configured: false },
         "managed",
         null,
+        t,
       ),
     ).toBe("AWS Secrets Manager is not configured in this deployment.");
   });
@@ -72,6 +77,7 @@ describe("Secrets page provider helpers", () => {
         { ...awsProvider, configured: false },
         "managed",
         health,
+        t,
       ),
     ).toBe(
       "AWS Secrets Manager is not configured in this deployment. AWS Secrets Manager provider is not ready: missing PAPERCLIP_SECRETS_AWS_DEPLOYMENT_ID.",
@@ -91,6 +97,7 @@ describe("Secrets page provider helpers", () => {
         },
         "external",
         null,
+        t,
       ),
     ).toBe("Local encrypted (default) does not support linked external references.");
   });
@@ -113,6 +120,7 @@ describe("Secrets page provider helpers", () => {
           },
         ] as never,
         "aws_secrets_manager",
+        t,
       ),
     ).toBe("prod");
   });
@@ -123,7 +131,7 @@ describe("Secrets page provider helpers", () => {
         id: "vault-draft",
         provider: "vault",
         status: "coming_soon",
-      } as never),
+      } as never, t),
     ).toBe("This provider vault is saved as draft metadata only.");
   });
 });
