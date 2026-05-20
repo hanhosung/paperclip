@@ -6,6 +6,7 @@ import { createRoot } from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { Sidebar } from "./Sidebar";
+import { i18n } from "@/i18n";
 
 const mockHeartbeatsApi = vi.hoisted(() => ({
   liveRunsForCompany: vi.fn(),
@@ -160,5 +161,29 @@ describe("Sidebar", () => {
     await act(async () => {
       root.unmount();
     });
+  });
+
+  it("renders Korean navigation labels when the locale is ko", async () => {
+    mockInstanceSettingsApi.getExperimental.mockResolvedValue({ enableIsolatedWorkspaces: false });
+    await act(async () => {
+      await i18n.changeLanguage("ko");
+    });
+    try {
+      const root = await renderSidebar();
+
+      expect(container.textContent).toContain("새 이슈"); // New Issue
+      expect(container.textContent).toContain("대시보드"); // Dashboard
+      expect(container.textContent).toContain("받은함"); // Inbox
+      expect(container.textContent).toContain("이슈"); // Issues
+      expect(container.textContent).not.toContain("Dashboard");
+
+      await act(async () => {
+        root.unmount();
+      });
+    } finally {
+      await act(async () => {
+        await i18n.changeLanguage("en");
+      });
+    }
   });
 });
