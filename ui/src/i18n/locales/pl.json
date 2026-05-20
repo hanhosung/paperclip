@@ -429,6 +429,36 @@
       "estimated": "estimated"
     }
   },
+  "commandPalette": {
+    "searchPlaceholder": "Search issues, agents, projects...",
+    "emptyHintBefore": "No quick issue matches. Press ",
+    "emptyHintAction": "search all",
+    "emptyHintAfter": " or keep typing to refine.",
+    "noResults": "No results found.",
+    "groups": {
+      "search": "Search",
+      "actions": "Actions",
+      "pages": "Pages",
+      "issues": "Issues",
+      "agents": "Agents",
+      "projects": "Projects"
+    },
+    "searchAllBefore": "Search all for ",
+    "openFullSearch": "open full search",
+    "createIssue": "Create new issue",
+    "createAgent": "Create new agent",
+    "createProject": "Create new project",
+    "pages": {
+      "dashboard": "Dashboard",
+      "inbox": "Inbox",
+      "issues": "Issues",
+      "projects": "Projects",
+      "goals": "Goals",
+      "agents": "Agents",
+      "costs": "Costs",
+      "activity": "Activity"
+    }
+  },
   "auth": {
     "loading": "Loading…",
     "signInTitle": "Sign in to Paperclip",

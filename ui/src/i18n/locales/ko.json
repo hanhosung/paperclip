@@ -429,6 +429,36 @@
       "estimated": "추정치"
     }
   },
+  "commandPalette": {
+    "searchPlaceholder": "이슈, 에이전트, 프로젝트 검색...",
+    "emptyHintBefore": "빠르게 일치하는 이슈가 없습니다. ",
+    "emptyHintAction": "전체 검색",
+    "emptyHintAfter": " 하거나 계속 입력해 좁혀보세요.",
+    "noResults": "결과를 찾을 수 없습니다.",
+    "groups": {
+      "search": "검색",
+      "actions": "작업",
+      "pages": "페이지",
+      "issues": "이슈",
+      "agents": "에이전트",
+      "projects": "프로젝트"
+    },
+    "searchAllBefore": "전체 검색: ",
+    "openFullSearch": "전체 검색 열기",
+    "createIssue": "새 이슈 만들기",
+    "createAgent": "새 에이전트 만들기",
+    "createProject": "새 프로젝트 만들기",
+    "pages": {
+      "dashboard": "대시보드",
+      "inbox": "받은함",
+      "issues": "이슈",
+      "projects": "프로젝트",
+      "goals": "목표",
+      "agents": "에이전트",
+      "costs": "비용",
+      "activity": "활동"
+    }
+  },
   "auth": {
     "loading": "불러오는 중…",
     "signInTitle": "Paperclip 로그인",
