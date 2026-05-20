@@ -363,6 +363,58 @@
       "enqueue_missed_with_cap": "상한 적용 누락 큐 추가"
     }
   },
+  "agents": {
+    "list": {
+      "breadcrumb": "에이전트",
+      "selectCompany": "에이전트를 보려면 회사를 선택하세요.",
+      "tabs": {
+        "all": "전체",
+        "active": "활성",
+        "paused": "일시중지",
+        "error": "오류"
+      },
+      "filters": "필터",
+      "showTerminated": "종료됨 표시",
+      "listView": "목록 보기",
+      "orgView": "조직도 보기",
+      "newAgent": "새 에이전트",
+      "count_one": "에이전트 {{count}}개",
+      "count_other": "에이전트 {{count}}개",
+      "emptyCreate": "첫 에이전트를 만들어 시작하세요.",
+      "noMatch": "선택한 필터에 해당하는 에이전트가 없습니다.",
+      "noHierarchy": "정의된 조직 계층이 없습니다.",
+      "live": "실행 중",
+      "liveCount": "실행 중 ({{count}})"
+    },
+    "new": {
+      "title": "새 에이전트",
+      "subtitle": "고급 에이전트 구성",
+      "namePlaceholder": "에이전트 이름",
+      "titlePlaceholder": "직함 (예: 엔지니어링 부사장)",
+      "companySkills": "회사 스킬",
+      "companySkillsHelp": "회사 라이브러리의 선택 스킬입니다. 기본 제공 Paperclip 런타임 스킬은 자동으로 추가됩니다.",
+      "noSkills": "설치된 선택 회사 스킬이 아직 없습니다.",
+      "willBeCeo": "이 에이전트가 CEO가 됩니다",
+      "cancel": "취소",
+      "testAgent": "에이전트 테스트",
+      "testing": "테스트 중...",
+      "create": "에이전트 만들기",
+      "creating": "만드는 중…",
+      "createFailed": "에이전트 생성에 실패했습니다",
+      "openCodeModelError": "OpenCode는 provider/model 형식의 명시적 모델이 필요합니다."
+    },
+    "props": {
+      "status": "상태",
+      "role": "역할",
+      "title": "직함",
+      "adapter": "어댑터",
+      "session": "세션",
+      "lastError": "마지막 오류",
+      "lastHeartbeat": "마지막 하트비트",
+      "reportsTo": "보고 대상",
+      "created": "생성일"
+    }
+  },
   "statusBadge": {
     "active": "활성",
     "running": "실행 중",
