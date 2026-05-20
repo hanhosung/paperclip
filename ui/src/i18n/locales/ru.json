@@ -29,6 +29,188 @@
     "language": {
       "label": "Language",
       "description": "Choose the display language for the dashboard."
+    },
+    "shell": {
+      "title": "Instance Settings"
+    },
+    "nav": {
+      "profile": "Profile",
+      "general": "General",
+      "access": "Access",
+      "heartbeats": "Heartbeats",
+      "experimental": "Experimental",
+      "plugins": "Plugins",
+      "adapters": "Adapters"
+    },
+    "general": {
+      "breadcrumb": "General",
+      "title": "General",
+      "description": "Configure instance-wide preferences including log display, keyboard shortcuts, backup retention, and data sharing.",
+      "loading": "Loading general settings...",
+      "loadError": "Failed to load general settings.",
+      "updateError": "Failed to update general settings.",
+      "deployment": {
+        "title": "Deployment and auth",
+        "localTrusted": "Local trusted mode is optimized for a local operator. Browser requests run as local board context and no sign-in is required.",
+        "authenticatedPublic": "Authenticated public mode requires sign-in for board access and is intended for public URLs.",
+        "authenticatedPrivate": "Authenticated private mode requires sign-in and is intended for LAN, VPN, or other private-network deployments.",
+        "authReadiness": "Auth readiness",
+        "ready": "Ready",
+        "notReady": "Not ready",
+        "bootstrapStatus": "Bootstrap status",
+        "setupRequired": "Setup required",
+        "bootstrapInvite": "Bootstrap invite",
+        "active": "Active",
+        "none": "None"
+      },
+      "censorUsername": {
+        "title": "Censor username in logs",
+        "description": "Hide the username segment in home-directory paths and similar operator-visible log output. Standalone username mentions outside of paths are not yet masked in the live transcript view. This is off by default.",
+        "ariaLabel": "Toggle username log censoring"
+      },
+      "keyboardShortcuts": {
+        "title": "Keyboard shortcuts",
+        "description": "Enable app keyboard shortcuts, including inbox navigation and global shortcuts like creating issues or toggling panels. This is off by default.",
+        "ariaLabel": "Toggle keyboard shortcuts"
+      },
+      "backupRetention": {
+        "title": "Backup retention",
+        "description": "Configure how long automatic database backups are retained. Backups run roughly every hour and are compressed with gzip. Within the daily window all backups are kept; beyond that, one backup per week and one per month are preserved.",
+        "daily": "Daily",
+        "weekly": "Weekly",
+        "monthly": "Monthly",
+        "days": "{{count}} days",
+        "weeks_one": "{{count}} week",
+        "weeks_other": "{{count}} weeks",
+        "months_one": "{{count}} month",
+        "months_other": "{{count}} months"
+      },
+      "feedbackSharing": {
+        "title": "AI feedback sharing",
+        "description": "Control whether thumbs up and thumbs down votes can send the voted AI output to Paperclip Labs. Votes are always saved locally.",
+        "termsLink": "Read our terms of service",
+        "promptNotice": "No default is saved yet. The next thumbs up or thumbs down choice will ask once and then save the answer here.",
+        "allowedLabel": "Always allow",
+        "allowedDescription": "Share voted AI outputs automatically.",
+        "notAllowedLabel": "Don't allow",
+        "notAllowedDescription": "Keep voted AI outputs local only.",
+        "retestHintBefore": "To retest the first-use prompt in local dev, remove the ",
+        "retestHintMiddle": " key from the ",
+        "retestHintAfter": " JSON row for this instance, or set it back to ",
+        "retestHintEnd": ". Unset and ",
+        "retestHintFinal": " both mean no default has been chosen yet."
+      },
+      "signOut": {
+        "title": "Sign out",
+        "description": "Sign out of this Paperclip instance. You will be redirected to the login page.",
+        "button": "Sign out",
+        "pending": "Signing out...",
+        "error": "Failed to sign out."
+      }
+    },
+    "access": {
+      "breadcrumb": "Access",
+      "title": "Instance Access",
+      "description": "Search users, manage instance-admin status, and control which companies they can access.",
+      "loading": "Loading instance users…",
+      "adminRequired": "Instance admin access is required to manage users.",
+      "loadError": "Failed to load users.",
+      "searchLabel": "Search users",
+      "searchPlaceholder": "Search by name or email",
+      "membershipCount": "{{count}} active company memberships",
+      "selectUser": "Select a user to inspect instance access.",
+      "loadingUserAccess": "Loading user access…",
+      "loadUserAccessError": "Failed to load user access.",
+      "removeAdmin": "Remove instance admin",
+      "promoteAdmin": "Promote to instance admin",
+      "companyAccessTitle": "Company access",
+      "companyAccessDescription": "Toggle company membership for this user. New access defaults to an active operator membership.",
+      "saveCompanyAccess": "Save company access",
+      "savingCompanyAccess": "Saving…",
+      "currentMemberships": "Current memberships",
+      "unsetRole": "unset",
+      "noUserSelected": "No user selected",
+      "companyAccessUpdated": "Company access updated",
+      "instanceRoleUpdated": "Instance role updated"
+    },
+    "heartbeats": {
+      "breadcrumb": "Heartbeats",
+      "title": "Scheduler Heartbeats",
+      "description": "Agents with a timer heartbeat enabled across all of your companies.",
+      "loading": "Loading scheduler heartbeats...",
+      "loadError": "Failed to load scheduler heartbeats.",
+      "updateError": "Failed to update heartbeat.",
+      "disableAllError": "Failed to disable all heartbeats.",
+      "disableOneError": "Failed to disable 1 timer heartbeat: {{detail}}",
+      "disableManyError": "Failed to disable {{failed}} of {{total}} timer heartbeats. First error: {{detail}}",
+      "unknownError": "Unknown error",
+      "active": "active",
+      "disabled": "disabled",
+      "company_one": "company",
+      "company_other": "companies",
+      "disableAll": "Disable All",
+      "disablingAll": "Disabling...",
+      "confirmDisableAll_one": "Disable timer heartbeats for all {{count}} enabled agent?",
+      "confirmDisableAll_other": "Disable timer heartbeats for all {{count}} enabled agents?",
+      "empty": "No scheduler heartbeats match the current criteria.",
+      "on": "On",
+      "off": "Off",
+      "never": "never",
+      "fullConfig": "Full agent config",
+      "enableTimer": "Enable Timer Heartbeat",
+      "disableTimer": "Disable Timer Heartbeat",
+      "intervalSeconds": "{{count}}s"
+    },
+    "experimental": {
+      "breadcrumb": "Experimental",
+      "title": "Experimental",
+      "description": "Opt into features that are still being evaluated before they become default behavior.",
+      "loading": "Loading experimental settings...",
+      "loadError": "Failed to load experimental settings.",
+      "updateError": "Failed to update experimental settings.",
+      "previewError": "Failed to preview recovery tasks.",
+      "runError": "Failed to create recovery tasks.",
+      "lookbackInvalid": "Lookback hours must be a whole number from 1 to 720.",
+      "environments": {
+        "title": "Enable Environments",
+        "description": "Show environment management in company settings and allow project and agent environment assignment controls.",
+        "ariaLabel": "Toggle environments experimental setting"
+      },
+      "isolatedWorkspaces": {
+        "title": "Enable Isolated Workspaces",
+        "description": "Show execution workspace controls in project configuration and allow isolated workspace behavior for new and existing issue runs.",
+        "ariaLabel": "Toggle isolated workspaces experimental setting"
+      },
+      "autoRestart": {
+        "title": "Auto-Restart Dev Server When Idle",
+        "description": "In `pnpm dev:once`, wait for all queued and running local agent runs to finish, then restart the server automatically when backend changes or migrations make the current boot stale.",
+        "ariaLabel": "Toggle guarded dev-server auto-restart"
+      },
+      "autoRecovery": {
+        "title": "Auto-Create Issue Recovery Tasks",
+        "description": "Let the heartbeat scheduler create recovery issues for issue dependency chains found inside the configured lookback window.",
+        "ariaLabel": "Toggle issue graph liveness auto-recovery",
+        "lookbackHours": "Lookback hours",
+        "saveHours": "Save hours",
+        "preview": "Preview",
+        "runNow": "Run now",
+        "currentWindow_one": "Current window: last {{count}} hour.",
+        "currentWindow_other": "Current window: last {{count}} hours."
+      },
+      "recoveryDialog": {
+        "title": "Confirm auto-recovery",
+        "summary_one": "{{count}} recovery task matches the last {{hours}} hours.",
+        "summary_other": "{{count}} recovery tasks match the last {{hours}} hours.",
+        "checking": "Checking recovery candidates before enabling.",
+        "noTasks": "No recovery tasks would be created right now. Auto-recovery can still run for future liveness incidents in this window.",
+        "recoveryTarget": "Recovery target:",
+        "skipped_one": "{{count}} current finding is outside the configured lookback and will not be touched.",
+        "skipped_other": "{{count}} current findings are outside the configured lookback and will not be touched.",
+        "cancel": "Cancel",
+        "enableOnly": "Enable only",
+        "enable": "Enable",
+        "enableAndCreate": "Enable and create {{count}}"
+      }
     }
   },
   "dashboard": {
