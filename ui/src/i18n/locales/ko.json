@@ -363,6 +363,37 @@
       "enqueue_missed_with_cap": "상한 적용 누락 큐 추가"
     }
   },
+  "statusBadge": {
+    "active": "활성",
+    "running": "실행 중",
+    "scheduled_retry": "재시도 예약됨",
+    "paused": "일시중지됨",
+    "idle": "대기 중",
+    "archived": "보관됨",
+    "planned": "계획됨",
+    "achieved": "달성됨",
+    "completed": "완료됨",
+    "failed": "실패",
+    "timed_out": "시간 초과",
+    "succeeded": "성공",
+    "ok": "정상",
+    "warning": "경고",
+    "error": "오류",
+    "info": "정보",
+    "terminated": "종료됨",
+    "pending": "대기 중",
+    "pending_approval": "승인 대기",
+    "revision_requested": "수정 요청됨",
+    "approved": "승인됨",
+    "rejected": "거부됨",
+    "backlog": "백로그",
+    "todo": "할 일",
+    "in_progress": "진행 중",
+    "in_review": "검토 중",
+    "blocked": "차단됨",
+    "done": "완료",
+    "cancelled": "취소됨"
+  },
   "common": {
     "none": "없음"
   },

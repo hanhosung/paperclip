@@ -1,7 +1,9 @@
 import { cn } from "../lib/utils";
 import { statusBadge, statusBadgeDefault } from "../lib/status-colors";
+import { useTranslation } from "@/i18n";
 
 export function StatusBadge({ status }: { status: string }) {
+  const { t } = useTranslation();
   return (
     <span
       className={cn(
@@ -9,7 +11,7 @@ export function StatusBadge({ status }: { status: string }) {
         statusBadge[status] ?? statusBadgeDefault
       )}
     >
-      {status.replace(/_/g, " ")}
+      {t(`statusBadge.${status}`, { defaultValue: status.replace(/_/g, " ") })}
     </span>
   );
 }

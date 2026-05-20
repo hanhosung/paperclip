@@ -363,6 +363,37 @@
       "enqueue_missed_with_cap": "Enqueue missed with cap"
     }
   },
+  "statusBadge": {
+    "active": "Active",
+    "running": "Running",
+    "scheduled_retry": "Scheduled retry",
+    "paused": "Paused",
+    "idle": "Idle",
+    "archived": "Archived",
+    "planned": "Planned",
+    "achieved": "Achieved",
+    "completed": "Completed",
+    "failed": "Failed",
+    "timed_out": "Timed out",
+    "succeeded": "Succeeded",
+    "ok": "OK",
+    "warning": "Warning",
+    "error": "Error",
+    "info": "Info",
+    "terminated": "Terminated",
+    "pending": "Pending",
+    "pending_approval": "Pending approval",
+    "revision_requested": "Revision requested",
+    "approved": "Approved",
+    "rejected": "Rejected",
+    "backlog": "Backlog",
+    "todo": "To Do",
+    "in_progress": "In Progress",
+    "in_review": "In Review",
+    "blocked": "Blocked",
+    "done": "Done",
+    "cancelled": "Cancelled"
+  },
   "common": {
     "none": "None"
   },
