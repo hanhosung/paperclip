@@ -25,3 +25,18 @@ export function issuePriorityKey(priority: string): string {
 export function fieldKey(field: string): string {
   return `field.${field}`;
 }
+
+/** i18n key for a billing type (`metered_api`, `subscription_included`, …). */
+export function billingTypeKey(billingType: string): string {
+  return `billingType.${billingType}`;
+}
+
+/** i18n key for a finance event kind (`inference_charge`, `platform_fee`, …). */
+export function financeEventKindKey(eventKind: string): string {
+  return `financeEventKind.${eventKind}`;
+}
+
+/** i18n key for a finance direction (`debit` | `credit`). */
+export function financeDirectionKey(direction: string): string {
+  return `financeDirection.${direction}`;
+}

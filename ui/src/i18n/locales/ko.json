@@ -115,6 +115,34 @@
     "workspace": "워크스페이스",
     "parent": "상위 이슈"
   },
+  "billingType": {
+    "metered_api": "종량제 API",
+    "subscription_included": "구독",
+    "subscription_overage": "구독 초과분",
+    "credits": "크레딧",
+    "fixed": "정액",
+    "unknown": "알 수 없음"
+  },
+  "financeEventKind": {
+    "inference_charge": "추론 청구",
+    "platform_fee": "플랫폼 수수료",
+    "credit_purchase": "크레딧 구매",
+    "credit_refund": "크레딧 환불",
+    "credit_expiry": "크레딧 만료",
+    "byok_fee": "BYOK 수수료",
+    "gateway_overhead": "게이트웨이 오버헤드",
+    "log_storage_charge": "로그 저장",
+    "logpush_charge": "로그 푸시",
+    "provisioned_capacity_charge": "프로비저닝된 용량",
+    "training_charge": "학습",
+    "custom_model_import_charge": "커스텀 모델 가져오기",
+    "custom_model_storage_charge": "커스텀 모델 저장",
+    "manual_adjustment": "수동 조정"
+  },
+  "financeDirection": {
+    "debit": "차변",
+    "credit": "대변"
+  },
   "common": {
     "none": "없음"
   },
@@ -225,6 +253,180 @@
       "financeEvents": "재무 이벤트",
       "financeEventsSub": "기간 내 추정 {{amount}}",
       "unlimitedBudget": "무제한 예산"
+    },
+    "unit": {
+      "in": "입력",
+      "out": "출력",
+      "tok": "{{tokens}} 토큰"
+    },
+    "inferenceLedger": {
+      "title": "추론 원장",
+      "description": "선택한 기간의 요청 단위 추론 비용입니다.",
+      "budget": "예산 {{amount}}",
+      "usage": "사용량",
+      "utilization": "이 기간에 월 예산의 {{percent}}%를 사용했습니다."
+    },
+    "financeLedger": {
+      "title": "재무 원장",
+      "description": "단일 추론 요청에 대응되지 않는 계정 단위 청구입니다.",
+      "debits": "차변",
+      "debitsSub_one": "기간 내 총 이벤트 {{count}}건",
+      "debitsSub_other": "기간 내 총 이벤트 {{count}}건",
+      "credits": "대변",
+      "creditsSub": "환불, 상계, 크레딧 반환",
+      "net": "순액",
+      "netSub": "선택한 기간의 차변에서 대변을 뺀 값",
+      "estimated": "추정치",
+      "estimatedSub": "아직 청구서로 확정되지 않은 추정 차변"
+    },
+    "byAgent": {
+      "title": "에이전트별",
+      "description": "선택한 기간에 각 에이전트가 사용한 양입니다.",
+      "empty": "아직 비용 이벤트가 없습니다.",
+      "inOut": "입력 {{in}} · 출력 {{out}}",
+      "apiRuns": "API {{count}}",
+      "subscriptionRuns": "구독 {{count}}"
+    },
+    "byProject": {
+      "title": "프로젝트별",
+      "description": "프로젝트에 연결된 이슈를 통해 귀속된 실행 비용입니다.",
+      "empty": "아직 프로젝트에 귀속된 실행 비용이 없습니다.",
+      "unattributed": "미귀속"
+    },
+    "byBiller": {
+      "title": "청구 주체별",
+      "description": "청구하거나 크레딧을 지급한 주체별로 묶은 계정 단위 재무 이벤트입니다.",
+      "empty": "아직 재무 이벤트가 없습니다."
+    },
+    "providers": {
+      "all": "전체 공급자",
+      "empty": "이 기간에 비용 이벤트가 없습니다."
+    },
+    "billers": {
+      "all": "전체 청구 주체",
+      "empty": "이 기간에 청구 가능한 이벤트가 없습니다."
+    },
+    "scope": {
+      "company": "회사",
+      "agent": "에이전트",
+      "project": "프로젝트"
+    },
+    "budgets": {
+      "controlPlaneTitle": "예산 관제",
+      "controlPlaneDesc": "에이전트와 프로젝트의 강제 중단 지출 한도입니다. 공급자 구독 할당량은 별도이며 공급자 탭에 표시됩니다.",
+      "activeIncidents": "활성 인시던트",
+      "activeIncidentsSub": "해소되지 않은 소프트 또는 하드 임계값 초과",
+      "pendingApprovals": "대기 중 승인",
+      "pendingApprovalsSub": "보드 조치를 기다리는 예산 재정의 승인",
+      "pausedAgents": "일시중지된 에이전트",
+      "pausedAgentsSub": "예산으로 차단된 에이전트 하트비트",
+      "pausedProjects": "일시중지된 프로젝트",
+      "pausedProjectsSub": "예산으로 차단된 프로젝트 실행",
+      "incidentsHelp": "예산을 올리거나 해당 범위를 명시적으로 일시중지 상태로 두어 강제 중단을 해소하세요.",
+      "companyBudgets": "회사 예산",
+      "agentBudgets": "에이전트 예산",
+      "projectBudgets": "프로젝트 예산",
+      "companyDesc": "회사 전체 월간 정책입니다.",
+      "agentDesc": "개별 에이전트의 반복 월간 지출 정책입니다.",
+      "projectDesc": "실행에 종속된 프로젝트의 누적 지출 정책입니다.",
+      "emptyPolicies": "아직 예산 정책이 없습니다. 에이전트와 프로젝트 예산은 각 상세 페이지에서 설정하거나, 기존 회사 월간 예산 관리를 사용하세요."
+    },
+    "incident": {
+      "hardStop": "{{scope}} 강제 중단",
+      "reached": "지출이 {{observed}}에 도달했으며 한도는 {{limit}}입니다.",
+      "pausedProject": "프로젝트 실행이 일시중지되었습니다. 예산 인시던트를 해소할 때까지 이 프로젝트의 새 작업이 시작되지 않습니다.",
+      "pausedScope": "이 범위가 일시중지되었습니다. 예산 인시던트를 해소할 때까지 새 하트비트가 시작되지 않습니다.",
+      "newBudget": "새 예산 (USD)",
+      "applying": "적용 중...",
+      "raiseResume": "예산 상향 후 재개",
+      "mustExceed": "새 예산은 현재 관측된 지출을 초과해야 합니다.",
+      "keepPaused": "일시중지 유지",
+      "stateResolved": "해소됨",
+      "stateDismissed": "기각됨",
+      "stateEscalated": "에스컬레이션됨",
+      "statePending": "승인 대기",
+      "stateOpen": "열림"
+    },
+    "policy": {
+      "lifetimeBudget": "누적 예산",
+      "monthlyBudget": "월간 UTC 예산",
+      "observed": "관측값",
+      "budget": "예산",
+      "percentOfLimit": "한도의 {{percent}}%",
+      "noCap": "한도 미설정",
+      "disabled": "비활성화됨",
+      "softAlert": "{{percent}}%에서 소프트 경고",
+      "pauseSuffix": "{{reason}} 일시중지",
+      "remaining": "잔여",
+      "unlimited": "무제한",
+      "pausedProject": "예산을 올리거나 인시던트를 기각할 때까지 이 프로젝트의 실행이 일시중지됩니다.",
+      "pausedScope": "예산을 올리거나 인시던트를 기각할 때까지 이 범위의 하트비트가 일시중지됩니다.",
+      "budgetUsd": "예산 (USD)",
+      "saving": "저장 중...",
+      "updateBudget": "예산 수정",
+      "setBudget": "예산 설정",
+      "statusPaused": "일시중지됨",
+      "statusWarning": "경고",
+      "statusHardStop": "강제 중단",
+      "statusHealthy": "정상",
+      "invalidAmount": "0 이상의 올바른 금액을 입력하세요."
+    },
+    "quota": {
+      "periodSpend": "기간 지출",
+      "percentOfAllocation": "할당량의 {{percent}}%"
+    },
+    "providerCard": {
+      "apiRuns": "~API {{count}}",
+      "subRuns": "~구독 {{count}}",
+      "runsSuffix": "실행",
+      "thisWeek": "이번 주",
+      "perWeek": "~{{amount}} / 주",
+      "rollingWindows": "롤링 윈도우",
+      "subscription": "구독",
+      "total": "합계",
+      "runsWord": "실행",
+      "subShare": "토큰 사용량의 {{percent}}%가 구독 경유",
+      "subscriptionQuota": "구독 할당량",
+      "tokenShare": "공급자 토큰의 {{percent}}%",
+      "costShare": "공급자 비용의 {{percent}}%",
+      "resets": "{{date}} 초기화"
+    },
+    "billerCard": {
+      "providers_one": "공급자 {{count}}개",
+      "providers_other": "공급자 {{count}}개",
+      "models_one": "모델 {{count}}개",
+      "models_other": "모델 {{count}}개",
+      "meteredRuns_one": "종량제 실행 {{count}}회",
+      "meteredRuns_other": "종량제 실행 {{count}}회",
+      "subscriptionRuns_one": "구독 실행 {{count}}회",
+      "subscriptionRuns_other": "구독 실행 {{count}}회",
+      "thisWeek": "이번 주 {{amount}}",
+      "billingTypes": "청구 유형",
+      "upstreamProviders": "상위 공급자"
+    },
+    "financeBiller": {
+      "summary": "{{kinds}}종에 걸친 이벤트 {{events}}건",
+      "net": "순액",
+      "debits": "차변",
+      "credits": "대변",
+      "estimated": "추정치"
+    },
+    "financeKind": {
+      "title": "재무 이벤트 구성",
+      "description": "이벤트 종류별로 묶은 계정 단위 청구입니다.",
+      "empty": "이 기간에 재무 이벤트가 없습니다.",
+      "summary": "이벤트 {{events}}건 · 청구 주체 {{billers}}개",
+      "debits": "차변 {{amount}}"
+    },
+    "financeTimeline": {
+      "title": "최근 재무 이벤트",
+      "description": "충전, 수수료, 크레딧, 약정 및 기타 요청 외 청구입니다.",
+      "empty": "이 기간에 재무 이벤트가 없습니다.",
+      "emptyOverview": "아직 재무 이벤트가 없습니다. 청구 주체의 청구서나 크레딧이 들어오면 계정 단위 청구를 추가하세요.",
+      "invoice": "청구서 {{id}}",
+      "region": "지역 {{region}}",
+      "tier": "등급 {{tier}}",
+      "estimated": "추정치"
     }
   }
 }
