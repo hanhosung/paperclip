@@ -5,5 +5,87 @@
       "description": "회사를 만들어 시작하세요.",
       "newCompany": "새 회사"
     }
+  },
+  "nav": {
+    "newIssue": "새 이슈",
+    "dashboard": "대시보드",
+    "inbox": "받은함",
+    "issues": "이슈",
+    "routines": "루틴",
+    "goals": "목표",
+    "workspaces": "워크스페이스",
+    "org": "조직도",
+    "skills": "스킬",
+    "costs": "비용",
+    "activity": "활동",
+    "settings": "설정",
+    "search": "검색",
+    "sections": {
+      "work": "작업",
+      "company": "회사"
+    }
+  },
+  "settings": {
+    "language": {
+      "label": "언어",
+      "description": "대시보드 표시 언어를 선택하세요."
+    }
+  },
+  "dashboard": {
+    "empty": {
+      "welcome": "Paperclip에 오신 것을 환영합니다. 첫 회사와 에이전트를 설정해 시작하세요.",
+      "getStarted": "시작하기",
+      "selectCompany": "대시보드를 보려면 회사를 만들거나 선택하세요."
+    },
+    "noAgents": "에이전트가 없습니다.",
+    "createAgent": "여기서 만들기",
+    "budgetIncident_one": "활성 예산 인시던트 {{count}}건",
+    "budgetIncident_other": "활성 예산 인시던트 {{count}}건",
+    "budgetIncidentDetail": "에이전트 {{agents}}개 일시중지 · 프로젝트 {{projects}}개 일시중지 · 예산 승인 대기 {{approvals}}건",
+    "openBudgets": "예산 열기",
+    "metrics": {
+      "agentsEnabled": "활성 에이전트",
+      "agentsDetail": "{{running}} 실행 중, {{paused}} 일시중지, {{error}} 오류",
+      "tasksInProgress": "진행 중 작업",
+      "tasksDetail": "{{open}} 열림, {{blocked}} 차단됨",
+      "monthSpend": "월 지출",
+      "budgetUtilization": "{{budget}} 예산의 {{percent}}%",
+      "unlimitedBudget": "무제한 예산",
+      "pendingApprovals": "대기 중 승인",
+      "budgetOverridesPending": "예산 재정의 {{n}}건이 보드 검토 대기 중",
+      "awaitingReview": "보드 검토 대기 중"
+    },
+    "charts": {
+      "runActivity": "실행 활동",
+      "issuesByPriority": "우선순위별 이슈",
+      "issuesByStatus": "상태별 이슈",
+      "successRate": "성공률",
+      "last14Days": "최근 14일"
+    },
+    "recentActivity": "최근 활동",
+    "recentTasks": "최근 작업",
+    "noTasks": "작업이 없습니다."
+  },
+  "issues": {
+    "searchPlaceholder": "이슈 검색...",
+    "search": "이슈 검색",
+    "view": {
+      "list": "목록 보기",
+      "board": "보드 보기",
+      "enableNesting": "상위-하위 중첩 켜기",
+      "disableNesting": "상위-하위 중첩 끄기",
+      "sort": "정렬",
+      "group": "그룹"
+    }
+  },
+  "inbox": {
+    "tabs": {
+      "mine": "내 항목",
+      "recent": "최근",
+      "unread": "읽지 않음",
+      "blocked": "차단됨",
+      "all": "전체"
+    },
+    "searchPlaceholder": "받은함 검색…"
   }
 }

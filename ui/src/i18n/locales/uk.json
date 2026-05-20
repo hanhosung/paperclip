@@ -5,5 +5,87 @@
       "description": "Почніть зі створення компанії.",
       "newCompany": "Нова компанія"
     }
+  },
+  "nav": {
+    "newIssue": "New Issue",
+    "dashboard": "Dashboard",
+    "inbox": "Inbox",
+    "issues": "Issues",
+    "routines": "Routines",
+    "goals": "Goals",
+    "workspaces": "Workspaces",
+    "org": "Org",
+    "skills": "Skills",
+    "costs": "Costs",
+    "activity": "Activity",
+    "settings": "Settings",
+    "search": "Search",
+    "sections": {
+      "work": "Work",
+      "company": "Company"
+    }
+  },
+  "settings": {
+    "language": {
+      "label": "Language",
+      "description": "Choose the display language for the dashboard."
+    }
+  },
+  "dashboard": {
+    "empty": {
+      "welcome": "Welcome to Paperclip. Set up your first company and agent to get started.",
+      "getStarted": "Get Started",
+      "selectCompany": "Create or select a company to view the dashboard."
+    },
+    "noAgents": "You have no agents.",
+    "createAgent": "Create one here",
+    "budgetIncident_one": "{{count}} active budget incident",
+    "budgetIncident_other": "{{count}} active budget incidents",
+    "budgetIncidentDetail": "{{agents}} agents paused · {{projects}} projects paused · {{approvals}} pending budget approvals",
+    "openBudgets": "Open budgets",
+    "metrics": {
+      "agentsEnabled": "Agents Enabled",
+      "agentsDetail": "{{running}} running, {{paused}} paused, {{error}} errors",
+      "tasksInProgress": "Tasks In Progress",
+      "tasksDetail": "{{open}} open, {{blocked}} blocked",
+      "monthSpend": "Month Spend",
+      "budgetUtilization": "{{percent}}% of {{budget}} budget",
+      "unlimitedBudget": "Unlimited budget",
+      "pendingApprovals": "Pending Approvals",
+      "budgetOverridesPending": "{{n}} budget overrides awaiting board review",
+      "awaitingReview": "Awaiting board review"
+    },
+    "charts": {
+      "runActivity": "Run Activity",
+      "issuesByPriority": "Issues by Priority",
+      "issuesByStatus": "Issues by Status",
+      "successRate": "Success Rate",
+      "last14Days": "Last 14 days"
+    },
+    "recentActivity": "Recent Activity",
+    "recentTasks": "Recent Tasks",
+    "noTasks": "No tasks yet."
+  },
+  "issues": {
+    "searchPlaceholder": "Search issues...",
+    "search": "Search issues",
+    "view": {
+      "list": "List view",
+      "board": "Board view",
+      "enableNesting": "Enable parent-child nesting",
+      "disableNesting": "Disable parent-child nesting",
+      "sort": "Sort",
+      "group": "Group"
+    }
+  },
+  "inbox": {
+    "tabs": {
+      "mine": "Mine",
+      "recent": "Recent",
+      "unread": "Unread",
+      "blocked": "Blocked",
+      "all": "All"
+    },
+    "searchPlaceholder": "Search inbox…"
   }
 }
