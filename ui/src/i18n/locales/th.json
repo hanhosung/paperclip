@@ -87,5 +87,35 @@
       "all": "All"
     },
     "searchPlaceholder": "Search inbox…"
+  },
+  "status": {
+    "backlog": "Backlog",
+    "todo": "To Do",
+    "in_progress": "In Progress",
+    "in_review": "In Review",
+    "done": "Done",
+    "blocked": "Blocked",
+    "cancelled": "Cancelled"
+  },
+  "priority": {
+    "critical": "Critical",
+    "high": "High",
+    "medium": "Medium",
+    "low": "Low"
+  },
+  "field": {
+    "workflow": "Workflow",
+    "status": "Status",
+    "priority": "Priority",
+    "title": "Title",
+    "created": "Created",
+    "updated": "Updated",
+    "assignee": "Assignee",
+    "project": "Project",
+    "workspace": "Workspace",
+    "parent": "Parent Issue"
+  },
+  "common": {
+    "none": "None"
   }
 }

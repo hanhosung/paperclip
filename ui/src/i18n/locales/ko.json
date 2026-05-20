@@ -87,5 +87,35 @@
       "all": "전체"
     },
     "searchPlaceholder": "받은함 검색…"
+  },
+  "status": {
+    "backlog": "백로그",
+    "todo": "할 일",
+    "in_progress": "진행 중",
+    "in_review": "검토 중",
+    "done": "완료",
+    "blocked": "차단됨",
+    "cancelled": "취소됨"
+  },
+  "priority": {
+    "critical": "긴급",
+    "high": "높음",
+    "medium": "보통",
+    "low": "낮음"
+  },
+  "field": {
+    "workflow": "워크플로",
+    "status": "상태",
+    "priority": "우선순위",
+    "title": "제목",
+    "created": "생성일",
+    "updated": "수정일",
+    "assignee": "담당자",
+    "project": "프로젝트",
+    "workspace": "워크스페이스",
+    "parent": "상위 이슈"
+  },
+  "common": {
+    "none": "없음"
   }
 }
