@@ -428,5 +428,24 @@
       "tier": "등급 {{tier}}",
       "estimated": "추정치"
     }
+  },
+  "auth": {
+    "loading": "불러오는 중…",
+    "signInTitle": "Paperclip 로그인",
+    "signUpTitle": "Paperclip 계정 만들기",
+    "signInDescription": "이메일과 비밀번호로 이 인스턴스에 접속하세요.",
+    "signUpDescription": "이 인스턴스의 계정을 만드세요. v1에서는 이메일 확인이 필요하지 않습니다.",
+    "nameLabel": "이름",
+    "emailLabel": "이메일",
+    "passwordLabel": "비밀번호",
+    "signInButton": "로그인",
+    "signUpButton": "계정 만들기",
+    "working": "처리 중…",
+    "needAccount": "계정이 필요하신가요?",
+    "haveAccount": "이미 계정이 있으신가요?",
+    "createOne": "계정 만들기",
+    "switchToSignIn": "로그인",
+    "fillRequired": "필수 항목을 모두 입력하세요.",
+    "genericError": "인증에 실패했습니다"
   }
 }
