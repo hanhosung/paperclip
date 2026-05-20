@@ -11,6 +11,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { LanguageSelector } from "@/components/LanguageSelector";
+import { useTranslation } from "@/i18n";
 
 function deriveInitials(name: string) {
   const parts = name.trim().split(/\s+/).filter(Boolean);
@@ -19,6 +21,7 @@ function deriveInitials(name: string) {
 }
 
 export function ProfileSettings() {
+  const { t } = useTranslation();
   const { setBreadcrumbs } = useBreadcrumbs();
   const { selectedCompanyId, selectedCompany } = useCompany();
   const queryClient = useQueryClient();
@@ -267,6 +270,14 @@ export function ProfileSettings() {
             </Button>
           </div>
         </form>
+
+        <div className="space-y-2 border-t border-border/60 pt-6">
+          <Label htmlFor="profile-language">{t("settings.language.label")}</Label>
+          <LanguageSelector id="profile-language" />
+          <p className="text-xs text-muted-foreground">
+            {t("settings.language.description")}
+          </p>
+        </div>
       </section>
     </div>
   );
