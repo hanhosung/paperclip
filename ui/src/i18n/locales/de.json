@@ -117,5 +117,31 @@
   },
   "common": {
     "none": "None"
+  },
+  "issueProps": {
+    "status": "Status",
+    "priority": "Priority",
+    "labels": "Labels",
+    "assignee": "Assignee",
+    "project": "Project",
+    "parent": "Parent",
+    "blockedBy": "Blocked by",
+    "blocking": "Blocking",
+    "subIssues": "Sub-issues",
+    "relatedTasks": "Related Tasks",
+    "reviewers": "Reviewers",
+    "approvers": "Approvers",
+    "execution": "Execution",
+    "monitor": "Monitor",
+    "depth": "Depth",
+    "service": "Service",
+    "workspace": "Workspace",
+    "branch": "Branch",
+    "folder": "Folder",
+    "createdBy": "Created by",
+    "started": "Started",
+    "completed": "Completed",
+    "created": "Created",
+    "updated": "Updated"
   }
 }

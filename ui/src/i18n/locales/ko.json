@@ -117,5 +117,31 @@
   },
   "common": {
     "none": "없음"
+  },
+  "issueProps": {
+    "status": "상태",
+    "priority": "우선순위",
+    "labels": "라벨",
+    "assignee": "담당자",
+    "project": "프로젝트",
+    "parent": "상위 이슈",
+    "blockedBy": "차단 요인",
+    "blocking": "차단 중",
+    "subIssues": "하위 이슈",
+    "relatedTasks": "관련 작업",
+    "reviewers": "검토자",
+    "approvers": "승인자",
+    "execution": "실행",
+    "monitor": "모니터",
+    "depth": "깊이",
+    "service": "서비스",
+    "workspace": "워크스페이스",
+    "branch": "브랜치",
+    "folder": "폴더",
+    "createdBy": "생성자",
+    "started": "시작일",
+    "completed": "완료일",
+    "created": "생성일",
+    "updated": "수정일"
   }
 }
