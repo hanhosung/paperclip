@@ -160,5 +160,35 @@
     "uploading": "업로드 중...",
     "newSubIssue": "새 하위 이슈",
     "subIssue": "하위 이슈"
+  },
+  "issueFilter": {
+    "filter": "필터",
+    "filtersWithCount": "필터: {{count}}",
+    "title": "필터",
+    "clear": "초기화",
+    "quickFilters": "빠른 필터",
+    "preset": {
+      "all": "전체",
+      "active": "활성",
+      "backlog": "백로그",
+      "done": "완료"
+    },
+    "section": {
+      "status": "상태",
+      "priority": "우선순위",
+      "assignee": "담당자",
+      "creator": "작성자",
+      "project": "프로젝트",
+      "labels": "라벨",
+      "workspace": "워크스페이스",
+      "visibility": "표시"
+    },
+    "noAssignee": "담당자 없음",
+    "me": "나",
+    "searchCreators": "작성자 검색...",
+    "removeCreator": "작성자 {{name}} 제거",
+    "noCreators": "일치하는 작성자 없음",
+    "liveRunsOnly": "실행 중만",
+    "hideRoutineRuns": "루틴 실행 숨기기"
   }
 }

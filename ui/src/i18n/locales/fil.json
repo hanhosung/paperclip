@@ -160,5 +160,35 @@
     "uploading": "Uploading...",
     "newSubIssue": "New Sub-issue",
     "subIssue": "Sub-issue"
+  },
+  "issueFilter": {
+    "filter": "Filter",
+    "filtersWithCount": "Filters: {{count}}",
+    "title": "Filters",
+    "clear": "Clear",
+    "quickFilters": "Quick filters",
+    "preset": {
+      "all": "All",
+      "active": "Active",
+      "backlog": "Backlog",
+      "done": "Done"
+    },
+    "section": {
+      "status": "Status",
+      "priority": "Priority",
+      "assignee": "Assignee",
+      "creator": "Creator",
+      "project": "Project",
+      "labels": "Labels",
+      "workspace": "Workspace",
+      "visibility": "Visibility"
+    },
+    "noAssignee": "No assignee",
+    "me": "Me",
+    "searchCreators": "Search creators...",
+    "removeCreator": "Remove creator {{name}}",
+    "noCreators": "No creators match.",
+    "liveRunsOnly": "Live runs only",
+    "hideRoutineRuns": "Hide routine runs"
   }
 }
