@@ -190,5 +190,41 @@
     "noCreators": "일치하는 작성자 없음",
     "liveRunsOnly": "실행 중만",
     "hideRoutineRuns": "루틴 실행 숨기기"
+  },
+  "costs": {
+    "title": "비용",
+    "description": "추론 비용, 플랫폼 수수료, 크레딧, 실시간 할당량 윈도우.",
+    "selectCompany": "비용을 보려면 회사를 선택하세요.",
+    "range": {
+      "mtd": "이번 달",
+      "7d": "최근 7일",
+      "30d": "최근 30일",
+      "ytd": "올해",
+      "all": "전체 기간",
+      "custom": "사용자 지정"
+    },
+    "customTo": "~",
+    "customPrompt": "시작일과 종료일을 선택해 데이터를 불러오세요.",
+    "tabs": {
+      "overview": "개요",
+      "budgets": "예산",
+      "providers": "공급자",
+      "billers": "청구 주체",
+      "finance": "재무"
+    },
+    "metrics": {
+      "inferenceSpend": "추론 비용",
+      "inferenceSpendSub": "요청 단위 이벤트 {{tokens}} 토큰",
+      "budget": "예산",
+      "budgetOpen": "열림",
+      "budgetPaused": "에이전트 {{agents}}개 일시중지 · 프로젝트 {{projects}}개 일시중지",
+      "budgetOf": "{{total}} 중 {{spent}}",
+      "noCap": "월 한도 미설정",
+      "financeNet": "재무 순액",
+      "financeNetSub": "차변 {{debits}} · 대변 {{credits}}",
+      "financeEvents": "재무 이벤트",
+      "financeEventsSub": "기간 내 추정 {{amount}}",
+      "unlimitedBudget": "무제한 예산"
+    }
   }
 }

@@ -26,7 +26,8 @@ import { ProviderQuotaCard } from "../components/ProviderQuotaCard";
 import { StatusBadge } from "../components/StatusBadge";
 import { useBreadcrumbs } from "../context/BreadcrumbContext";
 import { useCompany } from "../context/CompanyContext";
-import { useDateRange, PRESET_KEYS, PRESET_LABELS } from "../hooks/useDateRange";
+import { useDateRange, PRESET_KEYS } from "../hooks/useDateRange";
+import { useTranslation } from "@/i18n";
 import { queryKeys } from "../lib/queryKeys";
 import { billingTypeDisplayName, cn, formatCents, formatTokens, providerDisplayName } from "../lib/utils";
 import { Button } from "@/components/ui/button";
@@ -147,6 +148,7 @@ function FinanceSummaryCard({
 }
 
 export function Costs() {
+  const { t } = useTranslation();
   const { selectedCompanyId } = useCompany();
   const { setBreadcrumbs } = useBreadcrumbs();
   const queryClient = useQueryClient();
@@ -168,8 +170,8 @@ export function Costs() {
   } = useDateRange();
 
   useEffect(() => {
-    setBreadcrumbs([{ label: "Costs" }]);
-  }, [setBreadcrumbs]);
+    setBreadcrumbs([{ label: t("nav.costs") }]);
+  }, [setBreadcrumbs, t]);
 
   const [today, setToday] = useState(() => new Date().toDateString());
   const todayTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -529,7 +531,7 @@ export function Costs() {
   }), [budgetPolicies]);
 
   if (!selectedCompanyId) {
-    return <EmptyState icon={DollarSign} message="Select a company to view costs." />;
+    return <EmptyState icon={DollarSign} message={t("costs.selectCompany")} />;
   }
 
   const showCustomPrompt = preset === "custom" && !customReady;
@@ -541,9 +543,9 @@ export function Costs() {
       <div className="space-y-5">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
             <div>
-                <h1 className="text-3xl font-semibold tracking-tight">Costs</h1>
+                <h1 className="text-3xl font-semibold tracking-tight">{t("costs.title")}</h1>
                 <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
-                  Inference spend, platform fees, credits, and live quota windows.
+                  {t("costs.description")}
                 </p>
             </div>
 
@@ -555,7 +557,7 @@ export function Costs() {
                   size="sm"
                   onClick={() => setPreset(key)}
                 >
-                  {PRESET_LABELS[key]}
+                  {t(`costs.range.${key}`)}
                 </Button>
               ))}
             </div>
@@ -569,7 +571,7 @@ export function Costs() {
                 onChange={(event) => setCustomFrom(event.target.value)}
                 className="h-9 rounded-md border border-input bg-background px-3 text-sm text-foreground"
               />
-              <span className="text-sm text-muted-foreground">to</span>
+              <span className="text-sm text-muted-foreground">{t("costs.customTo")}</span>
               <input
                 type="date"
                 value={customTo}
@@ -581,37 +583,37 @@ export function Costs() {
 
           <div className="grid gap-3 lg:grid-cols-4">
             <MetricTile
-              label="Inference spend"
+              label={t("costs.metrics.inferenceSpend")}
               value={formatCents(spendData?.summary.spendCents ?? 0)}
-              subtitle={`${formatTokens(inferenceTokenTotal)} tokens across request-scoped events`}
+              subtitle={t("costs.metrics.inferenceSpendSub", { tokens: formatTokens(inferenceTokenTotal) })}
               icon={DollarSign}
             />
             <MetricTile
-              label="Budget"
+              label={t("costs.metrics.budget")}
               value={activeBudgetIncidents.length > 0 ? String(activeBudgetIncidents.length) : (
                 spendData?.summary.budgetCents && spendData.summary.budgetCents > 0
                   ? `${spendData.summary.utilizationPercent}%`
-                  : "Open"
+                  : t("costs.metrics.budgetOpen")
               )}
               subtitle={
                 activeBudgetIncidents.length > 0
-                  ? `${budgetData?.pausedAgentCount ?? 0} agents paused · ${budgetData?.pausedProjectCount ?? 0} projects paused`
+                  ? t("costs.metrics.budgetPaused", { agents: budgetData?.pausedAgentCount ?? 0, projects: budgetData?.pausedProjectCount ?? 0 })
                   : spendData?.summary.budgetCents && spendData.summary.budgetCents > 0
-                    ? `${formatCents(spendData.summary.spendCents)} of ${formatCents(spendData.summary.budgetCents)}`
-                    : "No monthly cap configured"
+                    ? t("costs.metrics.budgetOf", { spent: formatCents(spendData.summary.spendCents), total: formatCents(spendData.summary.budgetCents) })
+                    : t("costs.metrics.noCap")
               }
               icon={Coins}
             />
             <MetricTile
-              label="Finance net"
+              label={t("costs.metrics.financeNet")}
               value={formatCents(financeData?.summary.netCents ?? 0)}
-              subtitle={`${formatCents(financeData?.summary.debitCents ?? 0)} debits · ${formatCents(financeData?.summary.creditCents ?? 0)} credits`}
+              subtitle={t("costs.metrics.financeNetSub", { debits: formatCents(financeData?.summary.debitCents ?? 0), credits: formatCents(financeData?.summary.creditCents ?? 0) })}
               icon={ReceiptText}
             />
             <MetricTile
-              label="Finance events"
+              label={t("costs.metrics.financeEvents")}
               value={String(financeData?.summary.eventCount ?? 0)}
-              subtitle={`${formatCents(financeData?.summary.estimatedDebitCents ?? 0)} estimated in range`}
+              subtitle={t("costs.metrics.financeEventsSub", { amount: formatCents(financeData?.summary.estimatedDebitCents ?? 0) })}
               icon={ArrowUpRight}
             />
           </div>
@@ -619,16 +621,16 @@ export function Costs() {
 
       <Tabs value={mainTab} onValueChange={(value) => setMainTab(value as typeof mainTab)}>
         <TabsList variant="line" className="justify-start">
-          <TabsTrigger value="overview">Overview</TabsTrigger>
-          <TabsTrigger value="budgets">Budgets</TabsTrigger>
-          <TabsTrigger value="providers">Providers</TabsTrigger>
-          <TabsTrigger value="billers">Billers</TabsTrigger>
-          <TabsTrigger value="finance">Finance</TabsTrigger>
+          <TabsTrigger value="overview">{t("costs.tabs.overview")}</TabsTrigger>
+          <TabsTrigger value="budgets">{t("costs.tabs.budgets")}</TabsTrigger>
+          <TabsTrigger value="providers">{t("costs.tabs.providers")}</TabsTrigger>
+          <TabsTrigger value="billers">{t("costs.tabs.billers")}</TabsTrigger>
+          <TabsTrigger value="finance">{t("costs.tabs.finance")}</TabsTrigger>
         </TabsList>
 
         <TabsContent value="overview" className="mt-4 space-y-4">
           {showCustomPrompt ? (
-            <p className="text-sm text-muted-foreground">Select a start and end date to load data.</p>
+            <p className="text-sm text-muted-foreground">{t("costs.customPrompt")}</p>
           ) : showOverviewLoading ? (
             <PageSkeleton variant="costs" />
           ) : overviewError ? (
@@ -671,7 +673,7 @@ export function Costs() {
                         <div className="mt-1 text-sm text-muted-foreground">
                           {spendData?.summary.budgetCents && spendData.summary.budgetCents > 0
                             ? `Budget ${formatCents(spendData.summary.budgetCents)}`
-                            : "Unlimited budget"}
+                            : t("costs.metrics.unlimitedBudget")}
                         </div>
                       </div>
                       <div className="border border-border px-4 py-3 text-right">
@@ -950,7 +952,7 @@ export function Costs() {
 
         <TabsContent value="providers" className="mt-4 space-y-4">
           {showCustomPrompt ? (
-            <p className="text-sm text-muted-foreground">Select a start and end date to load data.</p>
+            <p className="text-sm text-muted-foreground">{t("costs.customPrompt")}</p>
           ) : (
             <>
               <Tabs value={effectiveProvider} onValueChange={setActiveProvider}>
@@ -1005,7 +1007,7 @@ export function Costs() {
 
         <TabsContent value="billers" className="mt-4 space-y-4">
           {showCustomPrompt ? (
-            <p className="text-sm text-muted-foreground">Select a start and end date to load data.</p>
+            <p className="text-sm text-muted-foreground">{t("costs.customPrompt")}</p>
           ) : (
             <>
               <Tabs value={effectiveBiller} onValueChange={setActiveBiller}>
@@ -1058,7 +1060,7 @@ export function Costs() {
 
         <TabsContent value="finance" className="mt-4 space-y-4">
           {showCustomPrompt ? (
-            <p className="text-sm text-muted-foreground">Select a start and end date to load data.</p>
+            <p className="text-sm text-muted-foreground">{t("costs.customPrompt")}</p>
           ) : financeLoading ? (
             <PageSkeleton variant="costs" />
           ) : financeError ? (
