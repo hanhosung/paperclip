@@ -143,5 +143,22 @@
     "completed": "완료일",
     "created": "생성일",
     "updated": "수정일"
+  },
+  "issueDetail": {
+    "tabs": {
+      "chat": "채팅",
+      "activity": "활동",
+      "relatedWork": "관련 작업"
+    },
+    "backToInbox": "받은함으로 돌아가기",
+    "archiveFromInbox": "받은함에서 보관",
+    "moreActions": "더보기",
+    "loadEarlier": "이전 댓글 불러오기",
+    "loadingEarlier": "이전 댓글 불러오는 중...",
+    "uploadAttachment": "첨부파일 업로드",
+    "upload": "업로드",
+    "uploading": "업로드 중...",
+    "newSubIssue": "새 하위 이슈",
+    "subIssue": "하위 이슈"
   }
 }

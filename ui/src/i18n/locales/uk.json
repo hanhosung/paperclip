@@ -143,5 +143,22 @@
     "completed": "Completed",
     "created": "Created",
     "updated": "Updated"
+  },
+  "issueDetail": {
+    "tabs": {
+      "chat": "Chat",
+      "activity": "Activity",
+      "relatedWork": "Related work"
+    },
+    "backToInbox": "Back to inbox",
+    "archiveFromInbox": "Archive from inbox",
+    "moreActions": "More actions",
+    "loadEarlier": "Load earlier comments",
+    "loadingEarlier": "Loading earlier comments...",
+    "uploadAttachment": "Upload attachment",
+    "upload": "Upload",
+    "uploading": "Uploading...",
+    "newSubIssue": "New Sub-issue",
+    "subIssue": "Sub-issue"
   }
 }
