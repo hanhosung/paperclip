@@ -1020,5 +1020,85 @@
       "reinstalledBody": "Type \"{{type}}\" updated from npm.{{version}}",
       "reinstallFailed": "Reinstall failed"
     }
+  },
+  "companySettings": {
+    "breadcrumbCompany": "Company",
+    "breadcrumbSettings": "Settings",
+    "title": "Company Settings",
+    "noCompany": "No company selected. Select a company from the switcher above.",
+    "sidebar": {
+      "backToCompany": "Company",
+      "title": "Company Settings",
+      "general": "General",
+      "environments": "Environments",
+      "access": "Access",
+      "invites": "Invites",
+      "secrets": "Secrets"
+    },
+    "general": {
+      "section": "General",
+      "companyName": "Company name",
+      "companyNameHint": "The display name for your company.",
+      "description": "Description",
+      "descriptionHint": "Optional description shown in the company profile.",
+      "descriptionPlaceholder": "Optional company description"
+    },
+    "appearance": {
+      "section": "Appearance",
+      "logo": "Logo",
+      "logoHint": "Upload a PNG, JPEG, WEBP, GIF, or SVG logo image.",
+      "removeLogo": "Remove logo",
+      "removingLogo": "Removing...",
+      "logoUploadFailed": "Logo upload failed",
+      "uploadingLogo": "Uploading logo...",
+      "brandColor": "Brand color",
+      "brandColorHint": "Sets the hue for the company icon. Leave empty for auto-generated color.",
+      "brandColorPlaceholder": "Auto",
+      "clear": "Clear",
+      "attachmentLimit": "Attachment size limit",
+      "attachmentLimitHint": "Accepted range: 1-{{max}} MiB.",
+      "attachmentUnit": "MiB",
+      "attachmentInvalid": "Enter a whole number from 1 to {{max}}."
+    },
+    "save": {
+      "saveChanges": "Save changes",
+      "saving": "Saving...",
+      "saved": "Saved",
+      "failed": "Failed to save"
+    },
+    "hiring": {
+      "section": "Hiring",
+      "requireApproval": "Require board approval for new hires",
+      "requireApprovalHint": "New agent hires stay pending until approved by board."
+    },
+    "invites": {
+      "section": "Invites",
+      "intro": "Generate an OpenClaw agent invite snippet.",
+      "introHint": "Creates a short-lived OpenClaw agent invite and renders a copy-ready prompt.",
+      "generate": "Generate OpenClaw Invite Prompt",
+      "generating": "Generating...",
+      "createFailed": "Failed to create invite",
+      "snippetTitle": "OpenClaw Invite Prompt",
+      "copied": "Copied",
+      "copySnippet": "Copy snippet",
+      "copiedSnippet": "Copied snippet"
+    },
+    "packages": {
+      "section": "Company Packages",
+      "movedBefore": "Import and export have moved to dedicated pages accessible from the ",
+      "orgChartLink": "Org Chart",
+      "movedAfter": " header.",
+      "export": "Export",
+      "import": "Import"
+    },
+    "danger": {
+      "section": "Danger Zone",
+      "archiveDescription": "Archive this company to hide it from the sidebar. This persists in the database.",
+      "archiveCompany": "Archive company",
+      "archiving": "Archiving...",
+      "alreadyArchived": "Already archived",
+      "confirmArchive": "Archive company \"{{name}}\"? It will be hidden from the sidebar.",
+      "archiveFailed": "Failed to archive company"
+    }
   }
 }

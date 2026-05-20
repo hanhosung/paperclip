@@ -1019,5 +1019,85 @@
       "reinstalledBody": "\"{{type}}\" 유형이 npm에서 업데이트되었습니다.{{version}}",
       "reinstallFailed": "재설치에 실패했습니다"
     }
+  },
+  "companySettings": {
+    "breadcrumbCompany": "회사",
+    "breadcrumbSettings": "설정",
+    "title": "회사 설정",
+    "noCompany": "선택된 회사가 없습니다. 위의 전환기에서 회사를 선택하세요.",
+    "sidebar": {
+      "backToCompany": "회사",
+      "title": "회사 설정",
+      "general": "일반",
+      "environments": "환경",
+      "access": "접근 권한",
+      "invites": "초대",
+      "secrets": "시크릿"
+    },
+    "general": {
+      "section": "일반",
+      "companyName": "회사 이름",
+      "companyNameHint": "회사의 표시 이름입니다.",
+      "description": "설명",
+      "descriptionHint": "회사 프로필에 표시되는 선택 설명입니다.",
+      "descriptionPlaceholder": "선택 회사 설명"
+    },
+    "appearance": {
+      "section": "외관",
+      "logo": "로고",
+      "logoHint": "PNG, JPEG, WEBP, GIF 또는 SVG 로고 이미지를 업로드하세요.",
+      "removeLogo": "로고 제거",
+      "removingLogo": "제거 중...",
+      "logoUploadFailed": "로고 업로드에 실패했습니다",
+      "uploadingLogo": "로고 업로드 중...",
+      "brandColor": "브랜드 색상",
+      "brandColorHint": "회사 아이콘의 색조를 설정합니다. 비워 두면 색상이 자동 생성됩니다.",
+      "brandColorPlaceholder": "자동",
+      "clear": "지우기",
+      "attachmentLimit": "첨부파일 크기 제한",
+      "attachmentLimitHint": "허용 범위: 1-{{max}} MiB.",
+      "attachmentUnit": "MiB",
+      "attachmentInvalid": "1에서 {{max}}까지의 정수를 입력하세요."
+    },
+    "save": {
+      "saveChanges": "변경사항 저장",
+      "saving": "저장 중...",
+      "saved": "저장됨",
+      "failed": "저장에 실패했습니다"
+    },
+    "hiring": {
+      "section": "채용",
+      "requireApproval": "신규 채용에 이사회 승인 필요",
+      "requireApprovalHint": "신규 에이전트 채용은 이사회 승인 전까지 대기 상태로 유지됩니다."
+    },
+    "invites": {
+      "section": "초대",
+      "intro": "OpenClaw 에이전트 초대 스니펫을 생성합니다.",
+      "introHint": "단기 OpenClaw 에이전트 초대를 만들고 복사 가능한 프롬프트를 렌더링합니다.",
+      "generate": "OpenClaw 초대 프롬프트 생성",
+      "generating": "생성 중...",
+      "createFailed": "초대 생성에 실패했습니다",
+      "snippetTitle": "OpenClaw 초대 프롬프트",
+      "copied": "복사됨",
+      "copySnippet": "스니펫 복사",
+      "copiedSnippet": "스니펫이 복사됨"
+    },
+    "packages": {
+      "section": "회사 패키지",
+      "movedBefore": "가져오기와 내보내기는 ",
+      "orgChartLink": "조직도",
+      "movedAfter": " 헤더에서 접근할 수 있는 전용 페이지로 이동되었습니다.",
+      "export": "내보내기",
+      "import": "가져오기"
+    },
+    "danger": {
+      "section": "위험 구역",
+      "archiveDescription": "이 회사를 보관하여 사이드바에서 숨깁니다. 이 설정은 데이터베이스에 유지됩니다.",
+      "archiveCompany": "회사 보관",
+      "archiving": "보관 중...",
+      "alreadyArchived": "이미 보관됨",
+      "confirmArchive": "회사 \"{{name}}\"을(를) 보관하시겠습니까? 사이드바에서 숨겨집니다.",
+      "archiveFailed": "회사 보관에 실패했습니다"
+    }
   }
 }
