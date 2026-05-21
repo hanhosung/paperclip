@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from "react";
+import { useTranslation } from "@/i18n";
 import {
   Tooltip,
   TooltipTrigger,
@@ -18,48 +19,51 @@ import { HelpCircle, ChevronDown, ChevronRight } from "lucide-react";
 import { cn } from "../lib/utils";
 import { AGENT_ROLE_LABELS } from "@paperclipai/shared";
 
-/* ---- Help text for (?) tooltips ---- */
+/* ---- Help text keys for (?) tooltips ----
+ * Maps each field to its i18n key under `agentConfig.hint.*`.
+ * Callers resolve the actual text with their own `t(help.<field>)`.
+ */
 export const help: Record<string, string> = {
-  name: "Display name for this agent.",
-  title: "Job title shown in the org chart.",
-  role: "Organizational role. Determines position and capabilities.",
-  reportsTo: "The agent this one reports to in the org hierarchy.",
-  capabilities: "Describes what this agent can do. Shown in the org chart and used for task routing.",
-  adapterType: "How this agent runs: local CLI (Claude/Codex/OpenCode), OpenClaw Gateway, spawned process, or generic HTTP webhook.",
-  cwd: "Deprecated legacy working directory fallback for local adapters. Existing agents may still carry this value, but new configurations should use project workspaces instead.",
-  promptTemplate: "Sent on every heartbeat. Keep this small and dynamic. Use it for current-task framing, not large static instructions. Supports {{ agent.id }}, {{ agent.name }}, {{ agent.role }} and other template variables.",
-  model: "Override the default model used by the adapter.",
-  thinkingEffort: "Control model reasoning depth. Supported values vary by adapter/model.",
-  chrome: "Enable Claude's Chrome integration by passing --chrome.",
-  dangerouslySkipPermissions: "Run unattended by auto-approving adapter permission prompts when supported.",
-  dangerouslyBypassSandbox: "Run Codex without sandbox restrictions. Required for filesystem/network access.",
-  search: "Enable Codex web search capability during runs.",
-  fastMode: "Enable Codex Fast mode. This burns credits/tokens much faster and is supported on GPT-5.4 and manual Codex model IDs.",
-  workspaceStrategy: "How Paperclip should realize an execution workspace for this agent. Keep project_primary for normal cwd execution, or use git_worktree for issue-scoped isolated checkouts.",
-  workspaceBaseRef: "Base git ref used when creating a worktree branch. Leave blank to use the resolved workspace ref or HEAD.",
-  workspaceBranchTemplate: "Template for naming derived branches. Supports {{issue.identifier}}, {{issue.title}}, {{agent.name}}, {{project.id}}, {{workspace.repoRef}}, and {{slug}}.",
-  worktreeParentDir: "Directory where derived worktrees should be created. Absolute, ~-prefixed, and repo-relative paths are supported.",
-  runtimeServicesJson: "Optional workspace runtime service definitions. Use this for shared app servers, workers, or other long-lived companion processes attached to the workspace.",
-  maxTurnsPerRun: "Maximum number of agentic turns (tool calls) per heartbeat run.",
-  command: "The command to execute (e.g. node, python).",
-  localCommand: "Override the path to the CLI command you want the adapter to call (e.g. /usr/local/bin/claude, codex, opencode).",
-  args: "Command-line arguments, comma-separated.",
-  extraArgs: "Extra CLI arguments for local adapters, comma-separated.",
-  envVars: "Environment variables injected into the adapter process. Use plain values or secret references.",
-  bootstrapPrompt: "Only sent when Paperclip starts a fresh session. Use this for stable setup guidance that should not be repeated on every heartbeat.",
-  payloadTemplateJson: "Optional JSON merged into remote adapter request payloads before Paperclip adds its standard wake and workspace fields.",
-  webhookUrl: "The URL that receives POST requests when the agent is invoked.",
-  heartbeatInterval: "Run this agent automatically on a timer. Useful for periodic tasks like checking for new work.",
-  intervalSec: "Seconds between automatic heartbeat invocations.",
-  timeoutSec: "Maximum seconds a run can take before being terminated. 0 means no timeout.",
-  graceSec: "Seconds to wait after sending interrupt before force-killing the process.",
-  wakeOnDemand: "Allow this agent to be woken by assignments, API calls, UI actions, or automated systems.",
-  cooldownSec: "Minimum seconds between consecutive heartbeat runs.",
-  maxConcurrentRuns: "Maximum number of heartbeat runs that can execute simultaneously for this agent.",
-  maxTurnContinuationEnabled: "Automatically queue bounded continuation runs when an adapter stops because its per-run turn cap was exhausted.",
-  maxTurnContinuationMaxAttempts: "Maximum automatic continuations after one max-turn stop. This is separate from max turns per run.",
-  maxTurnContinuationDelaySec: "Seconds to wait before starting each max-turn continuation.",
-  budgetMonthlyCents: "Monthly spending limit in cents. 0 means no limit.",
+  name: "agentConfig.hint.name",
+  title: "agentConfig.hint.title",
+  role: "agentConfig.hint.role",
+  reportsTo: "agentConfig.hint.reportsTo",
+  capabilities: "agentConfig.hint.capabilities",
+  adapterType: "agentConfig.hint.adapterType",
+  cwd: "agentConfig.hint.cwd",
+  promptTemplate: "agentConfig.hint.promptTemplate",
+  model: "agentConfig.hint.model",
+  thinkingEffort: "agentConfig.hint.thinkingEffort",
+  chrome: "agentConfig.hint.chrome",
+  dangerouslySkipPermissions: "agentConfig.hint.dangerouslySkipPermissions",
+  dangerouslyBypassSandbox: "agentConfig.hint.dangerouslyBypassSandbox",
+  search: "agentConfig.hint.search",
+  fastMode: "agentConfig.hint.fastMode",
+  workspaceStrategy: "agentConfig.hint.workspaceStrategy",
+  workspaceBaseRef: "agentConfig.hint.workspaceBaseRef",
+  workspaceBranchTemplate: "agentConfig.hint.workspaceBranchTemplate",
+  worktreeParentDir: "agentConfig.hint.worktreeParentDir",
+  runtimeServicesJson: "agentConfig.hint.runtimeServicesJson",
+  maxTurnsPerRun: "agentConfig.hint.maxTurnsPerRun",
+  command: "agentConfig.hint.command",
+  localCommand: "agentConfig.hint.localCommand",
+  args: "agentConfig.hint.args",
+  extraArgs: "agentConfig.hint.extraArgs",
+  envVars: "agentConfig.hint.envVars",
+  bootstrapPrompt: "agentConfig.hint.bootstrapPrompt",
+  payloadTemplateJson: "agentConfig.hint.payloadTemplateJson",
+  webhookUrl: "agentConfig.hint.webhookUrl",
+  heartbeatInterval: "agentConfig.hint.heartbeatInterval",
+  intervalSec: "agentConfig.hint.intervalSec",
+  timeoutSec: "agentConfig.hint.timeoutSec",
+  graceSec: "agentConfig.hint.graceSec",
+  wakeOnDemand: "agentConfig.hint.wakeOnDemand",
+  cooldownSec: "agentConfig.hint.cooldownSec",
+  maxConcurrentRuns: "agentConfig.hint.maxConcurrentRuns",
+  maxTurnContinuationEnabled: "agentConfig.hint.maxTurnContinuationEnabled",
+  maxTurnContinuationMaxAttempts: "agentConfig.hint.maxTurnContinuationMaxAttempts",
+  maxTurnContinuationDelaySec: "agentConfig.hint.maxTurnContinuationDelaySec",
+  budgetMonthlyCents: "agentConfig.hint.budgetMonthlyCents",
 };
 
 import { getAdapterLabels } from "../adapters/adapter-display-registry";
@@ -71,6 +75,10 @@ export const roleLabels = AGENT_ROLE_LABELS as Record<string, string>;
 /* ---- Primitive components ---- */
 
 export function HintIcon({ text }: { text: string }) {
+  const { t } = useTranslation();
+  // `text` may be an i18n key (e.g. "agentConfig.hint.name") or a literal
+  // string. i18next returns the input unchanged when the key is unknown, so
+  // both cases render correctly.
   return (
     <Tooltip>
       <TooltipTrigger asChild>
@@ -79,7 +87,7 @@ export function HintIcon({ text }: { text: string }) {
         </button>
       </TooltipTrigger>
       <TooltipContent side="top" className="max-w-xs">
-        {text}
+        {t(text)}
       </TooltipContent>
     </Tooltip>
   );
@@ -386,6 +394,7 @@ export function DraftNumberInput({
  * type the path due to browser security limitations.
  */
 export function ChoosePathButton() {
+  const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   return (
     <>
@@ -394,54 +403,53 @@ export function ChoosePathButton() {
         className="inline-flex items-center rounded-md border border-border px-2 py-0.5 text-xs text-muted-foreground hover:bg-accent/50 transition-colors shrink-0"
         onClick={() => setOpen(true)}
       >
-        Choose
+        {t("agentConfig.dialog.chooseButton")}
       </button>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Specify path manually</DialogTitle>
+            <DialogTitle>{t("agentConfig.dialog.specifyPathTitle")}</DialogTitle>
             <DialogDescription>
-              Browser security blocks apps from reading full local paths via a file picker.
-              Copy the absolute path and paste it into the input.
+              {t("agentConfig.dialog.specifyPathDescription")}
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-4 text-sm">
             <section className="space-y-1.5">
-              <p className="font-medium">macOS (Finder)</p>
+              <p className="font-medium">{t("agentConfig.dialog.macOsTitle")}</p>
               <ol className="list-decimal space-y-1 pl-5 text-muted-foreground">
-                <li>Find the folder in Finder.</li>
-                <li>Hold <kbd>Option</kbd> and right-click the folder.</li>
-                <li>Click "Copy &lt;folder name&gt; as Pathname".</li>
-                <li>Paste the result into the path input.</li>
+                <li>{t("agentConfig.dialog.macOsStep1")}</li>
+                <li>{t("agentConfig.dialog.macOsStep2")}</li>
+                <li>{t("agentConfig.dialog.macOsStep3")}</li>
+                <li>{t("agentConfig.dialog.macOsStep4")}</li>
               </ol>
               <p className="rounded-md bg-muted px-2 py-1 font-mono text-xs">
                 /Users/yourname/Documents/project
               </p>
             </section>
             <section className="space-y-1.5">
-              <p className="font-medium">Windows (File Explorer)</p>
+              <p className="font-medium">{t("agentConfig.dialog.windowsTitle")}</p>
               <ol className="list-decimal space-y-1 pl-5 text-muted-foreground">
-                <li>Find the folder in File Explorer.</li>
-                <li>Hold <kbd>Shift</kbd> and right-click the folder.</li>
-                <li>Click "Copy as path".</li>
-                <li>Paste the result into the path input.</li>
+                <li>{t("agentConfig.dialog.windowsStep1")}</li>
+                <li>{t("agentConfig.dialog.windowsStep2")}</li>
+                <li>{t("agentConfig.dialog.windowsStep3")}</li>
+                <li>{t("agentConfig.dialog.windowsStep4")}</li>
               </ol>
               <p className="rounded-md bg-muted px-2 py-1 font-mono text-xs">
                 C:\Users\yourname\Documents\project
               </p>
             </section>
             <section className="space-y-1.5">
-              <p className="font-medium">Terminal fallback (macOS/Linux)</p>
+              <p className="font-medium">{t("agentConfig.dialog.terminalTitle")}</p>
               <ol className="list-decimal space-y-1 pl-5 text-muted-foreground">
-                <li>Run <code>cd /path/to/folder</code>.</li>
-                <li>Run <code>pwd</code>.</li>
-                <li>Copy the output and paste it into the path input.</li>
+                <li>{t("agentConfig.dialog.terminalStep1")}</li>
+                <li>{t("agentConfig.dialog.terminalStep2")}</li>
+                <li>{t("agentConfig.dialog.terminalStep3")}</li>
               </ol>
             </section>
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setOpen(false)}>
-              OK
+              {t("agentConfig.dialog.ok")}
             </Button>
           </DialogFooter>
         </DialogContent>
