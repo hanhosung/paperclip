@@ -4355,5 +4355,82 @@
       "removeFailedTitle": "Remove failed",
       "removeFailedBody": "Failed to remove skill."
     }
+  },
+  "userProfile": {
+    "breadcrumb": "Users",
+    "selectCompany": "Select a company to view user profiles.",
+    "notFound": "User profile not found for this company.",
+    "defaultName": "User",
+    "meta": {
+      "defaultRole": "member",
+      "joined": "joined {{date}}"
+    },
+    "hero": {
+      "allTimeTokens": "All-time tokens",
+      "spent": "{{amount}} spent",
+      "completed": "Completed",
+      "completedRate": "{{rate}} rate",
+      "openAssigned": "Open assigned",
+      "created": "{{count}} created",
+      "actions7d": "7-day actions",
+      "comments": "{{count}} comments"
+    },
+    "window": {
+      "done": "{{rate}} done",
+      "touched": "Touched",
+      "completed": "Completed",
+      "comments": "Comments",
+      "actions": "Actions",
+      "tokens": "Tokens",
+      "spend": "Spend",
+      "created": "Created",
+      "open": "Open"
+    },
+    "chart": {
+      "title": "Last 14 days",
+      "tokensTotal": "tokens total",
+      "barTitle": "{{date}}: {{tokens}} tokens, {{completed}} completed",
+      "legendTokens": "tokens / day",
+      "legendCompletions": "completions"
+    },
+    "tasks": {
+      "title": "Recent tasks",
+      "empty": "No touched tasks yet."
+    },
+    "activity": {
+      "title": "Recent activity",
+      "empty": "No direct user actions recorded yet."
+    },
+    "usage": {
+      "agentTitle": "Agent attribution",
+      "agentEmpty": "No issue-linked token usage yet.",
+      "agentSublabel": "Issue-linked usage",
+      "providerTitle": "Provider mix",
+      "providerEmpty": "No provider usage attributed yet.",
+      "providerSublabel": "Billed through {{biller}}"
+    }
+  },
+  "notFound": {
+    "breadcrumb": "Not Found",
+    "companyTitle": "Company not found",
+    "pageTitle": "Page not found",
+    "companyDescription": "No company matches prefix \"{{prefix}}\".",
+    "pageDescription": "This route does not exist.",
+    "unknownPrefix": "unknown",
+    "requestedPath": "Requested path:",
+    "openDashboard": "Open dashboard",
+    "goHome": "Go home"
+  },
+  "dashboardLive": {
+    "breadcrumbDashboard": "Dashboard",
+    "breadcrumbLiveRuns": "Live runs",
+    "createCompany": "Create a company to view live runs.",
+    "selectCompany": "Select a company to view live runs.",
+    "backToDashboard": "Dashboard",
+    "title": "Live agent runs",
+    "description": "Active runs first, followed by the most recent completed runs.",
+    "showingUpTo": "Showing up to {{limit}}",
+    "panelTitle": "Active / recent",
+    "panelEmpty": "No active or recent agent runs."
   }
 }
