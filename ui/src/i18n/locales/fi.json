@@ -3340,5 +3340,133 @@
       "collapse": "Collapse continuation handoff",
       "expand": "Expand continuation handoff"
     }
+  },
+  "issueNotice": {
+    "scheduledRetry": {
+      "badgeRetry": "Retry scheduled",
+      "badgeContinuation": "Continuation scheduled",
+      "attempt": "Attempt {{count}}",
+      "title": "{{action}} {{suffix}}",
+      "actionRetry": "Automatic retry",
+      "actionContinuation": "Automatic continuation",
+      "suffixDueNow": "due now",
+      "suffixPending": "pending schedule",
+      "replacesRun": "Replaces run",
+      "lastAttemptFailed": "Last attempt failed: {{error}}. Paperclip will retry automatically.",
+      "retryNow": "Retry now",
+      "retrying": "Retrying…",
+      "promoted": "Promoted",
+      "alreadyPromoted": "Already promoted",
+      "helperRetry": "Pulls retry forward immediately",
+      "helperContinuation": "Pulls continuation forward immediately",
+      "helperPromoting": "Promoting scheduled retry",
+      "helperPromotedStarting": "Promoted — run starting",
+      "helperAlreadyPromotedStarting": "Already promoted — run starting",
+      "errorTitle": "Couldn't retry now",
+      "errorTryAgain": "Try again"
+    },
+    "recovery": {
+      "kindLabel": {
+        "missing_disposition": "Missing Disposition",
+        "stranded_assigned_issue": "Stranded Issue",
+        "active_run_watchdog": "Active Watchdog",
+        "issue_graph_liveness": "Graph Liveness"
+      },
+      "kindHeadline": {
+        "missing_disposition": "This issue's run finished, but no next step was chosen.",
+        "stranded_assigned_issue": "Paperclip retried this issue's last run and it still has no live execution path.",
+        "active_run_watchdog": "The active run has been silent. Recovery is observing without interrupting it.",
+        "issue_graph_liveness": "Paperclip detected this issue lost a live action path. A recovery owner needs to act."
+      },
+      "stateLabel": {
+        "needed": "RECOVERY NEEDED",
+        "in_progress": "RECOVERY IN PROGRESS",
+        "observe_only": "OBSERVING ACTIVE RUN",
+        "escalated": "RECOVERY ESCALATED",
+        "resolved": "RECOVERY RESOLVED"
+      },
+      "ariaState": {
+        "needed": "needed",
+        "in_progress": "in progress",
+        "observe_only": "observing active run",
+        "escalated": "escalated",
+        "resolved": "resolved"
+      },
+      "outcome": {
+        "restored": "restored",
+        "delegated": "delegated to follow-up",
+        "false_positive": "false positive",
+        "blocked": "blocked",
+        "escalated": "escalated",
+        "cancelled": "cancelled"
+      },
+      "ariaLabel": "Recovery action: {{state}}",
+      "resolvedHeadline": "Recovery resolved as {{outcome}}.",
+      "wake": {
+        "wakeOwner": "Corrective wake queued",
+        "boardEscalation": "Escalated to board",
+        "manual": "Manual",
+        "monitorScheduled": "Monitor scheduled",
+        "monitorScheduledInterval": "Monitor scheduled · {{interval}}"
+      },
+      "time": {
+        "inMinutes": "in {{count}}m",
+        "minutesAgo": "{{count}}m ago",
+        "soon": "soon"
+      },
+      "metadata": {
+        "owner": "Owner",
+        "sourceRun": "Source run",
+        "correctiveRun": "Corrective run",
+        "evidence": "Evidence",
+        "nextAction": "Next action",
+        "wake": "Wake",
+        "resolution": "Resolution"
+      },
+      "owner": {
+        "recoveryPrefix": "Recovery:",
+        "board": "Board",
+        "user": "user {{id}}",
+        "system": "System",
+        "unassigned": "unassigned — pick one to wake them",
+        "returnsTo": "→ Returns to:"
+      },
+      "run": {
+        "label": "run {{id}}"
+      },
+      "agentFallback": "agent {{id}}",
+      "attemptOf": "attempt {{count}} of {{max}}",
+      "timesOut": "Times out {{time}}",
+      "resolvedAs": "Resolved as {{outcome}}",
+      "resolveTrigger": "Resolve…",
+      "resolveTriggerAria": "Resolve recovery",
+      "resolveMenuTitle": "Resolve recovery",
+      "resolveOption": {
+        "doneLabel": "Mark issue done",
+        "doneDescription": "Restore by recording the requested work as complete.",
+        "inReviewLabel": "Send for review",
+        "inReviewDescription": "Hand off to a reviewer with a real review path.",
+        "falsePositiveDoneLabel": "False positive, done",
+        "falsePositiveDoneDescription": "Dismiss recovery and mark the source issue complete.",
+        "falsePositiveInReviewLabel": "False positive, review",
+        "falsePositiveInReviewDescription": "Dismiss recovery and send the source issue for review."
+      },
+      "footerObserving": "Recovery is observing without interrupting the live run.",
+      "footerOpen": "The card stays open until an explicit decision is recorded."
+    },
+    "monitor": {
+      "title": "Monitor scheduled",
+      "nextCheck": "Next check {{absolute}} ({{relative}})",
+      "attempt": "Attempt {{count}}",
+      "checkNow": "Check now",
+      "checking": "Checking..."
+    },
+    "siblingNav": {
+      "ariaLabel": "Sub-issue navigation",
+      "previous": "Previous",
+      "next": "Next",
+      "previousAria": "Previous sub-issue: {{identifier}} - {{title}}",
+      "nextAria": "Next sub-issue: {{identifier}} - {{title}}"
+    }
   }
 }

@@ -3340,5 +3340,133 @@
       "collapse": "연속 인계 접기",
       "expand": "연속 인계 펼치기"
     }
+  },
+  "issueNotice": {
+    "scheduledRetry": {
+      "badgeRetry": "재시도 예약됨",
+      "badgeContinuation": "연속 실행 예약됨",
+      "attempt": "{{count}}번째 시도",
+      "title": "{{action}} {{suffix}}",
+      "actionRetry": "자동 재시도",
+      "actionContinuation": "자동 연속 실행",
+      "suffixDueNow": "지금 실행 예정",
+      "suffixPending": "예약 대기 중",
+      "replacesRun": "대체 대상 실행",
+      "lastAttemptFailed": "마지막 시도 실패: {{error}}. Paperclip이 자동으로 재시도합니다.",
+      "retryNow": "지금 재시도",
+      "retrying": "재시도하는 중…",
+      "promoted": "승격됨",
+      "alreadyPromoted": "이미 승격됨",
+      "helperRetry": "재시도를 즉시 앞당깁니다",
+      "helperContinuation": "연속 실행을 즉시 앞당깁니다",
+      "helperPromoting": "예약된 재시도를 승격하는 중",
+      "helperPromotedStarting": "승격됨 — 실행을 시작하는 중",
+      "helperAlreadyPromotedStarting": "이미 승격됨 — 실행을 시작하는 중",
+      "errorTitle": "지금 재시도할 수 없습니다",
+      "errorTryAgain": "다시 시도"
+    },
+    "recovery": {
+      "kindLabel": {
+        "missing_disposition": "처리 누락",
+        "stranded_assigned_issue": "고립된 이슈",
+        "active_run_watchdog": "활성 감시",
+        "issue_graph_liveness": "그래프 활성"
+      },
+      "kindHeadline": {
+        "missing_disposition": "이 이슈의 실행은 완료되었지만 다음 단계가 선택되지 않았습니다.",
+        "stranded_assigned_issue": "Paperclip이 이 이슈의 마지막 실행을 재시도했지만 여전히 활성 실행 경로가 없습니다.",
+        "active_run_watchdog": "활성 실행이 응답이 없습니다. 복구가 실행을 중단하지 않고 관찰하고 있습니다.",
+        "issue_graph_liveness": "Paperclip이 이 이슈가 활성 액션 경로를 잃은 것을 감지했습니다. 복구 소유자가 조치해야 합니다."
+      },
+      "stateLabel": {
+        "needed": "복구 필요",
+        "in_progress": "복구 진행 중",
+        "observe_only": "활성 실행 관찰 중",
+        "escalated": "복구 에스컬레이션됨",
+        "resolved": "복구 해결됨"
+      },
+      "ariaState": {
+        "needed": "필요",
+        "in_progress": "진행 중",
+        "observe_only": "활성 실행 관찰 중",
+        "escalated": "에스컬레이션됨",
+        "resolved": "해결됨"
+      },
+      "outcome": {
+        "restored": "복원됨",
+        "delegated": "후속 작업으로 위임됨",
+        "false_positive": "거짓 양성",
+        "blocked": "차단됨",
+        "escalated": "에스컬레이션됨",
+        "cancelled": "취소됨"
+      },
+      "ariaLabel": "복구 액션: {{state}}",
+      "resolvedHeadline": "복구가 {{outcome}}(으)로 해결되었습니다.",
+      "wake": {
+        "wakeOwner": "교정 깨우기 대기 중",
+        "boardEscalation": "보드로 에스컬레이션됨",
+        "manual": "수동",
+        "monitorScheduled": "모니터 예약됨",
+        "monitorScheduledInterval": "모니터 예약됨 · {{interval}}"
+      },
+      "time": {
+        "inMinutes": "{{count}}분 후",
+        "minutesAgo": "{{count}}분 전",
+        "soon": "곧"
+      },
+      "metadata": {
+        "owner": "소유자",
+        "sourceRun": "원본 실행",
+        "correctiveRun": "교정 실행",
+        "evidence": "증거",
+        "nextAction": "다음 액션",
+        "wake": "깨우기",
+        "resolution": "해결"
+      },
+      "owner": {
+        "recoveryPrefix": "복구:",
+        "board": "보드",
+        "user": "사용자 {{id}}",
+        "system": "시스템",
+        "unassigned": "미할당 — 깨울 소유자를 선택하세요",
+        "returnsTo": "→ 반환 대상:"
+      },
+      "run": {
+        "label": "실행 {{id}}"
+      },
+      "agentFallback": "에이전트 {{id}}",
+      "attemptOf": "{{max}}회 중 {{count}}번째 시도",
+      "timesOut": "{{time}} 시간 초과",
+      "resolvedAs": "{{outcome}}(으)로 해결됨",
+      "resolveTrigger": "해결…",
+      "resolveTriggerAria": "복구 해결",
+      "resolveMenuTitle": "복구 해결",
+      "resolveOption": {
+        "doneLabel": "이슈를 완료로 표시",
+        "doneDescription": "요청된 작업을 완료로 기록하여 복원합니다.",
+        "inReviewLabel": "검토로 보내기",
+        "inReviewDescription": "실제 검토 경로와 함께 검토자에게 인계합니다.",
+        "falsePositiveDoneLabel": "거짓 양성, 완료",
+        "falsePositiveDoneDescription": "복구를 해제하고 원본 이슈를 완료로 표시합니다.",
+        "falsePositiveInReviewLabel": "거짓 양성, 검토",
+        "falsePositiveInReviewDescription": "복구를 해제하고 원본 이슈를 검토로 보냅니다."
+      },
+      "footerObserving": "복구가 활성 실행을 중단하지 않고 관찰하고 있습니다.",
+      "footerOpen": "명시적인 결정이 기록될 때까지 카드가 열린 상태로 유지됩니다."
+    },
+    "monitor": {
+      "title": "모니터 예약됨",
+      "nextCheck": "다음 점검 {{absolute}} ({{relative}})",
+      "attempt": "{{count}}번째 시도",
+      "checkNow": "지금 점검",
+      "checking": "점검하는 중..."
+    },
+    "siblingNav": {
+      "ariaLabel": "하위 이슈 내비게이션",
+      "previous": "이전",
+      "next": "다음",
+      "previousAria": "이전 하위 이슈: {{identifier}} - {{title}}",
+      "nextAria": "다음 하위 이슈: {{identifier}} - {{title}}"
+    }
   }
 }

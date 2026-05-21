@@ -4,6 +4,7 @@ import type { IssueSiblingNavigation as IssueSiblingNavigationState } from "@/li
 import { createIssueDetailPath, withIssueDetailHeaderSeed } from "@/lib/issueDetailBreadcrumb";
 import { cn } from "@/lib/utils";
 import { Link } from "@/lib/router";
+import { useTranslation } from "@/i18n";
 import { StatusIcon } from "./StatusIcon";
 
 type IssueSiblingNavigationProps = {
@@ -12,11 +13,12 @@ type IssueSiblingNavigationProps = {
 };
 
 export function IssueSiblingNavigation({ navigation, linkState }: IssueSiblingNavigationProps) {
+  const { t } = useTranslation();
   if (!navigation) return null;
 
   return (
     <nav
-      aria-label="Sub-issue navigation"
+      aria-label={t("issueNotice.siblingNav.ariaLabel")}
       className="mt-4 flex flex-col gap-3 sm:mt-6 sm:grid sm:grid-cols-2"
     >
       {navigation.previous ? (
@@ -45,10 +47,15 @@ function SiblingLink({
   linkState?: unknown;
   className?: string;
 }) {
+  const { t } = useTranslation();
   const issuePathId = issue.identifier ?? issue.id;
-  const label = direction === "previous" ? "Previous" : "Next";
-  const ariaDirection = direction === "previous" ? "Previous sub-issue" : "Next sub-issue";
+  const label = direction === "previous"
+    ? t("issueNotice.siblingNav.previous")
+    : t("issueNotice.siblingNav.next");
   const identifier = issue.identifier ?? issue.id.slice(0, 8);
+  const ariaLabel = direction === "previous"
+    ? t("issueNotice.siblingNav.previousAria", { identifier, title: issue.title })
+    : t("issueNotice.siblingNav.nextAria", { identifier, title: issue.title });
   const Icon = direction === "previous" ? ChevronLeft : ChevronRight;
 
   return (
@@ -58,7 +65,7 @@ function SiblingLink({
       issuePrefetch={issue}
       issueQuicklookSide="top"
       issueQuicklookAlign={direction === "previous" ? "start" : "end"}
-      aria-label={`${ariaDirection}: ${identifier} - ${issue.title}`}
+      aria-label={ariaLabel}
       className={cn(
         "group min-w-0 rounded-lg border border-border bg-card px-3 py-2.5 text-left no-underline transition-colors hover:bg-accent/50 focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring",
         direction === "next" && "sm:text-right",
