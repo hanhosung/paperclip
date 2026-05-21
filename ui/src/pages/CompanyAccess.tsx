@@ -27,6 +27,7 @@ import { useCompany } from "@/context/CompanyContext";
 import { useToast } from "@/context/ToastContext";
 import { useTranslation } from "@/i18n";
 import { queryKeys } from "@/lib/queryKeys";
+import { formatDateTime } from "@/lib/utils";
 
 /** Maps each permission key to its i18n key under companySettings.access.permission. */
 const permissionLabelKeys: Record<PermissionKey, string> = {
@@ -340,7 +341,7 @@ export function CompanyAccess() {
                       : t("companySettings.access.inviteMetadataUnavailable")
                   }
                   detail={t("companySettings.access.submitted", {
-                    date: new Date(request.createdAt).toLocaleString(),
+                    date: formatDateTime(request.createdAt),
                   })}
                   approveLabel={t("companySettings.access.approveHuman")}
                   rejectLabel={t("companySettings.access.rejectHuman")}

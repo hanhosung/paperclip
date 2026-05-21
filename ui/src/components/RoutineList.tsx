@@ -3,6 +3,7 @@ import { MoreHorizontal, Play } from "lucide-react";
 import { Link } from "@/lib/router";
 import { useTranslation } from "@/i18n";
 import { routineRunStatusKey } from "@/lib/enum-labels";
+import { formatDateTime } from "@/lib/utils";
 import { AgentIcon } from "@/components/AgentIconPicker";
 import { Button } from "@/components/ui/button";
 import {
@@ -120,7 +121,7 @@ export function RoutineListRow<TRoutine extends RoutineListRowItem>({
           </span>
           <span>
             {routine.lastRun?.triggeredAt
-              ? new Date(routine.lastRun.triggeredAt).toLocaleString()
+              ? formatDateTime(routine.lastRun.triggeredAt)
               : t("routines.row.neverRun")}
             {routine.lastRun?.status ? ` · ${t(routineRunStatusKey(routine.lastRun.status))}` : ""}
           </span>

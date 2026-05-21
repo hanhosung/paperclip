@@ -43,7 +43,7 @@ import {
   resolveIssueWorkspaceName,
   type InboxIssueColumn,
 } from "../lib/inbox";
-import { cn, formatDurationMs, formatTokens } from "../lib/utils";
+import { cn, formatDurationMs, formatNumber, formatTokens } from "../lib/utils";
 import {
   InboxIssueMetaLeading,
   InboxIssueTrailingColumns,
@@ -524,7 +524,7 @@ function SubIssueProgressSummaryStrip({
               <>
                 <span
                   className="text-muted-foreground tabular-nums"
-                  title={`${costSummary.runCount.toLocaleString()} run${
+                  title={`${formatNumber(costSummary.runCount)} run${
                     costSummary.runCount === 1 ? "" : "s"
                   } across ${costSummary.issueCount} sub-issue${
                     costSummary.issueCount === 1 ? "" : "s"

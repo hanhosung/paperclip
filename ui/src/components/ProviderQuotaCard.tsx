@@ -9,6 +9,7 @@ import { useTranslation } from "@/i18n";
 import { billingTypeKey } from "@/lib/enum-labels";
 import {
   formatCents,
+  formatShortDate,
   formatTokens,
   providerDisplayName,
   quotaSourceDisplayName,
@@ -370,7 +371,7 @@ export function ProviderQuotaCard({
                             </p>
                           ) : qw.resetsAt ? (
                             <p className="text-xs text-muted-foreground">
-                              {t("costs.providerCard.resets", { date: new Date(qw.resetsAt).toLocaleDateString(undefined, { month: "short", day: "numeric" }) })}
+                              {t("costs.providerCard.resets", { date: formatShortDate(qw.resetsAt) })}
                             </p>
                           ) : null}
                         </div>

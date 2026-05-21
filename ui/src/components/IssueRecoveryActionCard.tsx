@@ -15,7 +15,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { agentUrl } from "@/lib/utils";
+import { agentUrl, formatDateTime } from "@/lib/utils";
 import { cn } from "@/lib/utils";
 import { useTranslation } from "@/i18n";
 import {
@@ -175,12 +175,7 @@ function formatTimeShort(value: string | Date | null | undefined, t: TFunction):
         ? t("issueNotice.recovery.time.inMinutes", { count: absMin })
         : t("issueNotice.recovery.time.minutesAgo", { count: absMin });
     }
-    return date.toLocaleString(undefined, {
-      month: "short",
-      day: "numeric",
-      hour: "numeric",
-      minute: "2-digit",
-    });
+    return formatDateTime(date);
   } catch {
     return null;
   }

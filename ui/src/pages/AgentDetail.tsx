@@ -43,7 +43,7 @@ import { RunButton, PauseResumeButton } from "../components/AgentActionButtons";
 import { BudgetPolicyCard } from "../components/BudgetPolicyCard";
 import { FileTree, buildFileTree } from "../components/FileTree";
 import { ScrollToBottom } from "../components/ScrollToBottom";
-import { formatCents, formatDate, relativeTime, formatTokens, visibleRunCostUsd } from "../lib/utils";
+import { formatCents, formatDate, formatNumber, formatTime, relativeTime, formatTokens, visibleRunCostUsd } from "../lib/utils";
 import { cn } from "../lib/utils";
 import { describeRunRetryState } from "../lib/runRetryState";
 import { Button } from "@/components/ui/button";
@@ -506,7 +506,7 @@ function WorkspaceOperationLogViewer({
               {chunks.map((chunk, index) => (
                 <div key={`${chunk.ts}-${index}`} className="flex gap-2">
                   <span className="shrink-0 text-neutral-500">
-                    {new Date(chunk.ts).toLocaleTimeString("en-US", { hour12: false })}
+                    {formatTime(chunk.ts, { seconds: true })}
                   </span>
                   <span
                     className={cn(
@@ -3180,9 +3180,8 @@ function RunDetail({ run: initialRun, agentRouteId, adapterType, adapterConfig }
     return () => clearInterval(id);
   }, [isRunning, run.startedAt]);
 
-  const timeFormat: Intl.DateTimeFormatOptions = { hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false };
-  const startTime = run.startedAt ? new Date(run.startedAt).toLocaleTimeString("en-US", timeFormat) : null;
-  const endTime = run.finishedAt ? new Date(run.finishedAt).toLocaleTimeString("en-US", timeFormat) : null;
+  const startTime = run.startedAt ? formatTime(run.startedAt, { seconds: true }) : null;
+  const endTime = run.finishedAt ? formatTime(run.finishedAt, { seconds: true }) : null;
   const durationSec = run.startedAt && run.finishedAt
     ? Math.round((new Date(run.finishedAt).getTime() - new Date(run.startedAt).getTime()) / 1000)
     : null;
@@ -4006,11 +4005,11 @@ function LogViewer({ run, adapterType }: { run: HeartbeatRun; adapterType: strin
             <span className="text-xs text-muted-foreground">
               {typeof run.logBytes === "number" && run.logBytes > 0
                 ? t("agents.detail.log.showingFirstOf", {
-                    shown: Math.round(logOffset / 1024).toLocaleString("en-US"),
-                    total: Math.round(run.logBytes / 1024).toLocaleString("en-US"),
+                    shown: formatNumber(Math.round(logOffset / 1024)),
+                    total: formatNumber(Math.round(run.logBytes / 1024)),
                   })
                 : t("agents.detail.log.showingFirst", {
-                    shown: Math.round(logOffset / 1024).toLocaleString("en-US"),
+                    shown: formatNumber(Math.round(logOffset / 1024)),
                   })}
             </span>
           </div>
@@ -4072,7 +4071,7 @@ function LogViewer({ run, adapterType }: { run: HeartbeatRun; adapterType: strin
               return (
                 <div key={evt.id} className="flex gap-2">
                   <span className="text-neutral-400 dark:text-neutral-600 shrink-0 select-none w-16">
-                    {new Date(evt.createdAt).toLocaleTimeString("en-US", { hour12: false })}
+                    {formatTime(evt.createdAt, { seconds: true })}
                   </span>
                   <span className={cn("shrink-0 w-14", evt.stream ? (streamColors[evt.stream] ?? "text-neutral-500") : "text-neutral-500")}>
                     {evt.stream ? `[${evt.stream}]` : ""}

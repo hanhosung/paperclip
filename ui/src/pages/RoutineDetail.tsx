@@ -31,6 +31,7 @@ import { useCompany } from "../context/CompanyContext";
 import { useBreadcrumbs } from "../context/BreadcrumbContext";
 import { useToastActions } from "../context/ToastContext";
 import { queryKeys } from "../lib/queryKeys";
+import { formatDateTime } from "../lib/utils";
 import { buildRoutineTriggerPatch } from "../lib/routine-trigger-patch";
 import { buildMarkdownMentionOptions } from "../lib/company-members";
 import { timeAgo } from "../lib/timeAgo";
@@ -178,7 +179,7 @@ function TriggerEditor({
         </div>
         <span className="text-xs text-muted-foreground">
           {trigger.kind === "schedule" && trigger.nextRunAt
-            ? t("routines.detail.triggerNext", { date: new Date(trigger.nextRunAt).toLocaleString() })
+            ? t("routines.detail.triggerNext", { date: formatDateTime(trigger.nextRunAt) })
             : trigger.kind === "webhook"
               ? t("routines.detail.triggerWebhook")
               : t("routines.detail.triggerApi")}

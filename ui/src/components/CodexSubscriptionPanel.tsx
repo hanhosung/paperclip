@@ -1,5 +1,5 @@
 import type { QuotaWindow } from "@paperclipai/shared";
-import { cn, quotaSourceDisplayName } from "@/lib/utils";
+import { cn, formatDateTime, quotaSourceDisplayName } from "@/lib/utils";
 
 interface CodexSubscriptionPanelProps {
   windows: QuotaWindow[];
@@ -30,13 +30,7 @@ function orderedWindows(windows: QuotaWindow[]): QuotaWindow[] {
 function detailText(window: QuotaWindow): string | null {
   if (typeof window.detail === "string" && window.detail.trim().length > 0) return window.detail.trim();
   if (!window.resetsAt) return null;
-  const formatted = new Date(window.resetsAt).toLocaleString(undefined, {
-    month: "short",
-    day: "numeric",
-    hour: "numeric",
-    minute: "2-digit",
-    timeZoneName: "short",
-  });
+  const formatted = formatDateTime(window.resetsAt);
   return `Resets ${formatted}`;
 }
 

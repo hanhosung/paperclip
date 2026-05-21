@@ -8,7 +8,7 @@ import {
   TriangleAlert,
   type LucideIcon,
 } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn, formatDateTime } from "@/lib/utils";
 import { useTranslation } from "@/i18n";
 
 export type SystemNoticeTone = "neutral" | "info" | "success" | "warning" | "danger";
@@ -101,12 +101,7 @@ const TONE_TOKENS: Record<SystemNoticeTone, ToneTokens> = {
 
 function formatTimestamp(ts: string) {
   try {
-    return new Date(ts).toLocaleString(undefined, {
-      month: "short",
-      day: "numeric",
-      hour: "numeric",
-      minute: "2-digit",
-    });
+    return formatDateTime(ts);
   } catch {
     return ts;
   }

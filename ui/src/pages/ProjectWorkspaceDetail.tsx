@@ -16,7 +16,7 @@ import { useBreadcrumbs } from "../context/BreadcrumbContext";
 import { useCompany } from "../context/CompanyContext";
 import { useTranslation } from "@/i18n";
 import { queryKeys } from "../lib/queryKeys";
-import { projectRouteRef, projectWorkspaceUrl } from "../lib/utils";
+import { formatDateTime, projectRouteRef, projectWorkspaceUrl } from "../lib/utils";
 
 type WorkspaceFormState = {
   name: string;
@@ -617,7 +617,7 @@ export function ProjectWorkspaceDetail() {
               ) : t("common.none")}
             </DetailRow>
             <DetailRow label={t("workspaces.projectDetail.facts.defaultRef")}>{workspace.defaultRef ?? t("common.none")}</DetailRow>
-            <DetailRow label={t("workspaces.projectDetail.facts.updated")}>{new Date(workspace.updatedAt).toLocaleString()}</DetailRow>
+            <DetailRow label={t("workspaces.projectDetail.facts.updated")}>{formatDateTime(workspace.updatedAt)}</DetailRow>
           </div>
 
           <div className="rounded-2xl border border-border bg-card p-5">

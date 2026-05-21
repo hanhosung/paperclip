@@ -10,6 +10,7 @@ import { useCompany } from "@/context/CompanyContext";
 import { useToast } from "@/context/ToastContext";
 import { useTranslation } from "@/i18n";
 import { queryKeys } from "@/lib/queryKeys";
+import { formatDate } from "@/lib/utils";
 
 export function InstanceAccess() {
   const { t } = useTranslation();
@@ -236,7 +237,7 @@ export function InstanceAccess() {
                         </div>
                       </div>
                       <div className="text-xs text-muted-foreground">
-                        {new Date(membership.updatedAt).toLocaleDateString()}
+                        {formatDate(membership.updatedAt)}
                       </div>
                     </div>
                   ))}
