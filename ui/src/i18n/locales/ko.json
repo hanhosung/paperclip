@@ -25,6 +25,143 @@
       "company": "회사"
     }
   },
+  "chrome": {
+    "sortMode": {
+      "top": "상단",
+      "alphabetical": "가나다순",
+      "recent": "최근"
+    },
+    "section": {
+      "collapse": "{{label}} 접기",
+      "expand": "{{label}} 펼치기",
+      "actions": "{{label}} 작업"
+    },
+    "navItem": {
+      "live_one": "{{count}}개 실행 중",
+      "live_other": "{{count}}개 실행 중"
+    },
+    "agents": {
+      "label": "에이전트",
+      "newAgent": "새 에이전트",
+      "sectionActions": "에이전트 섹션 작업",
+      "browseAgents": "에이전트 둘러보기",
+      "sortLabel": "에이전트 정렬",
+      "openActions": "{{name}} 작업 열기",
+      "editAgent": "에이전트 편집",
+      "resumeAgent": "에이전트 재개",
+      "pauseAgent": "에이전트 일시중지",
+      "updating": "업데이트 중...",
+      "budgetPaused": "예산으로 일시중지됨",
+      "budgetPausedTooltip": "예산 한도로 에이전트가 일시중지되었습니다",
+      "agentPausedByBudget": "예산으로 일시중지된 에이전트",
+      "toastPaused": "에이전트 일시중지됨",
+      "toastResumed": "에이전트 재개됨",
+      "toastPauseFailed": "에이전트를 일시중지할 수 없습니다",
+      "toastResumeFailed": "에이전트를 재개할 수 없습니다"
+    },
+    "projects": {
+      "label": "프로젝트",
+      "newProject": "새 프로젝트",
+      "sectionActions": "프로젝트 섹션 작업",
+      "browseProjects": "프로젝트 둘러보기",
+      "sortLabel": "프로젝트 정렬",
+      "projectPausedByBudget": "예산으로 일시중지된 프로젝트"
+    },
+    "companyMenu": {
+      "openSwitcher": "{{name}} 워크스페이스 전환기 열기",
+      "openSwitcherGeneric": "워크스페이스 전환기 열기",
+      "selectWorkspace": "워크스페이스 선택",
+      "switchWorkspace": "워크스페이스 전환",
+      "edit": "편집",
+      "done": "완료",
+      "noWorkspaces": "워크스페이스 없음",
+      "reorder": "{{name}} 순서 변경",
+      "addCompany": "회사 추가...",
+      "invitePeople": "{{name}}에 사람 초대",
+      "invitePeopleGeneric": "사람 초대",
+      "companySettings": "회사 설정",
+      "signOut": "로그아웃",
+      "signingOut": "로그아웃 중..."
+    },
+    "companySwitcher": {
+      "selectCompany": "회사 선택",
+      "companies": "회사",
+      "noCompanies": "회사 없음",
+      "companySettings": "회사 설정",
+      "manageCompanies": "회사 관리"
+    },
+    "account": {
+      "openMenu": "계정 메뉴 열기",
+      "defaultName": "보드",
+      "signedIn": "로그인됨",
+      "localWorkspace": "로컬 워크스페이스 보드",
+      "badgeAccount": "계정",
+      "badgeLocal": "로컬",
+      "version": "Paperclip v{{version}}",
+      "viewProfile": "프로필 보기",
+      "viewProfileDesc": "활동, 작업, 사용량 원장을 엽니다.",
+      "editProfile": "프로필 편집",
+      "editProfileDesc": "표시 이름과 아바타를 업데이트합니다.",
+      "instanceSettings": "인스턴스 설정",
+      "instanceSettingsDesc": "마지막으로 연 설정 페이지로 돌아갑니다.",
+      "documentation": "문서",
+      "documentationDesc": "새 탭에서 Paperclip 문서를 엽니다.",
+      "switchToLight": "라이트 모드로 전환",
+      "switchToDark": "다크 모드로 전환",
+      "appearanceDesc": "앱 외관을 전환합니다.",
+      "signOut": "로그아웃",
+      "signingOut": "로그아웃 중...",
+      "signOutDesc": "이 브라우저 세션을 종료합니다."
+    },
+    "mobileNav": {
+      "navLabel": "모바일 내비게이션",
+      "home": "홈",
+      "issues": "이슈",
+      "create": "만들기",
+      "agents": "에이전트",
+      "inbox": "받은함"
+    },
+    "layout": {
+      "skipToMain": "본문으로 건너뛰기",
+      "closeSidebar": "사이드바 닫기"
+    },
+    "breadcrumb": {
+      "openSidebar": "사이드바 열기"
+    },
+    "resize": {
+      "resizeSidebar": "사이드바 크기 조절"
+    },
+    "budgetMarker": {
+      "healthy": "예산 정상",
+      "warning": "예산 경고",
+      "critical": "예산으로 일시중지됨"
+    },
+    "worktree": {
+      "label": "워크트리",
+      "copyTooltip": "클릭하여 워크트리 이름 복사",
+      "copied": "복사됨!"
+    },
+    "devRestart": {
+      "restartRequired": "재시작 필요",
+      "autoRestartOn": "자동 재시작 켜짐",
+      "reasonBackendAndMigrations": "백엔드 파일이 변경되었고 마이그레이션이 대기 중입니다",
+      "reasonPendingMigrations": "대기 중인 마이그레이션에 새 부팅이 필요합니다",
+      "reasonBackendChanges": "이 서버가 부팅된 이후 백엔드 파일이 변경되었습니다",
+      "updatedAt": " · {{time}} 업데이트됨",
+      "changed": "변경됨: {{paths}}",
+      "morePaths": " 외 {{count}}개",
+      "pendingMigrations": "대기 중인 마이그레이션: {{migrations}}",
+      "moreMigrations": " 외 {{count}}개",
+      "waitingForIdle_one": "실행 중인 {{count}}개 작업이 끝나기를 기다리는 중",
+      "waitingForIdle_other": "실행 중인 {{count}}개 작업이 끝나기를 기다리는 중",
+      "autoRestartIdle": "인스턴스가 유휴 상태가 되면 자동 재시작이 트리거됩니다",
+      "manualRestart": "활동 중인 작업을 중단해도 안전할 때 <code>pnpm dev:once</code>를 재시작하세요",
+      "justNow": "방금",
+      "minutesAgo": "{{count}}분 전",
+      "hoursAgo": "{{count}}시간 전",
+      "daysAgo": "{{count}}일 전"
+    }
+  },
   "settings": {
     "language": {
       "label": "언어",

@@ -24,6 +24,7 @@ import { useProjectOrder } from "../hooks/useProjectOrder";
 import { BudgetSidebarMarker } from "./BudgetSidebarMarker";
 import { SidebarSection, type SidebarSectionRadioChoice } from "./SidebarSection";
 import { PluginSlotMount, usePluginSlots } from "@/plugins/slots";
+import { useTranslation } from "@/i18n";
 import {
   getProjectSortModeStorageKey,
   PROJECT_SORT_MODE_UPDATED_EVENT,
@@ -36,11 +37,7 @@ import type { Project } from "@paperclipai/shared";
 
 type ProjectSidebarSlot = ReturnType<typeof usePluginSlots>["slots"][number];
 
-const PROJECT_SORT_CHOICES: SidebarSectionRadioChoice[] = [
-  { value: "top", label: "Top" },
-  { value: "alphabetical", label: "Alphabetical" },
-  { value: "recent", label: "Recent" },
-];
+const PROJECT_SORT_VALUES = ["top", "alphabetical", "recent"] as const;
 
 type ProjectItemProps = {
   activeProjectRef: string | null;
@@ -84,6 +81,7 @@ function ProjectItem({
   setSidebarOpen,
   isDragging = false,
 }: ProjectItemProps) {
+  const { t } = useTranslation();
   const routeRef = projectRouteRef(project);
 
   return (
@@ -110,7 +108,7 @@ function ProjectItem({
           style={{ backgroundColor: project.color ?? "#6366f1" }}
         />
         <span className="flex-1 truncate">{project.name}</span>
-        {project.pauseReason === "budget" ? <BudgetSidebarMarker title="Project paused by budget" /> : null}
+        {project.pauseReason === "budget" ? <BudgetSidebarMarker title={t("chrome.projects.projectPausedByBudget")} /> : null}
       </NavLink>
       {projectSidebarSlots.length > 0 && (
         <div className="ml-5 flex flex-col gap-0.5">
@@ -163,6 +161,7 @@ function SortableProjectItem(props: ProjectItemProps) {
 }
 
 export function SidebarProjects() {
+  const { t } = useTranslation();
   const [open, setOpen] = useState(true);
   const { selectedCompany, selectedCompanyId } = useCompany();
   const { openNewProject } = useDialogActions();
@@ -209,6 +208,10 @@ export function SidebarProjects() {
     [orderedProjects, sortMode],
   );
   const isTopMode = sortMode === "top";
+  const sortChoices: SidebarSectionRadioChoice[] = useMemo(
+    () => PROJECT_SORT_VALUES.map((value) => ({ value, label: t(`chrome.sortMode.${value}`) })),
+    [t],
+  );
 
   const projectMatch = location.pathname.match(/^\/(?:[^/]+\/)?projects\/([^/]+)/);
   const activeProjectRef = projectMatch?.[1] ?? null;
@@ -291,21 +294,21 @@ export function SidebarProjects() {
 
   return (
     <SidebarSection
-      label="Projects"
+      label={t("chrome.projects.label")}
       collapsible={{ open, onOpenChange: setOpen }}
       headerAction={{
-        ariaLabel: "New project",
+        ariaLabel: t("chrome.projects.newProject"),
         icon: Plus,
         onClick: openNewProject,
       }}
       menu={{
-        ariaLabel: "Projects section actions",
+        ariaLabel: t("chrome.projects.sectionActions"),
         actions: [
-          { type: "item", label: "Browse projects", icon: FolderOpen, href: "/projects" },
+          { type: "item", label: t("chrome.projects.browseProjects"), icon: FolderOpen, href: "/projects" },
           { type: "separator" },
         ],
-        radioLabel: "Project sort",
-        radioChoices: PROJECT_SORT_CHOICES,
+        radioLabel: t("chrome.projects.sortLabel"),
+        radioChoices: sortChoices,
         radioValue: sortMode,
         onRadioValueChange: persistSortMode,
       }}

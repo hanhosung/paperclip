@@ -39,13 +39,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useTranslation } from "@/i18n";
 import type { Agent } from "@paperclipai/shared";
 
-const AGENT_SORT_CHOICES: SidebarSectionRadioChoice[] = [
-  { value: "top", label: "Top" },
-  { value: "alphabetical", label: "Alphabetical" },
-  { value: "recent", label: "Recent" },
-];
+const AGENT_SORT_VALUES = ["top", "alphabetical", "recent"] as const;
 
 function agentTimestamp(agent: Agent, field: "lastHeartbeatAt" | "updatedAt" | "createdAt"): number {
   const raw = agent[field];
@@ -95,18 +92,19 @@ function SidebarAgentItem({
   runCount: number;
   setSidebarOpen: (open: boolean) => void;
 }) {
+  const { t } = useTranslation();
   const routeRef = agentRouteRef(agent);
   const href = activeTab ? `${agentUrl(agent)}/${activeTab}` : agentUrl(agent);
   const editHref = `${agentUrl(agent)}/configuration`;
   const isActive = activeAgentId === routeRef;
   const isPaused = agent.status === "paused";
   const isBudgetPaused = isPaused && agent.pauseReason === "budget";
-  const pauseResumeLabel = isPaused ? "Resume agent" : "Pause agent";
+  const pauseResumeLabel = isPaused ? t("chrome.agents.resumeAgent") : t("chrome.agents.pauseAgent");
   const pauseResumeDisabled = disabled || agent.status === "pending_approval" || isBudgetPaused;
   const pauseResumeDisabledLabel = disabled
-    ? "Updating..."
+    ? t("chrome.agents.updating")
     : isBudgetPaused
-      ? "Budget paused"
+      ? t("chrome.agents.budgetPaused")
       : pauseResumeLabel;
 
   return (
@@ -129,7 +127,7 @@ function SidebarAgentItem({
         {(agent.pauseReason === "budget" || runCount > 0) && (
           <span className="ml-auto flex items-center gap-1.5 shrink-0">
             {agent.pauseReason === "budget" ? (
-              <BudgetSidebarMarker title="Agent paused by budget" />
+              <BudgetSidebarMarker title={t("chrome.agents.agentPausedByBudget")} />
             ) : null}
             {runCount > 0 ? (
               <span className="relative flex h-2 w-2">
@@ -139,7 +137,7 @@ function SidebarAgentItem({
             ) : null}
             {runCount > 0 ? (
               <span className="text-[11px] font-medium text-blue-600 dark:text-blue-400">
-                {runCount} live
+                {t("chrome.navItem.live", { count: runCount })}
               </span>
             ) : null}
           </span>
@@ -157,7 +155,7 @@ function SidebarAgentItem({
                 ? "opacity-100"
                 : "pointer-events-none opacity-0 group-hover/agent:pointer-events-auto group-hover/agent:opacity-100 group-focus-within/agent:pointer-events-auto group-focus-within/agent:opacity-100",
             )}
-            aria-label={`Open actions for ${agent.name}`}
+            aria-label={t("chrome.agents.openActions", { name: agent.name })}
           >
             <MoreHorizontal className="h-3.5 w-3.5" />
           </Button>
@@ -171,7 +169,7 @@ function SidebarAgentItem({
               }}
             >
               <Pencil className="size-4" />
-              <span>Edit agent</span>
+              <span>{t("chrome.agents.editAgent")}</span>
             </Link>
           </DropdownMenuItem>
           <DropdownMenuSeparator />
@@ -181,7 +179,7 @@ function SidebarAgentItem({
               onPauseResume(agent, isPaused ? "resume" : "pause");
             }}
             disabled={pauseResumeDisabled}
-            title={isBudgetPaused ? "Agent was paused by budget limits" : undefined}
+            title={isBudgetPaused ? t("chrome.agents.budgetPausedTooltip") : undefined}
           >
             {isPaused ? <PlayCircle className="size-4" /> : <PauseCircle className="size-4" />}
             <span>{pauseResumeDisabledLabel}</span>
@@ -193,6 +191,7 @@ function SidebarAgentItem({
 }
 
 export function SidebarAgents() {
+  const { t } = useTranslation();
   const [open, setOpen] = useState(true);
   const [pendingAgentIds, setPendingAgentIds] = useState<Set<string>>(() => new Set());
   const queryClient = useQueryClient();
@@ -250,6 +249,10 @@ export function SidebarAgents() {
   const sortedAgents = useMemo(
     () => sortAgents(orderedAgents, sortMode),
     [orderedAgents, sortMode],
+  );
+  const sortChoices: SidebarSectionRadioChoice[] = useMemo(
+    () => AGENT_SORT_VALUES.map((value) => ({ value, label: t(`chrome.sortMode.${value}`) })),
+    [t],
   );
 
   const agentMatch = location.pathname.match(/^\/(?:[^/]+\/)?agents\/([^/]+)(?:\/([^/]+))?/);
@@ -322,14 +325,14 @@ export function SidebarAgents() {
         queryClient.invalidateQueries({ queryKey: queryKeys.agents.detail(agentRouteRef(agent)) }),
       ]);
       pushToast({
-        title: action === "pause" ? "Agent paused" : "Agent resumed",
+        title: action === "pause" ? t("chrome.agents.toastPaused") : t("chrome.agents.toastResumed"),
         body: agent.name,
         tone: "success",
       });
     },
     onError: (error, { agent, action }) => {
       pushToast({
-        title: action === "pause" ? "Could not pause agent" : "Could not resume agent",
+        title: action === "pause" ? t("chrome.agents.toastPauseFailed") : t("chrome.agents.toastResumeFailed"),
         body: error instanceof Error ? error.message : agent.name,
         tone: "error",
       });
@@ -345,21 +348,21 @@ export function SidebarAgents() {
 
   return (
     <SidebarSection
-      label="Agents"
+      label={t("chrome.agents.label")}
       collapsible={{ open, onOpenChange: setOpen }}
       headerAction={{
-        ariaLabel: "New agent",
+        ariaLabel: t("chrome.agents.newAgent"),
         icon: Plus,
         onClick: openNewAgent,
       }}
       menu={{
-        ariaLabel: "Agents section actions",
+        ariaLabel: t("chrome.agents.sectionActions"),
         actions: [
-          { type: "item", label: "Browse agents", icon: Users, href: "/agents/all" },
+          { type: "item", label: t("chrome.agents.browseAgents"), icon: Users, href: "/agents/all" },
           { type: "separator" },
         ],
-        radioLabel: "Agent sort",
-        radioChoices: AGENT_SORT_CHOICES,
+        radioLabel: t("chrome.agents.sortLabel"),
+        radioChoices: sortChoices,
         radioValue: sortMode,
         onRadioValueChange: persistSortMode,
       }}

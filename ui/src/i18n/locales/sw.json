@@ -25,6 +25,143 @@
       "company": "Company"
     }
   },
+  "chrome": {
+    "sortMode": {
+      "top": "Top",
+      "alphabetical": "Alphabetical",
+      "recent": "Recent"
+    },
+    "section": {
+      "collapse": "Collapse {{label}}",
+      "expand": "Expand {{label}}",
+      "actions": "{{label}} actions"
+    },
+    "navItem": {
+      "live_one": "{{count}} live",
+      "live_other": "{{count}} live"
+    },
+    "agents": {
+      "label": "Agents",
+      "newAgent": "New agent",
+      "sectionActions": "Agents section actions",
+      "browseAgents": "Browse agents",
+      "sortLabel": "Agent sort",
+      "openActions": "Open actions for {{name}}",
+      "editAgent": "Edit agent",
+      "resumeAgent": "Resume agent",
+      "pauseAgent": "Pause agent",
+      "updating": "Updating...",
+      "budgetPaused": "Budget paused",
+      "budgetPausedTooltip": "Agent was paused by budget limits",
+      "agentPausedByBudget": "Agent paused by budget",
+      "toastPaused": "Agent paused",
+      "toastResumed": "Agent resumed",
+      "toastPauseFailed": "Could not pause agent",
+      "toastResumeFailed": "Could not resume agent"
+    },
+    "projects": {
+      "label": "Projects",
+      "newProject": "New project",
+      "sectionActions": "Projects section actions",
+      "browseProjects": "Browse projects",
+      "sortLabel": "Project sort",
+      "projectPausedByBudget": "Project paused by budget"
+    },
+    "companyMenu": {
+      "openSwitcher": "Open {{name}} workspace switcher",
+      "openSwitcherGeneric": "Open workspace switcher",
+      "selectWorkspace": "Select workspace",
+      "switchWorkspace": "Switch workspace",
+      "edit": "Edit",
+      "done": "Done",
+      "noWorkspaces": "No workspaces",
+      "reorder": "Reorder {{name}}",
+      "addCompany": "Add company...",
+      "invitePeople": "Invite people to {{name}}",
+      "invitePeopleGeneric": "Invite people",
+      "companySettings": "Company settings",
+      "signOut": "Sign out",
+      "signingOut": "Signing out..."
+    },
+    "companySwitcher": {
+      "selectCompany": "Select company",
+      "companies": "Companies",
+      "noCompanies": "No companies",
+      "companySettings": "Company Settings",
+      "manageCompanies": "Manage Companies"
+    },
+    "account": {
+      "openMenu": "Open account menu",
+      "defaultName": "Board",
+      "signedIn": "Signed in",
+      "localWorkspace": "Local workspace board",
+      "badgeAccount": "Account",
+      "badgeLocal": "Local",
+      "version": "Paperclip v{{version}}",
+      "viewProfile": "View profile",
+      "viewProfileDesc": "Open your activity, task, and usage ledger.",
+      "editProfile": "Edit profile",
+      "editProfileDesc": "Update your display name and avatar.",
+      "instanceSettings": "Instance settings",
+      "instanceSettingsDesc": "Jump back to the last settings page you opened.",
+      "documentation": "Documentation",
+      "documentationDesc": "Open Paperclip docs in a new tab.",
+      "switchToLight": "Switch to light mode",
+      "switchToDark": "Switch to dark mode",
+      "appearanceDesc": "Toggle the app appearance.",
+      "signOut": "Sign out",
+      "signingOut": "Signing out...",
+      "signOutDesc": "End this browser session."
+    },
+    "mobileNav": {
+      "navLabel": "Mobile navigation",
+      "home": "Home",
+      "issues": "Issues",
+      "create": "Create",
+      "agents": "Agents",
+      "inbox": "Inbox"
+    },
+    "layout": {
+      "skipToMain": "Skip to Main Content",
+      "closeSidebar": "Close sidebar"
+    },
+    "breadcrumb": {
+      "openSidebar": "Open sidebar"
+    },
+    "resize": {
+      "resizeSidebar": "Resize sidebar"
+    },
+    "budgetMarker": {
+      "healthy": "Budget healthy",
+      "warning": "Budget warning",
+      "critical": "Paused by budget"
+    },
+    "worktree": {
+      "label": "Worktree",
+      "copyTooltip": "Click to copy worktree name",
+      "copied": "Copied!"
+    },
+    "devRestart": {
+      "restartRequired": "Restart Required",
+      "autoRestartOn": "Auto-Restart On",
+      "reasonBackendAndMigrations": "backend files changed and migrations are pending",
+      "reasonPendingMigrations": "pending migrations need a fresh boot",
+      "reasonBackendChanges": "backend files changed since this server booted",
+      "updatedAt": " · updated {{time}}",
+      "changed": "Changed: {{paths}}",
+      "morePaths": " +{{count}} more",
+      "pendingMigrations": "Pending migrations: {{migrations}}",
+      "moreMigrations": " +{{count}} more",
+      "waitingForIdle_one": "Waiting for {{count}} live run to finish",
+      "waitingForIdle_other": "Waiting for {{count}} live runs to finish",
+      "autoRestartIdle": "Auto-restart will trigger when the instance is idle",
+      "manualRestart": "Restart <code>pnpm dev:once</code> after the active work is safe to interrupt",
+      "justNow": "just now",
+      "minutesAgo": "{{count}}m ago",
+      "hoursAgo": "{{count}}h ago",
+      "daysAgo": "{{count}}d ago"
+    }
+  },
   "settings": {
     "language": {
       "label": "Language",

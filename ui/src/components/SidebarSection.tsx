@@ -18,6 +18,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
+import { useTranslation } from "@/i18n";
 
 type SidebarSectionIcon = ComponentType<{ className?: string }>;
 
@@ -68,6 +69,7 @@ function SidebarSectionHeader({
   label,
   menu,
 }: Pick<SidebarSectionProps, "collapsible" | "headerAction" | "label" | "menu">) {
+  const { t } = useTranslation();
   const { isMobile } = useSidebar();
   const [menuOpen, setMenuOpen] = useState(false);
   const hasMenu = Boolean(
@@ -100,7 +102,7 @@ function SidebarSectionHeader({
             "hover:bg-accent/50 focus-visible:bg-accent/50 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1",
             menuOpen && "bg-accent/50",
           )}
-          aria-label={menu?.ariaLabel ?? `${label} actions`}
+          aria-label={menu?.ariaLabel ?? t("chrome.section.actions", { label })}
         >
           {headerContent}
         </button>
@@ -157,7 +159,7 @@ function SidebarSectionHeader({
             <button
               type="button"
               className="absolute -left-4 flex h-5 w-5 items-center justify-center rounded-sm outline-none transition-colors hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1"
-              aria-label={collapsible.open ? `Collapse ${label}` : `Expand ${label}`}
+              aria-label={collapsible.open ? t("chrome.section.collapse", { label }) : t("chrome.section.expand", { label })}
             >
               <ChevronRight className={caretClassName} aria-hidden="true" />
             </button>
