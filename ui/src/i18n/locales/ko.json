@@ -258,6 +258,65 @@
       "disableNesting": "상위-하위 중첩 끄기",
       "sort": "정렬",
       "group": "그룹"
+    },
+    "list": {
+      "breadcrumb": "이슈",
+      "myBreadcrumb": "내 이슈",
+      "selectCompany": "이슈를 보려면 회사를 선택하세요.",
+      "selectCompanyMine": "내 이슈를 보려면 회사를 선택하세요.",
+      "emptyMine": "나에게 할당된 이슈가 없습니다.",
+      "previewError": "이슈 미리보기를 불러올 수 없습니다."
+    },
+    "columns": {
+      "button": "열",
+      "menuHeading": "데스크톱 이슈 행",
+      "resetDefaults": "기본값 복원",
+      "resetDefaultsHint": "상태, ID, 수정일",
+      "label": {
+        "status": "상태",
+        "id": "ID",
+        "assignee": "담당자",
+        "project": "프로젝트",
+        "workspace": "워크스페이스",
+        "parent": "상위 이슈",
+        "labels": "태그",
+        "updated": "최근 수정"
+      },
+      "description": {
+        "status": "왼쪽 가장자리의 이슈 상태 칩.",
+        "id": "PAP-1009 같은 티켓 식별자.",
+        "assignee": "할당된 에이전트 또는 보드 사용자.",
+        "project": "색상이 있는 연결된 프로젝트 알약.",
+        "workspace": "이슈에 사용된 실행 또는 프로젝트 워크스페이스.",
+        "parent": "상위 이슈 식별자 및 제목.",
+        "labels": "이슈 라벨 및 태그.",
+        "updated": "가장 최근에 보이는 활동 시각."
+      }
+    },
+    "row": {
+      "updated": "{{time}} 수정됨",
+      "unassigned": "미할당",
+      "user": "사용자",
+      "noProject": "프로젝트 없음",
+      "subIssue": "하위 이슈",
+      "filterByWorkspace": "워크스페이스로 필터",
+      "live": "실행 중",
+      "planning": "계획",
+      "planningTitle": "이 이슈는 계획 모드입니다.",
+      "parkedBlocker": "보류된 작업에 차단됨",
+      "parkedBlockerTitle": "보류된 작업에 차단됨 — 할당된 차단 요인 중 하나 이상이 백로그에 있어 담당자를 깨우지 않습니다.",
+      "productivityReviewTitle": "생산성 검토: {{trigger}}",
+      "productivityReviewOpen": "생산성 검토 진행 중",
+      "markAsRead": "읽음으로 표시",
+      "dismissFromInbox": "받은함에서 제외",
+      "recoveryChipTitle": "{{label}} — 조치하려면 원본 이슈를 여세요."
+    },
+    "board": {
+      "showMore": "{{count}}개 더 보기",
+      "showingOf": "{{total}}개 중 {{visible}}개 표시",
+      "nextStep": "다음 단계",
+      "nextStepTitle": "이 이슈에 다음 단계가 필요합니다",
+      "nextStepAria": "다음 단계 필요"
     }
   },
   "inbox": {

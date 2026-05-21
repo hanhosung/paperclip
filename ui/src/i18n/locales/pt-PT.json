@@ -258,6 +258,65 @@
       "disableNesting": "Disable parent-child nesting",
       "sort": "Sort",
       "group": "Group"
+    },
+    "list": {
+      "breadcrumb": "Issues",
+      "myBreadcrumb": "My Issues",
+      "selectCompany": "Select a company to view issues.",
+      "selectCompanyMine": "Select a company to view your issues.",
+      "emptyMine": "No issues assigned to you.",
+      "previewError": "Unable to load issue preview."
+    },
+    "columns": {
+      "button": "Columns",
+      "menuHeading": "Desktop issue rows",
+      "resetDefaults": "Reset defaults",
+      "resetDefaultsHint": "status, id, updated",
+      "label": {
+        "status": "Status",
+        "id": "ID",
+        "assignee": "Assignee",
+        "project": "Project",
+        "workspace": "Workspace",
+        "parent": "Parent issue",
+        "labels": "Tags",
+        "updated": "Last updated"
+      },
+      "description": {
+        "status": "Issue state chip on the left edge.",
+        "id": "Ticket identifier like PAP-1009.",
+        "assignee": "Assigned agent or board user.",
+        "project": "Linked project pill with its color.",
+        "workspace": "Execution or project workspace used for the issue.",
+        "parent": "Parent issue identifier and title.",
+        "labels": "Issue labels and tags.",
+        "updated": "Latest visible activity time."
+      }
+    },
+    "row": {
+      "updated": "Updated {{time}}",
+      "unassigned": "Unassigned",
+      "user": "User",
+      "noProject": "No project",
+      "subIssue": "Sub-issue",
+      "filterByWorkspace": "Filter by workspace",
+      "live": "Live",
+      "planning": "Planning",
+      "planningTitle": "This issue is in planning mode.",
+      "parkedBlocker": "Blocked by parked work",
+      "parkedBlockerTitle": "Blocked by parked work — at least one assigned blocker is in backlog and will not wake its assignee.",
+      "productivityReviewTitle": "Productivity review: {{trigger}}",
+      "productivityReviewOpen": "Productivity review open",
+      "markAsRead": "Mark as read",
+      "dismissFromInbox": "Dismiss from inbox",
+      "recoveryChipTitle": "{{label}} — open the source issue to act."
+    },
+    "board": {
+      "showMore": "Show {{count}} more",
+      "showingOf": "Showing {{visible}} of {{total}}",
+      "nextStep": "Next step",
+      "nextStepTitle": "This issue needs a next step",
+      "nextStepAria": "Needs next step"
     }
   },
   "inbox": {
