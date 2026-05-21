@@ -915,6 +915,65 @@
   "common": {
     "none": "없음"
   },
+  "misc": {
+    "activityRow": {
+      "system": "시스템",
+      "board": "보드",
+      "unknown": "알 수 없음"
+    },
+    "runButton": {
+      "label": "지금 실행"
+    },
+    "pauseResume": {
+      "resume": "재개",
+      "pause": "일시중지"
+    },
+    "copyText": {
+      "copied": "복사됨!",
+      "failed": "복사 실패"
+    },
+    "foldCurtain": {
+      "more": "더 보기",
+      "less": "접기"
+    },
+    "agentIconPicker": {
+      "search": "아이콘 검색...",
+      "noMatch": "일치하는 아이콘 없음"
+    },
+    "scrollToBottom": {
+      "label": "맨 아래로 스크롤"
+    },
+    "toast": {
+      "dismiss": "알림 닫기"
+    },
+    "newAgentDialog": {
+      "header": "새 에이전트 추가",
+      "recommendation": "CEO가 에이전트 설정을 맡는 것을 권장합니다 — CEO는 조직 구조를 알고 있어 보고 체계·권한·어댑터를 구성할 수 있습니다.",
+      "askCeo": "CEO에게 새 에이전트 생성 요청",
+      "advancedLink": "직접 고급 설정하기",
+      "back": "뒤로",
+      "chooseAdapter": "고급 설정을 위한 어댑터 유형을 선택하세요.",
+      "recommended": "추천",
+      "askCeoIssueTitle": "새 에이전트 생성",
+      "askCeoIssueDescription": "(원하는 에이전트 종류를 여기에 입력하세요)"
+    },
+    "statusIcon": {
+      "blocked": "차단됨",
+      "activeChildSample": "차단됨 · 활성 하위 이슈 {{id}} 대기 중",
+      "activeChild_one": "차단됨 · 활성 하위 이슈 {{count}}개 대기 중",
+      "activeChild_other": "차단됨 · 활성 하위 이슈 {{count}}개 대기 중",
+      "activeDependencySample": "차단됨 · 활성 의존성 {{id}}로 처리 중",
+      "activeDependency_one": "차단됨 · 활성 의존성 {{count}}개로 처리 중",
+      "activeDependency_other": "차단됨 · 활성 의존성 {{count}}개로 처리 중",
+      "stalledReviewSample": "차단됨 · {{id}} 검토 정체",
+      "stalledReview_one": "차단됨 · 검토가 정체되어 다음 단계가 불분명함",
+      "stalledReview_other": "차단됨 · 검토 {{count}}건이 정체되어 다음 단계가 불분명함",
+      "attentionCopy_one": "차단 요인 {{count}}개가 주의 필요",
+      "attentionCopy_other": "차단 요인 {{count}}개가 주의 필요",
+      "attentionFull": "차단됨 · {{attention}}",
+      "attentionFullCovered": "차단됨 · {{attention}}; {{covered}}개는 활성 작업으로 처리 중"
+    }
+  },
   "issueProps": {
     "status": "상태",
     "priority": "우선순위",

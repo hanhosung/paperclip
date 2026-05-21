@@ -915,6 +915,65 @@
   "common": {
     "none": "None"
   },
+  "misc": {
+    "activityRow": {
+      "system": "System",
+      "board": "Board",
+      "unknown": "Unknown"
+    },
+    "runButton": {
+      "label": "Run now"
+    },
+    "pauseResume": {
+      "resume": "Resume",
+      "pause": "Pause"
+    },
+    "copyText": {
+      "copied": "Copied!",
+      "failed": "Copy failed"
+    },
+    "foldCurtain": {
+      "more": "Show more",
+      "less": "Show less"
+    },
+    "agentIconPicker": {
+      "search": "Search icons...",
+      "noMatch": "No icons match"
+    },
+    "scrollToBottom": {
+      "label": "Scroll to bottom"
+    },
+    "toast": {
+      "dismiss": "Dismiss notification"
+    },
+    "newAgentDialog": {
+      "header": "Add a new agent",
+      "recommendation": "We recommend letting your CEO handle agent setup — they know the org structure and can configure reporting, permissions, and adapters.",
+      "askCeo": "Ask the CEO to create a new agent",
+      "advancedLink": "I want advanced configuration myself",
+      "back": "Back",
+      "chooseAdapter": "Choose your adapter type for advanced setup.",
+      "recommended": "Recommended",
+      "askCeoIssueTitle": "Create a new agent",
+      "askCeoIssueDescription": "(type in what kind of agent you want here)"
+    },
+    "statusIcon": {
+      "blocked": "Blocked",
+      "activeChildSample": "Blocked · waiting on active sub-issue {{id}}",
+      "activeChild_one": "Blocked · waiting on {{count}} active sub-issue",
+      "activeChild_other": "Blocked · waiting on {{count}} active sub-issues",
+      "activeDependencySample": "Blocked · covered by active dependency {{id}}",
+      "activeDependency_one": "Blocked · covered by {{count}} active dependency",
+      "activeDependency_other": "Blocked · covered by {{count}} active dependencies",
+      "stalledReviewSample": "Blocked · review stalled on {{id}}",
+      "stalledReview_one": "Blocked · review stalled with no clear next step",
+      "stalledReview_other": "Blocked · {{count}} reviews stalled with no clear next step",
+      "attentionCopy_one": "{{count}} blocker needs attention",
+      "attentionCopy_other": "{{count}} blockers need attention",
+      "attentionFull": "Blocked · {{attention}}",
+      "attentionFullCovered": "Blocked · {{attention}}; {{covered}} covered by active work"
+    }
+  },
   "issueProps": {
     "status": "Status",
     "priority": "Priority",

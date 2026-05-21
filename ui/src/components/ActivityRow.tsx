@@ -4,6 +4,7 @@ import { deriveInitials } from "./Identity";
 import { IssueReferenceActivitySummary } from "./IssueReferenceActivitySummary";
 import { timeAgo } from "../lib/timeAgo";
 import { cn } from "../lib/utils";
+import { useTranslation } from "@/i18n";
 import { formatActivityVerb } from "../lib/activity-format";
 import { deriveProjectUrlKey, type ActivityEvent, type Agent } from "@paperclipai/shared";
 import type { CompanyUserProfile } from "../lib/company-members";
@@ -29,6 +30,7 @@ interface ActivityRowProps {
 }
 
 export function ActivityRow({ event, agentMap, userProfileMap, entityNameMap, entityTitleMap, className }: ActivityRowProps) {
+  const { t } = useTranslation();
   const verb = formatActivityVerb(event.action, event.details, { agentMap, userProfileMap });
 
   const isHeartbeatEvent = event.entityType === "heartbeat_run";
@@ -48,7 +50,7 @@ export function ActivityRow({ event, agentMap, userProfileMap, entityNameMap, en
 
   const actor = event.actorType === "agent" ? agentMap.get(event.actorId) : null;
   const userProfile = event.actorType === "user" ? userProfileMap?.get(event.actorId) : null;
-  const actorName = actor?.name ?? (event.actorType === "system" ? "System" : userProfile?.label ?? (event.actorType === "user" ? "Board" : event.actorId || "Unknown"));
+  const actorName = actor?.name ?? (event.actorType === "system" ? t("misc.activityRow.system") : userProfile?.label ?? (event.actorType === "user" ? t("misc.activityRow.board") : event.actorId || t("misc.activityRow.unknown")));
   const actorAvatarUrl = userProfile?.image ?? null;
 
   const inner = (

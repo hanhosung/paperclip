@@ -8,6 +8,7 @@ import {
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useTranslation } from "@/i18n";
 
 interface FoldCurtainProps {
   children: ReactNode;
@@ -60,11 +61,14 @@ export function FoldCurtain({
   children,
   collapsedHeight: explicitCollapsedHeight,
   activationBuffer = 120,
-  moreLabel = "Show more",
-  lessLabel = "Show less",
+  moreLabel,
+  lessLabel,
   className,
   contentClassName,
 }: FoldCurtainProps) {
+  const { t } = useTranslation();
+  const resolvedMoreLabel = moreLabel ?? t("misc.foldCurtain.more");
+  const resolvedLessLabel = lessLabel ?? t("misc.foldCurtain.less");
   const collapsedHeight = useResponsiveCollapsedHeight(explicitCollapsedHeight);
   const contentRef = useRef<HTMLDivElement>(null);
   const [naturalHeight, setNaturalHeight] = useState(0);
@@ -131,7 +135,7 @@ export function FoldCurtain({
             }}
             className="h-7 px-2 text-xs text-muted-foreground hover:text-foreground"
           >
-            {expanded ? lessLabel : moreLabel}
+            {expanded ? resolvedLessLabel : resolvedMoreLabel}
             {expanded ? (
               <ChevronUp className="h-3.5 w-3.5" />
             ) : (
