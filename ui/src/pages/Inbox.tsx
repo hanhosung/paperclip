@@ -419,8 +419,9 @@ function ApprovalInboxRow({
   selected?: boolean;
   className?: string;
 }) {
+  const { t } = useTranslation();
   const Icon = typeIcon[approval.type] ?? defaultTypeIcon;
-  const label = approvalLabel(approval.type, approval.payload as Record<string, unknown> | null);
+  const label = approvalLabel(approval.type, approval.payload as Record<string, unknown> | null, t);
   const showResolutionButtons =
     approval.type !== "budget_override_required" &&
     ACTIONABLE_APPROVAL_STATUSES.has(approval.status);
@@ -1100,7 +1101,7 @@ export function Inbox() {
       }
       if (item.kind === "approval") {
         const a = item.approval;
-        const label = approvalLabel(a.type, a.payload as Record<string, unknown> | null);
+        const label = approvalLabel(a.type, a.payload as Record<string, unknown> | null, t);
         if (label.toLowerCase().includes(q)) return true;
         if (a.type.toLowerCase().includes(q)) return true;
         return false;

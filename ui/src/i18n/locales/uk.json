@@ -2873,5 +2873,85 @@
   "runtimeCommandKind": {
     "service": "service",
     "job": "job"
+  },
+  "approvals": {
+    "breadcrumb": "Approvals",
+    "selectCompany": "Select a company first.",
+    "type": {
+      "hire_agent": "Hire Agent",
+      "approve_ceo_strategy": "CEO Strategy",
+      "budget_override_required": "Budget Override",
+      "request_board_approval": "Board Approval"
+    },
+    "list": {
+      "tabPending": "Pending",
+      "tabAll": "All",
+      "emptyPending": "No pending approvals.",
+      "emptyAll": "No approvals yet."
+    },
+    "card": {
+      "requestedBy": "Requested by",
+      "createdAgo": "Approval request created {{time}}",
+      "decisionNote": "Decision note.",
+      "viewDetails": "View details",
+      "approve": "Approve",
+      "approving": "Approving...",
+      "reject": "Reject",
+      "rejecting": "Rejecting..."
+    },
+    "payload": {
+      "name": "Name",
+      "role": "Role",
+      "title": "Title",
+      "icon": "Icon",
+      "capabilities": "Capabilities",
+      "adapter": "Adapter",
+      "skills": "Skills",
+      "scope": "Scope",
+      "window": "Window",
+      "metric": "Metric",
+      "limitObserved": "Limit {{limit}} · Observed {{observed}}",
+      "summary": "Summary",
+      "recommendedAction": "Recommended action",
+      "onApproval": "On approval",
+      "risks": "Risks",
+      "proposedComment": "Proposed comment"
+    },
+    "detail": {
+      "notFound": "Approval not found.",
+      "confirmedTitle": "Approval confirmed",
+      "confirmedDescription": "Requesting agent was notified to review this approval and linked issues.",
+      "reviewLinkedIssue": "Review linked issue",
+      "reviewLinkedIssues": "Review linked issues",
+      "openHiredAgent": "Open hired agent",
+      "backToApprovals": "Back to approvals",
+      "requestedBy": "Requested by",
+      "seeFullRequest": "See full request",
+      "decisionNote": "Decision note: {{note}}",
+      "linkedIssues": "Linked Issues",
+      "linkedIssuesHelp": "Linked issues remain open until the requesting agent follows up and closes them.",
+      "approve": "Approve",
+      "reject": "Reject",
+      "budgetStopHint": "Resolve this budget stop from the budget controls on",
+      "requestRevision": "Request revision",
+      "markResubmitted": "Mark resubmitted",
+      "deleteDisapprovedAgent": "Delete disapproved agent",
+      "deleteAgentConfirm": "Delete this disapproved agent? This cannot be undone.",
+      "comments": "Comments ({{count}})",
+      "boardAuthor": "Board",
+      "commentPlaceholder": "Add a comment...",
+      "postComment": "Post comment",
+      "postingComment": "Posting…"
+    },
+    "errors": {
+      "approveFailed": "Failed to approve",
+      "rejectFailed": "Failed to reject",
+      "approve": "Approve failed",
+      "reject": "Reject failed",
+      "revision": "Revision request failed",
+      "resubmit": "Resubmit failed",
+      "comment": "Comment failed",
+      "delete": "Delete failed"
+    }
   }
 }

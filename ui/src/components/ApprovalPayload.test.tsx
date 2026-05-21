@@ -9,11 +9,19 @@ import { ApprovalPayloadRenderer, approvalLabel } from "./ApprovalPayload";
 (globalThis as any).IS_REACT_ACT_ENVIRONMENT = true;
 
 describe("approvalLabel", () => {
+  // Minimal translator: resolves the known approval-type key to its English label.
+  const t = (key: string): string =>
+    key === "approvals.type.request_board_approval" ? "Board Approval" : key;
+
   it("uses payload titles for generic board approvals", () => {
     expect(
-      approvalLabel("request_board_approval", {
-        title: "Reply with an ASCII frog",
-      }),
+      approvalLabel(
+        "request_board_approval",
+        {
+          title: "Reply with an ASCII frog",
+        },
+        t,
+      ),
     ).toBe("Board Approval: Reply with an ASCII frog");
   });
 });
