@@ -2,6 +2,15 @@ import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { deriveAgentUrlKey, deriveProjectUrlKey, normalizeProjectUrlKey, hasNonAsciiContent } from "@paperclipai/shared";
 import type { BillingType } from "@paperclipai/shared";
+import { i18n, t } from "@/i18n";
+
+/** Active BCP-47 locale tag for Intl formatting — follows the chosen UI language. */
+function activeLocale(): string {
+  return i18n.language || "en";
+}
+
+/** Fixed display time zone — the Korean investor dashboard always shows KST. */
+const DISPLAY_TIME_ZONE = "Asia/Seoul";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -22,35 +31,54 @@ export function asFiniteNumber(value: unknown, fallback: number) {
 }
 
 export function formatCents(cents: number): string {
-  return `$${(cents / 100).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+  return new Intl.NumberFormat(activeLocale(), {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(cents / 100);
 }
 
 export function formatNumber(n: number): string {
-  return n.toLocaleString("en-US");
+  return n.toLocaleString(activeLocale());
 }
 
 export function formatDate(date: Date | string): string {
-  return new Date(date).toLocaleDateString("en-US", {
+  return new Date(date).toLocaleDateString(activeLocale(), {
+    year: "numeric",
     month: "short",
     day: "numeric",
-    year: "numeric",
+    timeZone: DISPLAY_TIME_ZONE,
   });
 }
 
 export function formatDateTime(date: Date | string): string {
-  return new Date(date).toLocaleString("en-US", {
+  return new Date(date).toLocaleString(activeLocale(), {
+    year: "numeric",
     month: "short",
     day: "numeric",
-    year: "numeric",
     hour: "numeric",
     minute: "2-digit",
+    timeZone: DISPLAY_TIME_ZONE,
   });
 }
 
 export function formatShortDate(date: Date | string): string {
-  return new Date(date).toLocaleString("en-US", {
+  return new Date(date).toLocaleString(activeLocale(), {
     month: "short",
     day: "numeric",
+    timeZone: DISPLAY_TIME_ZONE,
+  });
+}
+
+/** Locale-aware 24-hour clock time (KST). Pass `{ seconds: true }` to include seconds. */
+export function formatTime(date: Date | string, opts?: { seconds?: boolean }): string {
+  return new Date(date).toLocaleTimeString(activeLocale(), {
+    hour: "2-digit",
+    minute: "2-digit",
+    ...(opts?.seconds ? { second: "2-digit" as const } : {}),
+    hour12: false,
+    timeZone: DISPLAY_TIME_ZONE,
   });
 }
 
@@ -58,17 +86,28 @@ export function relativeTime(date: Date | string): string {
   const now = Date.now();
   const then = new Date(date).getTime();
   const diffSec = Math.round((now - then) / 1000);
-  if (diffSec < 60) return "just now";
+  if (diffSec < 60) return t("time.justNow");
   const diffMin = Math.round(diffSec / 60);
-  if (diffMin < 60) return `${diffMin}m ago`;
+  if (diffMin < 60) return t("time.minutesAgo", { count: diffMin });
   const diffHr = Math.round(diffMin / 60);
-  if (diffHr < 24) return `${diffHr}h ago`;
+  if (diffHr < 24) return t("time.hoursAgo", { count: diffHr });
   const diffDay = Math.round(diffHr / 24);
-  if (diffDay < 30) return `${diffDay}d ago`;
+  if (diffDay < 30) return t("time.daysAgo", { count: diffDay });
   return formatDate(date);
 }
 
+// Korean myriad number units — 만(10^4) · 억(10^8) · 조(10^12).
+const KO_MAN = 10_000;
+const KO_EOK = 100_000_000;
+const KO_JO = 1_000_000_000_000;
+
 export function formatTokens(n: number): string {
+  if (activeLocale().startsWith("ko")) {
+    if (n >= KO_JO) return `${(n / KO_JO).toFixed(1)}조`;
+    if (n >= KO_EOK) return `${(n / KO_EOK).toFixed(1)}억`;
+    if (n >= KO_MAN) return `${(n / KO_MAN).toFixed(1)}만`;
+    return String(n);
+  }
   if (n >= 1_000_000_000) return `${(n / 1_000_000_000).toFixed(1)}B`;
   if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1)}M`;
   if (n >= 1_000) return `${(n / 1_000).toFixed(1)}k`;
