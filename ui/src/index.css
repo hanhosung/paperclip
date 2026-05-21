@@ -1,9 +1,13 @@
 @import "tailwindcss";
+/* Korean web font — Pretendard Variable (dynamic subset). Falls back to the
+   platform Korean sans (Apple SD Gothic Neo / Malgun Gothic) when offline. */
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css");
 @plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  --font-sans: "Pretendard Variable", Pretendard, ui-sans-serif, system-ui, -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", "Segoe UI", Roboto, sans-serif;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
