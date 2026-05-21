@@ -536,6 +536,49 @@
     "workspace": "워크스페이스",
     "parent": "상위 이슈"
   },
+  "blockedInbox": {
+    "variant": {
+      "needs_decision": "결정 필요",
+      "stalled": "차단 체인 정체",
+      "needs_attention": "주의 필요",
+      "recovery_required": "복구 필요",
+      "external_wait": "외부 대기",
+      "owner_paused": "담당자 일시중지"
+    },
+    "reason": {
+      "pending_board_decision": "보드 결정 대기",
+      "pending_user_decision": "사용자 결정 대기",
+      "missing_successful_run_disposition": "처리 방식 선택",
+      "blocked_chain_stalled": "차단 체인 정체",
+      "blocked_by_unassigned_issue": "미배정 차단 요인",
+      "blocked_by_assigned_backlog_issue": "보류된 차단 요인",
+      "blocked_by_cancelled_issue": "취소된 차단 요인",
+      "in_review_without_action_path": "조치 경로 없는 검토",
+      "invalid_review_participant": "유효하지 않은 검토 참여자",
+      "open_recovery_issue": "복구 진행 중",
+      "external_owner_action": "외부 담당자 조치",
+      "blocked_by_uninvokable_assignee": "담당자 일시중지",
+      "stopped": "정지됨"
+    },
+    "groupBy": {
+      "blocker_type": "차단 요인 유형",
+      "none": "없음"
+    },
+    "sort": {
+      "urgency": "긴급도순",
+      "most_recent": "최근순",
+      "longest_stopped": "오래 정지된 순"
+    },
+    "stopped": {
+      "unknown": "정지됨",
+      "justNow": "방금 정지됨",
+      "minutes": "{{count}}분째 정지",
+      "hours": "{{count}}시간째 정지",
+      "days": "{{count}}일째 정지",
+      "weeks": "{{count}}주째 정지",
+      "months": "{{count}}개월째 정지"
+    }
+  },
   "billingType": {
     "metered_api": "종량제 API",
     "subscription_included": "구독",
@@ -5213,6 +5256,9 @@
       "emptyTitle": "중단된 작업이 없습니다.",
       "emptyBody": "결정, 복구 또는 외부 조치가 필요한 이슈가 여기에 표시됩니다.",
       "noSearchResults": "검색과 일치하는 중단된 항목이 없습니다."
+    },
+    "blockedReasonChip": {
+      "ariaLabel": "사유: {{reason}}, 심각도 {{severity}}"
     },
     "statusIcon": {
       "blocked": "차단됨",

@@ -79,7 +79,7 @@ export function BlockedInboxView({
       }),
   });
 
-  const allRows = useMemo(() => buildBlockedInboxRows(issues), [issues]);
+  const allRows = useMemo(() => buildBlockedInboxRows(issues, t), [issues, t]);
   const filteredRows = useMemo(
     () => allRows.filter((row) => blockedRowMatchesSearch(row, searchQuery)),
     [allRows, searchQuery],
@@ -178,9 +178,11 @@ export function BlockedInboxView({
           <CheckCircle2 className="h-5 w-5" aria-hidden="true" />
         </span>
         <div className="space-y-1">
-          <p className="text-sm font-medium text-foreground">No work is stopped.</p>
+          <p className="text-sm font-medium text-foreground">
+            {t("components.blockedInbox.emptyTitle")}
+          </p>
           <p className="text-xs text-muted-foreground">
-            Issues that need a decision, recovery, or external action will appear here.
+            {t("components.blockedInbox.emptyBody")}
           </p>
         </div>
       </div>
@@ -194,7 +196,7 @@ export function BlockedInboxView({
           data-testid="blocked-inbox-no-search-results"
           className="rounded-lg border border-border/70 bg-card/40 px-4 py-6 text-center text-sm text-muted-foreground"
         >
-          No stopped items match your search.
+          {t("components.blockedInbox.noSearchResults")}
         </div>
       </div>
     );
@@ -223,7 +225,7 @@ export function BlockedInboxView({
               <div key={group.variant} data-testid={`blocked-inbox-group-${group.variant}`}>
                 <div className="px-3 sm:px-4">
                   <IssueGroupHeader
-                    label={`${group.label} · ${group.rows.length}`}
+                    label={`${t(group.label)} · ${group.rows.length}`}
                     collapsible
                     collapsed={isCollapsed}
                     onToggle={() => toggleVariant(group.variant)}
@@ -289,8 +291,9 @@ function BlockedInboxRow({
   showIdentifierColumn,
   showUpdatedColumn,
 }: BlockedInboxRowProps) {
+  const { t } = useTranslation();
   const { label: ownerName, isAgent } = resolveOwnerName(row, agentNameById, userLabelById);
-  const stoppedAge = formatStoppedAge(row.attention.stoppedSinceAt);
+  const stoppedAge = formatStoppedAge(row.attention.stoppedSinceAt, t);
 
   const desktopTrailing = (
     <span className="flex shrink-0 items-center gap-3 text-xs">

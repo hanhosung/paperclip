@@ -536,6 +536,49 @@
     "workspace": "Workspace",
     "parent": "Parent Issue"
   },
+  "blockedInbox": {
+    "variant": {
+      "needs_decision": "Needs decision",
+      "stalled": "Blocked chain stalled",
+      "needs_attention": "Needs attention",
+      "recovery_required": "Recovery required",
+      "external_wait": "External wait",
+      "owner_paused": "Owner paused"
+    },
+    "reason": {
+      "pending_board_decision": "Pending board decision",
+      "pending_user_decision": "Pending user decision",
+      "missing_successful_run_disposition": "Pick disposition",
+      "blocked_chain_stalled": "Blocked chain stalled",
+      "blocked_by_unassigned_issue": "Unassigned blocker",
+      "blocked_by_assigned_backlog_issue": "Parked blocker",
+      "blocked_by_cancelled_issue": "Cancelled blocker",
+      "in_review_without_action_path": "Review without action path",
+      "invalid_review_participant": "Invalid review participant",
+      "open_recovery_issue": "Recovery in progress",
+      "external_owner_action": "External owner action",
+      "blocked_by_uninvokable_assignee": "Owner paused",
+      "stopped": "Stopped"
+    },
+    "groupBy": {
+      "blocker_type": "Blocker type",
+      "none": "None"
+    },
+    "sort": {
+      "urgency": "Most urgent",
+      "most_recent": "Most recent",
+      "longest_stopped": "Longest stopped"
+    },
+    "stopped": {
+      "unknown": "stopped",
+      "justNow": "stopped just now",
+      "minutes": "stopped {{count}}m",
+      "hours": "stopped {{count}}h",
+      "days": "stopped {{count}}d",
+      "weeks": "stopped {{count}}w",
+      "months": "stopped {{count}}mo"
+    }
+  },
   "billingType": {
     "metered_api": "Metered API",
     "subscription_included": "Subscription",
@@ -5213,6 +5256,9 @@
       "emptyTitle": "No work is stopped.",
       "emptyBody": "Issues that need a decision, recovery, or external action will appear here.",
       "noSearchResults": "No stopped items match your search."
+    },
+    "blockedReasonChip": {
+      "ariaLabel": "Reason: {{reason}}, severity {{severity}}"
     },
     "statusIcon": {
       "blocked": "Blocked",
