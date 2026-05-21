@@ -909,17 +909,18 @@ a.paperclip-mention-chip[data-mention-kind="agent"]::before {
   outline-offset: 2px;
 }
 
-/* Fit markdown tables to the comment/report width — wrap cell text instead of
-   forcing horizontal scroll. `table-layout: fixed` + `width: 100%` distributes
-   columns within the container; the wrapper keeps `overflow-x: auto` only as a
-   safety net for unbreakable content. */
+/* Markdown tables size to their content (auto layout). Cells cap at 22rem and
+   wrap long text, so a wide report table fits within the (widened) comment
+   container; the wrapper keeps `overflow-x: auto` as a safety net. */
 .paperclip-markdown-table-scroll table {
-  width: 100%;
-  table-layout: fixed;
+  width: max-content;
+  min-width: 100%;
   margin: 0;
 }
 
 .paperclip-markdown-table-scroll :where(th, td) {
+  min-width: 8rem;
+  max-width: 22rem;
   vertical-align: top;
   overflow-wrap: anywhere;
   word-break: break-word;
