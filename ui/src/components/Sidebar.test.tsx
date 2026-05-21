@@ -171,10 +171,10 @@ describe("Sidebar", () => {
     try {
       const root = await renderSidebar();
 
-      expect(container.textContent).toContain("새 이슈"); // New Issue
+      expect(container.textContent).toContain("새 의뢰"); // New Issue
       expect(container.textContent).toContain("대시보드"); // Dashboard
       expect(container.textContent).toContain("받은함"); // Inbox
-      expect(container.textContent).toContain("이슈"); // Issues
+      expect(container.textContent).toContain("분석 의뢰"); // Issues
       expect(container.textContent).not.toContain("Dashboard");
 
       await act(async () => {
