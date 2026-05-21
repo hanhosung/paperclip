@@ -3012,5 +3012,176 @@
       "comment": "댓글 작성 실패",
       "delete": "삭제 실패"
     }
+  },
+  "issueChat": {
+    "author": {
+      "agent": "에이전트",
+      "you": "나",
+      "system": "시스템",
+      "user": "사용자",
+      "board": "이사회",
+      "paperclip": "Paperclip",
+      "unassigned": "미할당"
+    },
+    "empty": {
+      "full": "이 이슈 대화가 비어 있습니다. 아래에 메시지를 작성하여 시작하세요.",
+      "embedded": "아직 실행 출력이 없습니다.",
+      "noContent": "메시지 내용이 없습니다."
+    },
+    "fallback": {
+      "title": "채팅 렌더러에서 내부 상태 오류가 발생했습니다.",
+      "description": "이슈 페이지를 중단하는 대신 안전한 대체 기록을 표시합니다."
+    },
+    "thread": {
+      "jumpToLatest": "최신으로 이동"
+    },
+    "value": {
+      "none": "없음"
+    },
+    "runStatus": {
+      "timedOut": "시간 초과됨"
+    },
+    "agentPaused": {
+      "byBudget": "예산 강제 중지로 일시중지되었습니다.",
+      "bySystem": "시스템에 의해 일시중지되었습니다.",
+      "manually": "수동으로 일시중지되었습니다.",
+      "message": "{{agent}}이(가) 일시중지되었습니다. 에이전트가 재개될 때까지 새 실행이 시작되지 않습니다. {{detail}}"
+    },
+    "cot": {
+      "working": "작업 중",
+      "worked": "작업 완료",
+      "forDuration": "{{duration}} 동안",
+      "ranCommands_one": "명령 {{count}}개 실행",
+      "ranCommands_other": "명령 {{count}}개 실행",
+      "calledTools_one": "도구 {{count}}개 호출",
+      "calledTools_other": "도구 {{count}}개 호출"
+    },
+    "tool": {
+      "copy": "복사",
+      "input": "입력",
+      "result": "결과",
+      "toolLabel": "도구: {{name}}",
+      "argsLabel": "인자:",
+      "resultLabel": "결과:"
+    },
+    "message": {
+      "followUp": "후속 조치",
+      "running": "실행 중",
+      "sending": "전송 중...",
+      "copyMessage": "메시지 복사",
+      "moreActions": "추가 작업",
+      "viewRun": "실행 보기",
+      "stopRun": "실행 중지",
+      "stoppingRun": "중지 중...",
+      "queued": "대기 중",
+      "deferredWake": "⏸ 지연된 깨우기",
+      "interrupt": "중단",
+      "interrupting": "중단 중...",
+      "cancel": "취소",
+      "run": "실행"
+    },
+    "feedback": {
+      "helpful": "도움됨",
+      "needsWork": "개선 필요",
+      "betterPrompt": "무엇이 더 나았을까요?",
+      "notePlaceholder": "짧은 메모 추가",
+      "dismiss": "닫기",
+      "saveNote": "메모 저장",
+      "saving": "저장 중...",
+      "dialogTitle": "피드백 공유 설정 저장",
+      "dialogDescription": "투표한 AI 출력을 Paperclip Labs와 공유할지 선택하세요. 이 답변은 이후 좋아요·싫어요 투표의 기본값이 됩니다.",
+      "savedLocally": "이 투표는 항상 로컬에 저장됩니다.",
+      "alwaysAllow": "항상 허용",
+      "dontAllow": "허용 안 함",
+      "choiceExplainerPrefix": "이 투표와 이후 투표한 AI 출력을 공유하려면 ",
+      "choiceExplainerMiddle": " 을(를) 선택하세요. 이 투표와 이후 투표를 로컬에 유지하려면 ",
+      "choiceExplainerSuffix": " 을(를) 선택하세요.",
+      "changeLater": "인스턴스 설정 > 일반에서 나중에 변경할 수 있습니다.",
+      "readTerms": "서비스 약관 읽기"
+    },
+    "events": {
+      "updatedTask": "이 작업을 업데이트함",
+      "requestedFollowUp": "후속 조치를 요청함",
+      "hideConfirmation": "확인 숨기기",
+      "expiredConfirmation": "만료된 확인",
+      "status": "상태",
+      "assignee": "담당자",
+      "workspace": "워크스페이스",
+      "run": "실행"
+    },
+    "systemNotice": {
+      "staleDispositionWarning": "오래된 처리 경고",
+      "noAdditionalDetails": "추가 세부 정보가 없습니다.",
+      "copyLink": "링크 복사",
+      "copyLinkAria": "시스템 알림 링크 복사",
+      "copyNoticeText": "알림 텍스트 복사",
+      "copyNoticeAria": "시스템 알림 복사"
+    },
+    "recovery": {
+      "legacyLabel": "레거시 복구 이슈",
+      "legacyBody": "레거시 복구 이슈입니다. 최신 복구 조치는 원본 이슈에 있습니다"
+    },
+    "composer": {
+      "reply": "답글",
+      "send": "보내기",
+      "posting": "게시 중...",
+      "attachFile": "파일 첨부",
+      "moreOptions": "추가 작성 옵션",
+      "switchToStandard": "표준으로 전환",
+      "switchToPlanning": "계획으로 전환",
+      "planning": "계획",
+      "planningToggleTitle": "이 제출에 계획 모드가 켜져 있습니다. 표준으로 전환하려면 클릭하세요.",
+      "dropToUpload": "놓아서 업로드",
+      "dropHint": "이미지는 답글에 삽입됩니다. 다른 파일은 이 이슈에 추가됩니다.",
+      "assignee": "담당자",
+      "noAssignee": "담당자 없음",
+      "searchAssignees": "담당자 검색...",
+      "noAssigneesFound": "담당자를 찾을 수 없습니다.",
+      "attachmentUploading": "이슈에 업로드 중",
+      "attachmentInline": "인라인으로 삽입됨",
+      "attachmentAttached": "이슈에 첨부됨",
+      "uploadFailed": "업로드 실패",
+      "unsupportedFileType": "이 파일 형식은 여기에 첨부할 수 없습니다",
+      "noAssigneeToastTitle": "담당자가 선택되지 않음",
+      "noAssigneeToastBody": "담당자를 선택하거나 보내기를 다시 클릭하여 담당자 없이 게시하세요."
+    },
+    "size": {
+      "bytes": "{{value}} B",
+      "kilobytes": "{{value}} KB",
+      "megabytes": "{{value}} MB"
+    },
+    "backlogNotice": {
+      "assigneeFallback": "담당자",
+      "parked": "보류됨",
+      "parkedBodyBefore": "은(는) 상태가 다음으로 변경될 때까지 깨어나지 않습니다:",
+      "parkedBodyOr": "또는",
+      "agentHint": "댓글은 여전히 질문이나 분류를 위해 담당자를 깨웁니다. 작업이 의도적으로 보류된 경우에만 이 상태로 두세요.",
+      "resume": "지금 재개",
+      "resuming": "재개 중…"
+    },
+    "blockedNotice": {
+      "needsNextStep": "이 이슈에는 아직 다음 단계가 필요합니다.",
+      "runFinishedPrefix": "실행이 성공적으로 완료되었지만, 이 이슈는 여전히",
+      "runFinishedSuffix": "상태로 열려 있으며 다음 조치의 명확한 담당자가 없습니다.",
+      "optionDone": "완료 또는 취소로 표시하세요.",
+      "optionReview": "검토를 위해 보내거나 의견을 요청하세요.",
+      "optionBlocked": "차단 요인 담당자를 지정하여 차단됨으로 표시하세요.",
+      "optionDelegate": "후속 작업을 위임하거나 이어지는 작업을 대기열에 추가하세요.",
+      "runChip": "실행 {{runId}}",
+      "correctiveWake": "{{agent}}에 대한 시정 깨우기가 대기열에 추가됨",
+      "assigneeFallback": "담당자",
+      "detectedProgress": "감지된 진행 상황: {{summary}}",
+      "linkedIssue": "연결된 이슈",
+      "linkedIssues": "연결된 이슈",
+      "stalledMany": "이 이슈 작업은 {{label}}에 의해 차단되었지만, 체인이 검토 단계에서 명확한 다음 단계 없이 정체되어 있습니다. 아래의 정체된 검토를 해결하거나 차단 요인에서 제거하세요.",
+      "stalledOne": "이 이슈 작업은 {{label}}에 의해 차단되었지만, 체인이 검토 단계에서 명확한 다음 단계 없이 정체되어 있습니다. 아래의 정체된 검토를 해결하거나 차단 요인에서 제거하세요.",
+      "blockedByMany": "이 이슈 작업은 {{label}}이(가) 완료될 때까지 차단됩니다. 댓글은 여전히 질문이나 분류를 위해 담당자를 깨웁니다.",
+      "blockedByOne": "이 이슈 작업은 {{label}}이(가) 완료될 때까지 차단됩니다. 댓글은 여전히 질문이나 분류를 위해 담당자를 깨웁니다.",
+      "blockedStatus": "이 이슈 작업은 할 일로 다시 이동될 때까지 차단됩니다. 댓글은 여전히 질문이나 분류를 위해 담당자를 깨웁니다.",
+      "stalledInReview": "검토 단계에서 정체됨",
+      "ultimatelyWaitingOn": "최종적으로 대기 중",
+      "blockedByParked": "보류된 작업에 의해 차단됨",
+      "recoveryIndicatorTitle": "{{label}} — 조치하려면 원본 이슈를 여세요."
+    }
   }
 }
