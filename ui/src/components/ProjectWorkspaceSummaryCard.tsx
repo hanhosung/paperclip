@@ -6,10 +6,15 @@ import { IssuesQuicklook } from "./IssuesQuicklook";
 import type { ProjectWorkspaceSummary } from "../lib/project-workspaces-tab";
 import { cn, projectWorkspaceUrl } from "../lib/utils";
 import { timeAgo } from "../lib/timeAgo";
+import { useTranslation } from "@/i18n";
+import { executionWorkspaceStatusKey } from "../lib/enum-labels";
 import { Copy, ExternalLink, FolderOpen, GitBranch, Loader2, Play, Square } from "lucide-react";
 
-function workspaceKindLabel(kind: ProjectWorkspaceSummary["kind"]) {
-  return kind === "execution_workspace" ? "Execution workspace" : "Project workspace";
+/** i18n key for the workspace kind badge. */
+function workspaceKindKey(kind: ProjectWorkspaceSummary["kind"]) {
+  return kind === "execution_workspace"
+    ? "workspaces.summaryCard.executionWorkspace"
+    : "workspaces.summaryCard.projectWorkspace";
 }
 
 function truncatePath(path: string) {
@@ -44,6 +49,7 @@ export function ProjectWorkspaceSummaryCard({
   onRuntimeAction,
   onCloseWorkspace,
 }: ProjectWorkspaceSummaryCardProps) {
+  const { t } = useTranslation();
   const visibleIssues = summary.issues.slice(0, 4);
   const hiddenIssueCount = Math.max(summary.issues.length - visibleIssues.length, 0);
   const workspaceHref =
@@ -60,10 +66,10 @@ export function ProjectWorkspaceSummaryCard({
           <div className="min-w-0 space-y-2">
             <div className="flex flex-wrap items-center gap-2">
               <span className="inline-flex items-center rounded-full border border-border bg-background px-2.5 py-1 text-[11px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
-                {workspaceKindLabel(summary.kind)}
+                {t(workspaceKindKey(summary.kind))}
               </span>
               <span className="inline-flex items-center rounded-full border border-border/70 bg-background px-2.5 py-1 text-xs text-muted-foreground">
-                Updated {timeAgo(summary.lastUpdatedAt)}
+                {t("workspaces.summaryCard.updated", { time: timeAgo(summary.lastUpdatedAt) })}
               </span>
               {summary.serviceCount > 0 ? (
                 <span
@@ -80,12 +86,17 @@ export function ProjectWorkspaceSummaryCard({
                       hasRunningServices ? "bg-emerald-500" : "bg-muted-foreground/40",
                     )}
                   />
-                  {summary.runningServiceCount}/{summary.serviceCount} services
+                  {t("workspaces.summaryCard.serviceCount", {
+                    running: summary.runningServiceCount,
+                    total: summary.serviceCount,
+                  })}
                 </span>
               ) : null}
               {summary.executionWorkspaceStatus ? (
                 <span className="inline-flex items-center rounded-full border border-border/70 bg-background px-2.5 py-1 text-xs text-muted-foreground">
-                  {summary.executionWorkspaceStatus.replace(/_/g, " ")}
+                  {t(executionWorkspaceStatusKey(summary.executionWorkspaceStatus), {
+                    defaultValue: summary.executionWorkspaceStatus.replace(/_/g, " "),
+                  })}
                 </span>
               ) : null}
             </div>
@@ -123,7 +134,9 @@ export function ProjectWorkspaceSummaryCard({
                 ) : (
                   <Play className="mr-2 h-3.5 w-3.5" />
                 )}
-                {hasRunningServices ? "Stop services" : "Start services"}
+                {hasRunningServices
+                  ? t("workspaces.summaryCard.stopServices")
+                  : t("workspaces.summaryCard.startServices")}
               </Button>
             ) : null}
             {summary.kind === "execution_workspace" && summary.executionWorkspaceId && summary.executionWorkspaceStatus ? (
@@ -137,7 +150,9 @@ export function ProjectWorkspaceSummaryCard({
                   status: summary.executionWorkspaceStatus!,
                 })}
               >
-                {summary.executionWorkspaceStatus === "cleanup_failed" ? "Retry close" : "Close workspace"}
+                {summary.executionWorkspaceStatus === "cleanup_failed"
+                  ? t("workspaces.summaryCard.retryClose")
+                  : t("workspaces.summaryCard.closeWorkspace")}
               </Button>
             ) : null}
           </div>
@@ -149,21 +164,21 @@ export function ProjectWorkspaceSummaryCard({
               <div className="flex items-start gap-2">
                 <GitBranch className="mt-0.5 h-3.5 w-3.5 shrink-0 text-muted-foreground" />
                 <div className="min-w-0 flex-1">
-                  <div className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground">Branch</div>
+                  <div className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground">{t("workspaces.summaryCard.branch")}</div>
                   <div className="flex items-start gap-2">
                     <CopyText
                       text={summary.branchName}
                       containerClassName="min-w-0"
                       className="min-w-0 break-all text-left font-mono text-xs text-foreground"
-                      copiedLabel="Branch copied"
+                      copiedLabel={t("workspaces.summaryCard.branchCopied")}
                     >
                       {summary.branchName}
                     </CopyText>
                     <CopyText
                       text={summary.branchName}
-                      ariaLabel="Copy branch"
+                      ariaLabel={t("workspaces.summaryCard.copyBranch")}
                       className="mt-0.5 shrink-0 text-muted-foreground hover:text-foreground"
-                      copiedLabel="Branch copied"
+                      copiedLabel={t("workspaces.summaryCard.branchCopied")}
                     >
                       <Copy className="h-3.5 w-3.5" />
                     </CopyText>
@@ -176,22 +191,22 @@ export function ProjectWorkspaceSummaryCard({
               <div className="flex items-start gap-2">
                 <FolderOpen className="mt-0.5 h-3.5 w-3.5 shrink-0 text-muted-foreground" />
                 <div className="min-w-0 flex-1">
-                  <div className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground">Path</div>
+                  <div className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground">{t("workspaces.summaryCard.path")}</div>
                   <div className="flex items-start gap-2">
                     <CopyText
                       text={summary.cwd}
                       title={summary.cwd}
                       containerClassName="min-w-0"
                       className="min-w-0 break-all text-left font-mono text-xs text-foreground"
-                      copiedLabel="Path copied"
+                      copiedLabel={t("workspaces.summaryCard.pathCopied")}
                     >
                       {truncatePath(summary.cwd)}
                     </CopyText>
                     <CopyText
                       text={summary.cwd}
-                      ariaLabel="Copy path"
+                      ariaLabel={t("workspaces.summaryCard.copyPath")}
                       className="mt-0.5 shrink-0 text-muted-foreground hover:text-foreground"
-                      copiedLabel="Path copied"
+                      copiedLabel={t("workspaces.summaryCard.pathCopied")}
                     >
                       <Copy className="h-3.5 w-3.5" />
                     </CopyText>
@@ -204,7 +219,7 @@ export function ProjectWorkspaceSummaryCard({
               <div className="flex items-start gap-2">
                 <ExternalLink className="mt-0.5 h-3.5 w-3.5 shrink-0 text-muted-foreground" />
                 <div className="min-w-0">
-                  <div className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground">Service</div>
+                  <div className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground">{t("workspaces.summaryCard.service")}</div>
                   <a
                     href={summary.primaryServiceUrl}
                     target="_blank"
@@ -227,7 +242,7 @@ export function ProjectWorkspaceSummaryCard({
         {summary.issues.length > 0 ? (
           <div className="space-y-2">
             <div className="text-[11px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
-              Linked issues
+              {t("workspaces.summaryCard.linkedIssues")}
             </div>
             <div className="flex flex-wrap gap-2">
               {visibleIssues.map((issue) => (
@@ -238,7 +253,7 @@ export function ProjectWorkspaceSummaryCard({
                   to={workspaceHref}
                   className="inline-flex items-center rounded-full border border-border bg-background px-2.5 py-1 text-xs text-muted-foreground hover:text-foreground hover:underline"
                 >
-                  +{hiddenIssueCount} more
+                  {t("workspaces.summaryCard.moreIssues", { count: hiddenIssueCount })}
                 </Link>
               ) : null}
             </div>

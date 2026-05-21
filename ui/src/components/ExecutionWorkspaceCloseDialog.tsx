@@ -4,6 +4,8 @@ import { Link } from "@/lib/router";
 import { Loader2 } from "lucide-react";
 import { executionWorkspacesApi } from "../api/execution-workspaces";
 import { useToastActions } from "../context/ToastContext";
+import { useTranslation } from "@/i18n";
+import { issueStatusKey, runtimeServiceStatusKey } from "../lib/enum-labels";
 import { queryKeys } from "../lib/queryKeys";
 import { formatDateTime, issueUrl } from "../lib/utils";
 import { Button } from "./ui/button";
@@ -43,9 +45,12 @@ export function ExecutionWorkspaceCloseDialog({
   onOpenChange,
   onClosed,
 }: ExecutionWorkspaceCloseDialogProps) {
+  const { t } = useTranslation();
   const queryClient = useQueryClient();
   const { pushToast } = useToastActions();
-  const actionLabel = currentStatus === "cleanup_failed" ? "Retry close" : "Close workspace";
+  const actionLabel = currentStatus === "cleanup_failed"
+    ? t("workspaces.closeDialog.retryClose")
+    : t("workspaces.closeDialog.closeWorkspace");
 
   const readinessQuery = useQuery({
     queryKey: queryKeys.executionWorkspaces.closeReadiness(workspaceId),
@@ -59,7 +64,9 @@ export function ExecutionWorkspaceCloseDialog({
       queryClient.setQueryData(queryKeys.executionWorkspaces.detail(workspace.id), workspace);
       queryClient.invalidateQueries({ queryKey: queryKeys.executionWorkspaces.closeReadiness(workspace.id) });
       pushToast({
-        title: currentStatus === "cleanup_failed" ? "Workspace close retried" : "Workspace closed",
+        title: currentStatus === "cleanup_failed"
+          ? t("workspaces.closeDialog.retriedToast")
+          : t("workspaces.closeDialog.closedToast"),
         tone: "success",
       });
       onOpenChange(false);
@@ -67,8 +74,8 @@ export function ExecutionWorkspaceCloseDialog({
     },
     onError: (error) => {
       pushToast({
-        title: "Failed to close workspace",
-        body: error instanceof Error ? error.message : "Unknown error",
+        title: t("workspaces.closeDialog.closeFailedToast"),
+        body: error instanceof Error ? error.message : t("workspaces.closeDialog.unknownError"),
         tone: "error",
       });
     },
@@ -92,44 +99,43 @@ export function ExecutionWorkspaceCloseDialog({
         <DialogHeader>
           <DialogTitle>{actionLabel}</DialogTitle>
           <DialogDescription className="break-words">
-            Archive <span className="font-medium text-foreground">{workspaceName}</span> and clean up any owned workspace
-            artifacts. Paperclip keeps the workspace record and issue history, but removes it from active workspace views.
+            {t("workspaces.closeDialog.description", { name: workspaceName })}
           </DialogDescription>
         </DialogHeader>
 
         {readinessQuery.isLoading ? (
           <div className="flex items-center gap-2 rounded-xl border border-border bg-background px-4 py-3 text-sm text-muted-foreground">
             <Loader2 className="h-4 w-4 animate-spin" />
-            Checking whether this workspace is safe to close...
+            {t("workspaces.closeDialog.checking")}
           </div>
         ) : readinessQuery.error ? (
           <div className="rounded-xl border border-destructive/30 bg-destructive/5 px-4 py-3 text-sm text-destructive">
-            {readinessQuery.error instanceof Error ? readinessQuery.error.message : "Failed to inspect workspace close readiness."}
+            {readinessQuery.error instanceof Error ? readinessQuery.error.message : t("workspaces.closeDialog.inspectError")}
           </div>
         ) : readiness ? (
           <div className="space-y-4">
             <div className={`rounded-xl border px-4 py-3 text-sm ${readinessTone(readiness.state)}`}>
               <div className="font-medium">
                 {readiness.state === "blocked"
-                  ? "Close is blocked"
+                  ? t("workspaces.closeDialog.stateBlocked")
                   : readiness.state === "ready_with_warnings"
-                    ? "Close is allowed with warnings"
-                    : "Close is ready"}
+                    ? t("workspaces.closeDialog.stateWarnings")
+                    : t("workspaces.closeDialog.stateReady")}
               </div>
               <div className="mt-1 text-xs opacity-80">
                 {readiness.isSharedWorkspace
-                  ? "This is a shared workspace session. Archiving it removes this session record but keeps the underlying project workspace."
+                  ? t("workspaces.closeDialog.detailShared")
                   : readiness.git?.workspacePath && readiness.git.repoRoot && readiness.git.workspacePath !== readiness.git.repoRoot
-                    ? "This execution workspace has its own checkout path and can be archived independently."
+                    ? t("workspaces.closeDialog.detailOwnCheckout")
                     : readiness.isProjectPrimaryWorkspace
-                      ? "This execution workspace currently points at the project's primary workspace path."
-                      : "This workspace is disposable and can be archived."}
+                      ? t("workspaces.closeDialog.detailPrimary")
+                      : t("workspaces.closeDialog.detailDisposable")}
               </div>
             </div>
 
             {blockingIssues.length > 0 ? (
               <section className="space-y-2">
-                <h3 className="text-sm font-medium">Blocking issues</h3>
+                <h3 className="text-sm font-medium">{t("workspaces.closeDialog.blockingIssues")}</h3>
                 <div className="space-y-2">
                   {blockingIssues.map((issue) => (
                     <div key={issue.id} className="rounded-xl border border-destructive/20 bg-destructive/5 px-4 py-3 text-sm">
@@ -137,7 +143,9 @@ export function ExecutionWorkspaceCloseDialog({
                         <Link to={issueUrl(issue)} className="min-w-0 break-words font-medium hover:underline">
                           {issue.identifier ?? issue.id} · {issue.title}
                         </Link>
-                        <span className="text-xs text-muted-foreground">{issue.status}</span>
+                        <span className="text-xs text-muted-foreground">
+                          {t(issueStatusKey(issue.status), { defaultValue: issue.status })}
+                        </span>
                       </div>
                     </div>
                   ))}
@@ -147,7 +155,7 @@ export function ExecutionWorkspaceCloseDialog({
 
             {readiness.blockingReasons.length > 0 ? (
               <section className="space-y-2">
-                <h3 className="text-sm font-medium">Blocking reasons</h3>
+                <h3 className="text-sm font-medium">{t("workspaces.closeDialog.blockingReasons")}</h3>
                 <ul className="space-y-2 text-sm text-muted-foreground">
                   {readiness.blockingReasons.map((reason) => (
                     <li key={reason} className="break-words rounded-lg border border-destructive/20 bg-destructive/5 px-3 py-2 text-destructive">
@@ -160,7 +168,7 @@ export function ExecutionWorkspaceCloseDialog({
 
             {readiness.warnings.length > 0 ? (
               <section className="space-y-2">
-                <h3 className="text-sm font-medium">Warnings</h3>
+                <h3 className="text-sm font-medium">{t("workspaces.closeDialog.warnings")}</h3>
                 <ul className="space-y-2 text-sm text-muted-foreground">
                   {readiness.warnings.map((warning) => (
                     <li key={warning} className="break-words rounded-lg border border-amber-500/20 bg-amber-500/5 px-3 py-2">
@@ -173,33 +181,33 @@ export function ExecutionWorkspaceCloseDialog({
 
             {readiness.git ? (
               <section className="space-y-2">
-                <h3 className="text-sm font-medium">Git status</h3>
+                <h3 className="text-sm font-medium">{t("workspaces.closeDialog.gitStatus")}</h3>
                 <div className="rounded-xl border border-border bg-background px-4 py-3 text-sm">
                   <div className="grid gap-2 sm:grid-cols-2">
                     <div>
-                      <div className="text-xs uppercase tracking-[0.16em] text-muted-foreground">Branch</div>
-                      <div className="font-mono text-xs">{readiness.git.branchName ?? "Unknown"}</div>
+                      <div className="text-xs uppercase tracking-[0.16em] text-muted-foreground">{t("workspaces.closeDialog.gitBranch")}</div>
+                      <div className="font-mono text-xs">{readiness.git.branchName ?? t("workspaces.closeDialog.gitUnknown")}</div>
                     </div>
                     <div>
-                      <div className="text-xs uppercase tracking-[0.16em] text-muted-foreground">Base ref</div>
-                      <div className="font-mono text-xs">{readiness.git.baseRef ?? "Not set"}</div>
+                      <div className="text-xs uppercase tracking-[0.16em] text-muted-foreground">{t("workspaces.closeDialog.gitBaseRef")}</div>
+                      <div className="font-mono text-xs">{readiness.git.baseRef ?? t("workspaces.closeDialog.gitNotSet")}</div>
                     </div>
                     <div>
-                      <div className="text-xs uppercase tracking-[0.16em] text-muted-foreground">Merged into base</div>
-                      <div>{readiness.git.isMergedIntoBase == null ? "Unknown" : readiness.git.isMergedIntoBase ? "Yes" : "No"}</div>
+                      <div className="text-xs uppercase tracking-[0.16em] text-muted-foreground">{t("workspaces.closeDialog.gitMerged")}</div>
+                      <div>{readiness.git.isMergedIntoBase == null ? t("workspaces.closeDialog.gitUnknown") : readiness.git.isMergedIntoBase ? t("workspaces.closeDialog.gitYes") : t("workspaces.closeDialog.gitNo")}</div>
                     </div>
                     <div>
-                      <div className="text-xs uppercase tracking-[0.16em] text-muted-foreground">Ahead / behind</div>
+                      <div className="text-xs uppercase tracking-[0.16em] text-muted-foreground">{t("workspaces.closeDialog.gitAheadBehind")}</div>
                       <div>
                         {(readiness.git.aheadCount ?? 0).toString()} / {(readiness.git.behindCount ?? 0).toString()}
                       </div>
                     </div>
                     <div>
-                      <div className="text-xs uppercase tracking-[0.16em] text-muted-foreground">Dirty tracked files</div>
+                      <div className="text-xs uppercase tracking-[0.16em] text-muted-foreground">{t("workspaces.closeDialog.gitDirty")}</div>
                       <div>{readiness.git.dirtyEntryCount}</div>
                     </div>
                     <div>
-                      <div className="text-xs uppercase tracking-[0.16em] text-muted-foreground">Untracked files</div>
+                      <div className="text-xs uppercase tracking-[0.16em] text-muted-foreground">{t("workspaces.closeDialog.gitUntracked")}</div>
                       <div>{readiness.git.untrackedEntryCount}</div>
                     </div>
                   </div>
@@ -209,7 +217,7 @@ export function ExecutionWorkspaceCloseDialog({
 
             {otherLinkedIssues.length > 0 ? (
               <section className="space-y-2">
-                <h3 className="text-sm font-medium">Other linked issues</h3>
+                <h3 className="text-sm font-medium">{t("workspaces.closeDialog.otherLinkedIssues")}</h3>
                 <div className="space-y-2">
                   {otherLinkedIssues.map((issue) => (
                     <div key={issue.id} className="rounded-xl border border-border bg-background px-4 py-3 text-sm">
@@ -217,7 +225,9 @@ export function ExecutionWorkspaceCloseDialog({
                         <Link to={issueUrl(issue)} className="min-w-0 break-words font-medium hover:underline">
                           {issue.identifier ?? issue.id} · {issue.title}
                         </Link>
-                        <span className="text-xs text-muted-foreground">{issue.status}</span>
+                        <span className="text-xs text-muted-foreground">
+                          {t(issueStatusKey(issue.status), { defaultValue: issue.status })}
+                        </span>
                       </div>
                     </div>
                   ))}
@@ -227,16 +237,18 @@ export function ExecutionWorkspaceCloseDialog({
 
             {readiness.runtimeServices.length > 0 ? (
               <section className="space-y-2">
-                <h3 className="text-sm font-medium">Attached runtime services</h3>
+                <h3 className="text-sm font-medium">{t("workspaces.closeDialog.attachedServices")}</h3>
                 <div className="space-y-2">
                   {readiness.runtimeServices.map((service) => (
                     <div key={service.id} className="rounded-xl border border-border bg-background px-4 py-3 text-sm">
                       <div className="flex min-w-0 flex-wrap items-center justify-between gap-2">
                         <span className="font-medium">{service.serviceName}</span>
-                        <span className="text-xs text-muted-foreground">{service.status} · {service.lifecycle}</span>
+                        <span className="text-xs text-muted-foreground">
+                          {t(runtimeServiceStatusKey(service.status), { defaultValue: service.status })} · {service.lifecycle}
+                        </span>
                       </div>
                       <div className="mt-1 break-words text-xs text-muted-foreground">
-                        {service.url ?? service.command ?? service.cwd ?? "No additional details"}
+                        {service.url ?? service.command ?? service.cwd ?? t("workspaces.closeDialog.noServiceDetails")}
                       </div>
                     </div>
                   ))}
@@ -245,7 +257,7 @@ export function ExecutionWorkspaceCloseDialog({
             ) : null}
 
             <section className="space-y-2">
-              <h3 className="text-sm font-medium">Cleanup actions</h3>
+              <h3 className="text-sm font-medium">{t("workspaces.closeDialog.cleanupActions")}</h3>
               <div className="space-y-2">
                 {readiness.plannedActions.map((action, index) => (
                   <div key={`${action.kind}-${index}`} className="rounded-xl border border-border bg-background px-4 py-3 text-sm">
@@ -263,30 +275,29 @@ export function ExecutionWorkspaceCloseDialog({
 
             {currentStatus === "cleanup_failed" ? (
               <div className="rounded-xl border border-amber-500/20 bg-amber-500/5 px-4 py-3 text-sm text-muted-foreground">
-                Cleanup previously failed on this workspace. Retrying close will rerun the cleanup flow and update the
-                workspace status if it succeeds.
+                {t("workspaces.closeDialog.cleanupFailedNote")}
               </div>
             ) : null}
 
             {currentStatus === "archived" ? (
               <div className="rounded-xl border border-border bg-background px-4 py-3 text-sm text-muted-foreground">
-                This workspace is already archived.
+                {t("workspaces.closeDialog.archivedNote")}
               </div>
             ) : null}
 
             {readiness.git?.repoRoot ? (
               <div className="break-words text-xs text-muted-foreground">
-                Repo root: <span className="font-mono break-all">{readiness.git.repoRoot}</span>
+                {t("workspaces.closeDialog.repoRoot")} <span className="font-mono break-all">{readiness.git.repoRoot}</span>
                 {readiness.git.workspacePath ? (
                   <>
-                    {" · "}Workspace path: <span className="font-mono break-all">{readiness.git.workspacePath}</span>
+                    {" · "}{t("workspaces.closeDialog.workspacePath")} <span className="font-mono break-all">{readiness.git.workspacePath}</span>
                   </>
                 ) : null}
               </div>
             ) : null}
 
             <div className="text-xs text-muted-foreground">
-              Last checked {formatDateTime(new Date())}
+              {t("workspaces.closeDialog.lastChecked", { time: formatDateTime(new Date()) })}
             </div>
           </div>
         ) : null}
@@ -297,7 +308,7 @@ export function ExecutionWorkspaceCloseDialog({
             onClick={() => onOpenChange(false)}
             disabled={closeWorkspace.isPending}
           >
-            Cancel
+            {t("workspaces.closeDialog.cancel")}
           </Button>
           <Button
             variant={currentStatus === "cleanup_failed" ? "default" : "destructive"}

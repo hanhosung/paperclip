@@ -75,3 +75,23 @@ export function routineConcurrencyPolicyKey(policy: string): string {
 export function routineCatchUpPolicyKey(policy: string): string {
   return `routinePolicy.catchUp.${policy}`;
 }
+
+/** i18n key for an execution workspace status (`active`, `idle`, `cleanup_failed`, …). */
+export function executionWorkspaceStatusKey(status: string): string {
+  return `executionWorkspaceStatus.${status}`;
+}
+
+/** i18n key for a workspace runtime service status (`stopped`, `running`, …). */
+export function runtimeServiceStatusKey(status: string): string {
+  return `runtimeServiceStatus.${status}`;
+}
+
+/** i18n key for a workspace runtime service health status (`healthy`, `unhealthy`, `unknown`). */
+export function runtimeHealthStatusKey(status: string): string {
+  return `runtimeHealthStatus.${status}`;
+}
+
+/** i18n key for a workspace runtime command kind (`service` | `job`). */
+export function runtimeCommandKindKey(kind: string): string {
+  return `runtimeCommandKind.${kind}`;
+}

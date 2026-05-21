@@ -141,7 +141,7 @@ describe("buildWorkspaceRuntimeControlSections", () => {
         statusLabel: "running",
         command: "pnpm dev",
         runtimeServiceId: "service-web",
-        disabledReason: "This runtime service no longer matches a configured workspace command.",
+        disabledReason: "workspaces.runtimeControls.staleService",
       }),
     ]);
   });
@@ -179,7 +179,7 @@ describe("buildWorkspaceRuntimeControlSections", () => {
         statusLabel: "running",
         command: "pnpm dev",
         runtimeServiceId: "service-web",
-        disabledReason: "This runtime service no longer matches a configured workspace command.",
+        disabledReason: "workspaces.runtimeControls.staleService",
       }),
     ]);
   });
@@ -217,7 +217,7 @@ describe("buildWorkspaceRuntimeControlSections", () => {
         statusLabel: "running",
         command: "pnpm dev",
         runtimeServiceId: "service-web",
-        disabledReason: "This runtime service no longer matches a configured workspace command.",
+        disabledReason: "workspaces.runtimeControls.staleService",
       }),
     ]);
   });
