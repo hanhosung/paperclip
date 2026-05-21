@@ -20,6 +20,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useTranslation } from "@/i18n";
+import type { TFunction } from "i18next";
 
 // ---------------------------------------------------------------------------
 // Constants
@@ -150,17 +152,58 @@ export function getDefaultForSchema(schema: JsonSchemaNode): unknown {
   }
 }
 
-/** Validate a single field value against schema constraints. Returns error string or null. */
+/**
+ * English fallbacks for validation messages, used when no `t` is supplied.
+ * Mirrors the `editors.jsonSchema.*` locale keys.
+ */
+const VALIDATION_FALLBACK_EN: Record<string, string> = {
+  "editors.jsonSchema.required": "This field is required",
+  "editors.jsonSchema.minLength": "Must be at least {{count}} characters",
+  "editors.jsonSchema.maxLength": "Must be at most {{count}} characters",
+  "editors.jsonSchema.pattern": "Must match pattern: {{pattern}}",
+  "editors.jsonSchema.validNumber": "Must be a valid number",
+  "editors.jsonSchema.minimum": "Must be at least {{min}}",
+  "editors.jsonSchema.maximum": "Must be at most {{max}}",
+  "editors.jsonSchema.exclusiveMinimum": "Must be greater than {{min}}",
+  "editors.jsonSchema.exclusiveMaximum": "Must be less than {{max}}",
+  "editors.jsonSchema.integer": "Must be a whole number",
+  "editors.jsonSchema.multipleOf": "Must be a multiple of {{value}}",
+  "editors.jsonSchema.minItems": "Must have at least {{count}} items",
+  "editors.jsonSchema.maxItems": "Must have at most {{count}} items",
+};
+
+/** Resolve a validation message with `t` when available, else an English fallback. */
+function validationMessage(
+  t: TFunction | undefined,
+  key: string,
+  params?: Record<string, unknown>,
+): string {
+  if (t) return t(key, params);
+  let text = VALIDATION_FALLBACK_EN[key] ?? key;
+  if (params) {
+    for (const [name, raw] of Object.entries(params)) {
+      text = text.replace(new RegExp(`{{${name}}}`, "g"), String(raw));
+    }
+  }
+  return text;
+}
+
+/**
+ * Validate a single field value against schema constraints. Returns error string or null.
+ * Pass `t` to localize the message; omitted → English.
+ */
 export function validateField(
   value: unknown,
   schema: JsonSchemaNode,
   isRequired: boolean,
+  t?: TFunction,
 ): string | null {
   const type = resolveType(schema);
+  const msg = (key: string, params?: Record<string, unknown>) => validationMessage(t, key, params);
 
   // Required check
   if (isRequired && (value === undefined || value === null || value === "")) {
-    return "This field is required";
+    return msg("editors.jsonSchema.required");
   }
 
   // Skip further validation if empty and not required
@@ -169,10 +212,10 @@ export function validateField(
   if (type === "string" || type === "secret-ref") {
     const str = String(value);
     if (schema.minLength != null && str.length < schema.minLength) {
-      return `Must be at least ${schema.minLength} characters`;
+      return msg("editors.jsonSchema.minLength", { count: schema.minLength });
     }
     if (schema.maxLength != null && str.length > schema.maxLength) {
-      return `Must be at most ${schema.maxLength} characters`;
+      return msg("editors.jsonSchema.maxLength", { count: schema.maxLength });
     }
     if (schema.pattern) {
       // Guard against ReDoS: reject overly complex patterns from plugin JSON Schemas.
@@ -182,7 +225,7 @@ export function validateField(
         try {
           const re = new RegExp(schema.pattern);
           if (!re.test(str)) {
-            return `Must match pattern: ${schema.pattern}`;
+            return msg("editors.jsonSchema.pattern", { pattern: schema.pattern });
           }
         } catch {
           // Invalid regex in schema — skip
@@ -193,45 +236,48 @@ export function validateField(
 
   if (type === "number" || type === "integer") {
     const num = Number(value);
-    if (isNaN(num)) return "Must be a valid number";
+    if (isNaN(num)) return msg("editors.jsonSchema.validNumber");
     if (schema.minimum != null && num < schema.minimum) {
-      return `Must be at least ${schema.minimum}`;
+      return msg("editors.jsonSchema.minimum", { min: schema.minimum });
     }
     if (schema.maximum != null && num > schema.maximum) {
-      return `Must be at most ${schema.maximum}`;
+      return msg("editors.jsonSchema.maximum", { max: schema.maximum });
     }
     if (schema.exclusiveMinimum != null && num <= schema.exclusiveMinimum) {
-      return `Must be greater than ${schema.exclusiveMinimum}`;
+      return msg("editors.jsonSchema.exclusiveMinimum", { min: schema.exclusiveMinimum });
     }
     if (schema.exclusiveMaximum != null && num >= schema.exclusiveMaximum) {
-      return `Must be less than ${schema.exclusiveMaximum}`;
+      return msg("editors.jsonSchema.exclusiveMaximum", { max: schema.exclusiveMaximum });
     }
     if (type === "integer" && !Number.isInteger(num)) {
-      return "Must be a whole number";
+      return msg("editors.jsonSchema.integer");
     }
     if (schema.multipleOf != null && num % schema.multipleOf !== 0) {
-      return `Must be a multiple of ${schema.multipleOf}`;
+      return msg("editors.jsonSchema.multipleOf", { value: schema.multipleOf });
     }
   }
 
   if (type === "array") {
     const arr = value as unknown[];
     if (schema.minItems != null && arr.length < schema.minItems) {
-      return `Must have at least ${schema.minItems} items`;
+      return msg("editors.jsonSchema.minItems", { count: schema.minItems });
     }
     if (schema.maxItems != null && arr.length > schema.maxItems) {
-      return `Must have at most ${schema.maxItems} items`;
+      return msg("editors.jsonSchema.maxItems", { count: schema.maxItems });
     }
   }
 
   return null;
 }
 
-/** Public API for validation */
+/**
+ * Public API for validation. Pass `t` to localize messages; omitted → English.
+ */
 export function validateJsonSchemaForm(
   schema: JsonSchemaNode,
   values: Record<string, unknown>,
   path: string[] = [],
+  t?: TFunction,
 ): Record<string, string> {
   const errors: Record<string, string> = {};
   const properties = schema.properties ?? {};
@@ -245,7 +291,7 @@ export function validateJsonSchemaForm(
     const type = resolveType(propSchema);
 
     // Per-field validation
-    const fieldErr = validateField(value, propSchema, isRequired);
+    const fieldErr = validateField(value, propSchema, isRequired, t);
     if (fieldErr) {
       errors[errorKey] = fieldErr;
     }
@@ -254,7 +300,7 @@ export function validateJsonSchemaForm(
     if (type === "object" && propSchema.properties && typeof value === "object" && value !== null) {
       Object.assign(
         errors,
-        validateJsonSchemaForm(propSchema, value as Record<string, unknown>, fieldPath),
+        validateJsonSchemaForm(propSchema, value as Record<string, unknown>, fieldPath, t),
       );
     }
 
@@ -274,10 +320,11 @@ export function validateJsonSchemaForm(
               itemSchema,
               item as Record<string, unknown>,
               itemPath,
+              t,
             ),
           );
         } else {
-          const itemErr = validateField(item, itemSchema, false);
+          const itemErr = validateField(item, itemSchema, false, t);
           if (itemErr) {
             errors[itemErrorKey] = itemErr;
           }
@@ -437,7 +484,9 @@ const EnumField = React.memo(({
   description?: string;
   error?: string;
   options: unknown[];
-}) => (
+}) => {
+  const { t } = useTranslation();
+  return (
   <FieldWrapper
     label={label}
     description={description}
@@ -451,7 +500,7 @@ const EnumField = React.memo(({
       disabled={disabled}
     >
       <SelectTrigger className="w-full">
-        <SelectValue placeholder="Select an option" />
+        <SelectValue placeholder={t("editors.jsonSchema.selectOption")} />
       </SelectTrigger>
       <SelectContent>
         {options.map((option) => (
@@ -462,7 +511,8 @@ const EnumField = React.memo(({
       </SelectContent>
     </Select>
   </FieldWrapper>
-));
+  );
+});
 
 EnumField.displayName = "EnumField";
 
@@ -490,6 +540,7 @@ const SecretField = React.memo(({
   defaultValue?: unknown;
   maxLength?: number;
 }) => {
+  const { t } = useTranslation();
   const [isVisible, setIsVisible] = useState(false);
   const isTextArea = maxLength != null && maxLength > TEXTAREA_THRESHOLD;
   return (
@@ -497,7 +548,7 @@ const SecretField = React.memo(({
       label={label}
       description={
         description ||
-        "This secret is stored securely via the Paperclip secret provider."
+        t("editors.jsonSchema.secretStored")
       }
       required={isRequired}
       error={error}
@@ -523,7 +574,7 @@ const SecretField = React.memo(({
               value={
                 String(value ?? "").length === 0
                   ? ""
-                  : `Sensitive — ${String(value ?? "").length} characters hidden. Click the eye to reveal.`
+                  : t("editors.jsonSchema.secretHidden", { count: String(value ?? "").length })
               }
               readOnly
               placeholder={String(defaultValue ?? "")}
@@ -546,7 +597,7 @@ const SecretField = React.memo(({
               <Eye className="h-4 w-4 text-muted-foreground" />
             )}
             <span className="sr-only">
-              {isVisible ? "Hide secret" : "Show secret"}
+              {isVisible ? t("editors.jsonSchema.hideSecret") : t("editors.jsonSchema.showSecret")}
             </span>
           </Button>
         </div>
@@ -575,7 +626,7 @@ const SecretField = React.memo(({
               <Eye className="h-4 w-4 text-muted-foreground" />
             )}
             <span className="sr-only">
-              {isVisible ? "Hide secret" : "Show secret"}
+              {isVisible ? t("editors.jsonSchema.hideSecret") : t("editors.jsonSchema.showSecret")}
             </span>
           </Button>
         </div>
@@ -716,6 +767,7 @@ const ArrayField = React.memo(({
   errors: Record<string, string>;
   path: string;
 }) => {
+  const { t } = useTranslation();
   const items = Array.isArray(value) ? value : [];
   const itemSchema = propSchema.items as JsonSchemaNode;
   const isComplex = resolveType(itemSchema) === "object";
@@ -746,7 +798,7 @@ const ArrayField = React.memo(({
           }}
         >
           <Plus className="mr-2 h-4 w-4" />
-          {isComplex ? "Add item" : "Add"}
+          {isComplex ? t("editors.jsonSchema.addItem") : t("editors.jsonSchema.add")}
         </Button>
       </div>
 
@@ -758,7 +810,7 @@ const ArrayField = React.memo(({
           >
             <div className="flex-1">
               <div className="mb-2 text-xs font-medium text-muted-foreground">
-                Item {index + 1}
+                {t("editors.jsonSchema.itemLabel", { index: index + 1 })}
               </div>
               <FormField
                 propSchema={itemSchema}
@@ -791,13 +843,13 @@ const ArrayField = React.memo(({
               }}
             >
               <Trash2 className="h-4 w-4" />
-              <span className="sr-only">Remove item</span>
+              <span className="sr-only">{t("editors.jsonSchema.removeItem")}</span>
             </Button>
           </div>
         ))}
         {items.length === 0 && (
           <div className="rounded-lg border border-dashed p-4 text-center text-xs text-muted-foreground">
-            No items added yet.
+            {t("editors.jsonSchema.noItems")}
           </div>
         )}
       </div>
@@ -1021,6 +1073,7 @@ export function JsonSchemaForm({
   disabled,
   className,
 }: JsonSchemaFormProps) {
+  const { t } = useTranslation();
   const type = resolveType(schema);
 
   const handleRootScalarChange = useCallback((newVal: unknown) => {
@@ -1067,7 +1120,7 @@ export function JsonSchemaForm({
           className,
         )}
       >
-        No configuration options available.
+        {t("editors.jsonSchema.noOptions")}
       </div>
     );
   }

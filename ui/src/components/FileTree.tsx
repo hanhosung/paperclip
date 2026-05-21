@@ -1,6 +1,7 @@
 import type { KeyboardEvent, ReactNode } from "react";
 import { useMemo, useRef, useState } from "react";
 import { cn } from "../lib/utils";
+import { useTranslation } from "@/i18n";
 import {
   ChevronDown,
   ChevronRight,
@@ -215,20 +216,29 @@ export function parseFrontmatter(content: string): { data: FrontmatterData; body
   return Object.keys(data).length > 0 ? { data, body } : null;
 }
 
-export const FRONTMATTER_FIELD_LABELS: Record<string, string> = {
-  name: "Name",
-  title: "Title",
-  kind: "Kind",
-  reportsTo: "Reports to",
-  skills: "Skills",
-  status: "Status",
-  description: "Description",
-  priority: "Priority",
-  assignee: "Assignee",
-  project: "Project",
-  recurring: "Recurring",
-  targetDate: "Target date",
-};
+/** Known frontmatter field keys that have a localized display label. */
+const FRONTMATTER_FIELD_KEYS = new Set([
+  "name",
+  "title",
+  "kind",
+  "reportsTo",
+  "skills",
+  "status",
+  "description",
+  "priority",
+  "assignee",
+  "project",
+  "recurring",
+  "targetDate",
+]);
+
+/**
+ * i18n key for a frontmatter field label, or `null` when the field is unknown
+ * (callers fall back to the raw field key). Resolve with `t()`.
+ */
+export function frontmatterFieldLabelKey(field: string): string | null {
+  return FRONTMATTER_FIELD_KEYS.has(field) ? `editors.fileTree.frontmatter.${field}` : null;
+}
 
 // -- File tree component -----------------------------------------------------
 
@@ -274,8 +284,10 @@ export function FileTree({
   loading = false,
   error,
   empty,
-  ariaLabel = "Files",
+  ariaLabel: ariaLabelProp,
 }: FileTreeProps) {
+  const { t } = useTranslation();
+  const ariaLabel = ariaLabelProp ?? t("editors.fileTree.ariaLabel");
   const effectiveCheckedFiles = checkedFiles ?? new Set<string>();
   const visibleNodes = useMemo(
     () => flattenVisibleNodes(nodes, expandedDirs),
@@ -363,13 +375,13 @@ export function FileTree({
                 statusBadge.error ?? statusBadgeDefault,
               )}
             >
-              error
+              {t("editors.fileTree.error")}
             </span>
             <span className="min-w-0 text-destructive">{error.message}</span>
           </div>
           {error.retry && (
             <Button type="button" size="xs" variant="outline" onClick={error.retry}>
-              Retry
+              {t("editors.fileTree.retry")}
             </Button>
           )}
         </div>
@@ -381,9 +393,9 @@ export function FileTree({
     return (
       <div aria-label={ariaLabel} role="tree" className="p-3">
         <div className="rounded-md border border-dashed border-border px-4 py-8 text-center">
-          <div className="text-sm font-medium">{empty?.title ?? "No files"}</div>
+          <div className="text-sm font-medium">{empty?.title ?? t("editors.fileTree.emptyTitle")}</div>
           <div className="mt-1 text-xs text-muted-foreground">
-            {empty?.description ?? "Files will appear here when they are available."}
+            {empty?.description ?? t("editors.fileTree.emptyDescription")}
           </div>
         </div>
       </div>
@@ -483,7 +495,7 @@ export function FileTree({
                   event.stopPropagation();
                   onToggleDir(node.path);
                 }}
-                aria-label={expanded ? `Collapse ${node.name}` : `Expand ${node.name}`}
+                aria-label={expanded ? t("editors.fileTree.collapse", { name: node.name }) : t("editors.fileTree.expand", { name: node.name })}
               >
                 {expanded ? (
                   <ChevronDown className="h-3.5 w-3.5" />

@@ -41,7 +41,7 @@ import {
   countFiles,
   collectAllPaths,
   parseFrontmatter,
-  FRONTMATTER_FIELD_LABELS,
+  frontmatterFieldLabelKey,
   FileTree,
 } from "../components/FileTree";
 
@@ -352,13 +352,16 @@ function FrontmatterCard({
   data: FrontmatterData;
   onSkillClick?: (skill: string) => void;
 }) {
+  const { t } = useTranslation();
   return (
     <div className="rounded-md border border-border bg-accent/20 px-4 py-3 mb-4">
       <dl className="grid grid-cols-[auto_minmax(0,1fr)] gap-x-4 gap-y-1.5 text-sm">
-        {Object.entries(data).map(([key, value]) => (
+        {Object.entries(data).map(([key, value]) => {
+          const labelKey = frontmatterFieldLabelKey(key);
+          return (
           <div key={key} className="contents">
             <dt className="text-muted-foreground whitespace-nowrap py-0.5">
-              {FRONTMATTER_FIELD_LABELS[key] ?? key}
+              {labelKey ? t(labelKey) : key}
             </dt>
             <dd className="py-0.5">
               {Array.isArray(value) ? (
@@ -382,7 +385,8 @@ function FrontmatterCard({
               )}
             </dd>
           </div>
-        ))}
+          );
+        })}
       </dl>
     </div>
   );

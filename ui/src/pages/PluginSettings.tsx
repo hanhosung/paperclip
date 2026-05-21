@@ -1034,18 +1034,18 @@ function PluginConfigForm({ pluginId, schema, initialValues, isLoading, pluginSt
 
   const handleSave = useCallback(() => {
     // Validate before saving
-    const validationErrors = validateJsonSchemaForm(schema, values);
+    const validationErrors = validateJsonSchemaForm(schema, values, [], t);
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
     }
     setErrors({});
     saveMutation.mutate(values);
-  }, [schema, values, saveMutation]);
+  }, [schema, values, saveMutation, t]);
 
   const handleTestConnection = useCallback(() => {
     // Validate before testing
-    const validationErrors = validateJsonSchemaForm(schema, values);
+    const validationErrors = validateJsonSchemaForm(schema, values, [], t);
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
@@ -1053,7 +1053,7 @@ function PluginConfigForm({ pluginId, schema, initialValues, isLoading, pluginSt
     setErrors({});
     setTestResult(null);
     testMutation.mutate(values);
-  }, [schema, values, testMutation]);
+  }, [schema, values, testMutation, t]);
 
   if (isLoading) {
     return (

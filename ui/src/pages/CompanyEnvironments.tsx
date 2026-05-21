@@ -379,7 +379,7 @@ export function CompanyEnvironments() {
   const selectedSandboxSchema = selectedSandboxProvider?.configSchema ?? null;
   const sandboxConfigErrors =
     environmentForm.driver === "sandbox" && selectedSandboxSchema
-      ? validateJsonSchemaForm(selectedSandboxSchema as any, environmentForm.sandboxConfig)
+      ? validateJsonSchemaForm(selectedSandboxSchema as any, environmentForm.sandboxConfig, [], t)
       : {};
 
   useEffect(() => {

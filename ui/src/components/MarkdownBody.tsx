@@ -4,6 +4,7 @@ import { Check, Copy, ExternalLink, Github } from "lucide-react";
 import Markdown, { defaultUrlTransform, type Components, type Options } from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { cn } from "../lib/utils";
+import { useTranslation } from "@/i18n";
 import { Link } from "@/lib/router";
 import { useTheme } from "../context/ThemeContext";
 import { mentionChipInlineStyle, parseMentionChipHref } from "../lib/mention-chips";
@@ -40,6 +41,7 @@ function MarkdownIssueLink({
   issuePathId: string;
   children: ReactNode;
 }) {
+  const { t } = useTranslation();
   const { data } = useQuery({
     queryKey: queryKeys.issues.detail(issuePathId),
     queryFn: () => issuesApi.get(issuePathId),
@@ -49,7 +51,9 @@ function MarkdownIssueLink({
   const identifier = data?.identifier ?? issuePathId;
   const title = data?.title ?? identifier;
   const status = data?.status;
-  const issueLabel = title !== identifier ? `Issue ${identifier}: ${title}` : `Issue ${identifier}`;
+  const issueLabel = title !== identifier
+    ? t("editors.markdownBody.issueLabelWithTitle", { identifier, title })
+    : t("editors.markdownBody.issueLabel", { identifier });
 
   return (
     <Link
@@ -362,6 +366,7 @@ function CodeBlock({
   children: ReactNode;
   preProps: React.HTMLAttributes<HTMLPreElement>;
 }) {
+  const { t } = useTranslation();
   const [copied, setCopied] = useState(false);
   const [failed, setFailed] = useState(false);
   const preRef = useRef<HTMLPreElement>(null);
@@ -401,7 +406,11 @@ function CodeBlock({
     }, 1500);
   }, [children]);
 
-  const label = failed ? "Copy failed" : copied ? "Copied!" : "Copy";
+  const label = failed
+    ? t("editors.markdownBody.copyFailed")
+    : copied
+      ? t("editors.markdownBody.copied")
+      : t("editors.markdownBody.copy");
 
   return (
     <div className="paperclip-markdown-codeblock">
@@ -415,7 +424,7 @@ function CodeBlock({
       <button
         type="button"
         onClick={handleCopy}
-        aria-label="Copy code"
+        aria-label={t("editors.markdownBody.copyCode")}
         title={label}
         className="paperclip-markdown-codeblock-copy"
         data-copied={copied || undefined}
@@ -433,6 +442,7 @@ function CodeBlock({
 }
 
 function MermaidDiagramBlock({ source, darkMode }: { source: string; darkMode: boolean }) {
+  const { t } = useTranslation();
   const renderId = useId().replace(/[^a-zA-Z0-9_-]/g, "");
   const [svg, setSvg] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -460,14 +470,14 @@ function MermaidDiagramBlock({ source, darkMode }: { source: string; darkMode: b
         const message =
           err instanceof Error && err.message
             ? err.message
-            : "Failed to render Mermaid diagram.";
+            : t("editors.markdownBody.mermaidRenderFailed");
         setError(message);
       });
 
     return () => {
       active = false;
     };
-  }, [darkMode, renderId, source]);
+  }, [darkMode, renderId, source, t]);
 
   return (
     <div className="paperclip-mermaid">
@@ -476,7 +486,9 @@ function MermaidDiagramBlock({ source, darkMode }: { source: string; darkMode: b
       ) : (
         <>
           <p className={cn("paperclip-mermaid-status", error && "paperclip-mermaid-status-error")}>
-            {error ? `Unable to render Mermaid diagram: ${error}` : "Rendering Mermaid diagram..."}
+            {error
+              ? t("editors.markdownBody.mermaidError", { error })
+              : t("editors.markdownBody.mermaidRendering")}
           </p>
           <pre className="paperclip-mermaid-source">
             <code className="language-mermaid">{source}</code>
@@ -500,6 +512,7 @@ export function MarkdownBody({
   onImageClick,
 }: MarkdownBodyProps) {
   const { theme } = useTheme();
+  const { t } = useTranslation();
   const remarkPlugins: NonNullable<Options["remarkPlugins"]> = [remarkGfm];
   if (enableWikiLinks) {
     remarkPlugins.push(createRemarkWikiLinks({ wikiLinkRoot, resolveWikiLinkHref }));
@@ -527,7 +540,7 @@ export function MarkdownBody({
       </blockquote>
     ),
     table: ({ node: _node, style: tableStyle, children: tableChildren, ...tableProps }) => (
-      <div className="paperclip-markdown-table-scroll" role="region" aria-label="Scrollable table" tabIndex={0}>
+      <div className="paperclip-markdown-table-scroll" role="region" aria-label={t("editors.markdownBody.scrollableTable")} tabIndex={0}>
         <table {...tableProps} style={tableStyle as React.CSSProperties | undefined}>
           {tableChildren}
         </table>

@@ -6,7 +6,7 @@ export function PackageFileTree({ wrapLabels = false, ...props }: FileTreeProps)
 }
 
 export {
-  FRONTMATTER_FIELD_LABELS,
+  frontmatterFieldLabelKey,
   buildFileTree,
   collectAllPaths,
   countFiles,
