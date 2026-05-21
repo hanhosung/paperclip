@@ -3707,5 +3707,122 @@
       "issueAria": "이슈: {{title}}",
       "issueWithIdentifierAria": "이슈 {{identifier}}: {{title}}"
     }
+  },
+  "newIssue": {
+    "header": {
+      "newIssue": "새 이슈",
+      "newSubIssue": "새 하위 이슈"
+    },
+    "title": {
+      "placeholder": "이슈 제목"
+    },
+    "description": {
+      "placeholder": "설명 추가..."
+    },
+    "participants": {
+      "for": "담당",
+      "in": "프로젝트",
+      "assignee": "담당자",
+      "noAssignee": "담당자 없음",
+      "searchAssignees": "담당자 검색...",
+      "noAssigneesFound": "담당자를 찾을 수 없습니다.",
+      "project": "프로젝트",
+      "noProject": "프로젝트 없음",
+      "searchProjects": "프로젝트 검색...",
+      "noProjectsFound": "프로젝트를 찾을 수 없습니다.",
+      "addReviewerOrApprover": "검토자 또는 승인자 추가",
+      "reviewer": "검토자",
+      "noReviewer": "검토자 없음",
+      "searchReviewers": "검토자 검색...",
+      "noReviewersFound": "검토자를 찾을 수 없습니다.",
+      "approver": "승인자",
+      "noApprover": "승인자 없음",
+      "searchApprovers": "승인자 검색...",
+      "noApproversFound": "승인자를 찾을 수 없습니다."
+    },
+    "subIssue": {
+      "of": "상위 이슈"
+    },
+    "executionWorkspace": {
+      "label": "실행 워크스페이스",
+      "description": "이 이슈를 공유 워크스페이스, 새 격리 워크스페이스, 또는 기존 워크스페이스 중 어디에서 실행할지 제어합니다.",
+      "modeSharedWorkspace": "프로젝트 기본값",
+      "modeIsolatedWorkspace": "새 격리 워크스페이스",
+      "modeReuseExisting": "기존 워크스페이스 재사용",
+      "chooseExisting": "기존 워크스페이스 선택",
+      "reusing": "{{source}}에서 {{name}}을(를) 재사용합니다.",
+      "reusingFallbackSource": "기존 실행 워크스페이스",
+      "parentWarning": "경고: 이 하위 이슈는 더 이상 상위 이슈 워크스페이스{{label}}을(를) 사용하지 않습니다."
+    },
+    "assigneeOptions": {
+      "claude": "Claude 옵션",
+      "codex": "Codex 옵션",
+      "opencode": "OpenCode 옵션",
+      "agent": "에이전트 옵션",
+      "modelLane": "모델 레인",
+      "lanePrimary": "기본",
+      "laneCheap": "저비용",
+      "laneCustom": "사용자 지정",
+      "cheapHintSends": "전송",
+      "cheapHintProfile": "· 어댑터 기본값",
+      "cheapHintConfigured": "· 에이전트에 구성된 저비용 프로필을 사용합니다",
+      "cheapHintFallback": "· 저비용 프로필이 구성되지 않은 경우 기본 모델로 대체됩니다",
+      "primaryHint": "에이전트의 기본 모델에서 실행됩니다.",
+      "customHint": "이 이슈에만 모델과 노력 수준을 재정의합니다.",
+      "model": "모델",
+      "defaultModel": "기본 모델",
+      "searchModels": "모델 검색...",
+      "noModelsFound": "모델을 찾을 수 없습니다.",
+      "thinkingEffort": "사고 노력",
+      "enableChrome": "Chrome 활성화 (--chrome)"
+    },
+    "effort": {
+      "default": "기본값",
+      "minimal": "최소",
+      "low": "낮음",
+      "medium": "보통",
+      "high": "높음",
+      "xhigh": "매우 높음",
+      "max": "최대"
+    },
+    "workMode": {
+      "standard": "표준",
+      "planning": "계획"
+    },
+    "statusDescription": {
+      "backlog": "보류 — 담당자가 깨워지지 않습니다",
+      "todo": "실행 가능 — 담당자가 깨워집니다"
+    },
+    "files": {
+      "documents": "문서",
+      "attachments": "첨부파일",
+      "removeDocument": "문서 제거",
+      "removeAttachment": "첨부파일 제거",
+      "unknownType": "application/octet-stream"
+    },
+    "chips": {
+      "priority": "우선순위",
+      "upload": "업로드",
+      "startDate": "시작일",
+      "dueDate": "마감일"
+    },
+    "backlogNote": "담당자를 지정하면 실행 의도가 포함됩니다 — 의도적으로 보류하려는 경우에만 상태를 백로그로 두세요. 상태가 할 일 또는 진행 중으로 바뀌기 전까지 담당자는 깨워지지 않습니다.",
+    "footer": {
+      "discardDraft": "초안 폐기",
+      "creatingIssue": "이슈 생성 중...",
+      "creating": "생성 중...",
+      "createIssue": "이슈 만들기",
+      "createSubIssue": "하위 이슈 만들기",
+      "createError": "이슈 생성에 실패했습니다. 다시 시도하세요."
+    },
+    "toast": {
+      "uploadWarningsTitle": "업로드 경고와 함께 {{issueRef}}을(를) 생성했습니다",
+      "uploadWarningsBody_one": "준비된 파일 {{count}}개를 추가할 수 없습니다.",
+      "uploadWarningsBody_other": "준비된 파일 {{count}}개를 추가할 수 없습니다.",
+      "openIssue": "{{issueRef}} 열기"
+    },
+    "error": {
+      "noCompanySelected": "선택된 회사가 없습니다"
+    }
   }
 }

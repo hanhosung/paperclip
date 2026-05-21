@@ -3707,5 +3707,122 @@
       "issueAria": "Issue: {{title}}",
       "issueWithIdentifierAria": "Issue {{identifier}}: {{title}}"
     }
+  },
+  "newIssue": {
+    "header": {
+      "newIssue": "New issue",
+      "newSubIssue": "New sub-issue"
+    },
+    "title": {
+      "placeholder": "Issue title"
+    },
+    "description": {
+      "placeholder": "Add description..."
+    },
+    "participants": {
+      "for": "For",
+      "in": "in",
+      "assignee": "Assignee",
+      "noAssignee": "No assignee",
+      "searchAssignees": "Search assignees...",
+      "noAssigneesFound": "No assignees found.",
+      "project": "Project",
+      "noProject": "No project",
+      "searchProjects": "Search projects...",
+      "noProjectsFound": "No projects found.",
+      "addReviewerOrApprover": "Add reviewer or approver",
+      "reviewer": "Reviewer",
+      "noReviewer": "No reviewer",
+      "searchReviewers": "Search reviewers...",
+      "noReviewersFound": "No reviewers found.",
+      "approver": "Approver",
+      "noApprover": "No approver",
+      "searchApprovers": "Search approvers...",
+      "noApproversFound": "No approvers found."
+    },
+    "subIssue": {
+      "of": "Sub-issue of"
+    },
+    "executionWorkspace": {
+      "label": "Execution workspace",
+      "description": "Control whether this issue runs in the shared workspace, a new isolated workspace, or an existing one.",
+      "modeSharedWorkspace": "Project default",
+      "modeIsolatedWorkspace": "New isolated workspace",
+      "modeReuseExisting": "Reuse existing workspace",
+      "chooseExisting": "Choose an existing workspace",
+      "reusing": "Reusing {{name}} from {{source}}.",
+      "reusingFallbackSource": "existing execution workspace",
+      "parentWarning": "Warning: this sub-issue will no longer use the parent issue workspace{{label}}."
+    },
+    "assigneeOptions": {
+      "claude": "Claude options",
+      "codex": "Codex options",
+      "opencode": "OpenCode options",
+      "agent": "Agent options",
+      "modelLane": "Model lane",
+      "lanePrimary": "Primary",
+      "laneCheap": "Cheap",
+      "laneCustom": "Custom",
+      "cheapHintSends": "Sends",
+      "cheapHintProfile": "· adapter default",
+      "cheapHintConfigured": "· uses the agent's configured cheap profile",
+      "cheapHintFallback": "· falls back to the primary model if no cheap profile is configured",
+      "primaryHint": "Runs on the agent's primary model.",
+      "customHint": "Override the model and effort for this issue only.",
+      "model": "Model",
+      "defaultModel": "Default model",
+      "searchModels": "Search models...",
+      "noModelsFound": "No models found.",
+      "thinkingEffort": "Thinking effort",
+      "enableChrome": "Enable Chrome (--chrome)"
+    },
+    "effort": {
+      "default": "Default",
+      "minimal": "Minimal",
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High",
+      "xhigh": "X-High",
+      "max": "Max"
+    },
+    "workMode": {
+      "standard": "Standard",
+      "planning": "Planning"
+    },
+    "statusDescription": {
+      "backlog": "Parked — assignee will not be woken",
+      "todo": "Executable — assignee will be woken"
+    },
+    "files": {
+      "documents": "Documents",
+      "attachments": "Attachments",
+      "removeDocument": "Remove document",
+      "removeAttachment": "Remove attachment",
+      "unknownType": "application/octet-stream"
+    },
+    "chips": {
+      "priority": "Priority",
+      "upload": "Upload",
+      "startDate": "Start date",
+      "dueDate": "Due date"
+    },
+    "backlogNote": "Assigning implies executable intent — leave status as Backlog only to deliberately park this. The assignee will not be woken until status moves to Todo or In Progress.",
+    "footer": {
+      "discardDraft": "Discard Draft",
+      "creatingIssue": "Creating issue...",
+      "creating": "Creating...",
+      "createIssue": "Create Issue",
+      "createSubIssue": "Create Sub-Issue",
+      "createError": "Failed to create issue. Try again."
+    },
+    "toast": {
+      "uploadWarningsTitle": "Created {{issueRef}} with upload warnings",
+      "uploadWarningsBody_one": "{{count}} staged file could not be added.",
+      "uploadWarningsBody_other": "{{count}} staged files could not be added.",
+      "openIssue": "Open {{issueRef}}"
+    },
+    "error": {
+      "noCompanySelected": "No company selected"
+    }
   }
 }
