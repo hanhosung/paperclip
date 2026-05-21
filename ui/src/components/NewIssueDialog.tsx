@@ -51,6 +51,7 @@ import {
   ArrowDown,
   AlertTriangle,
   Tag,
+  Check,
   Calendar,
   Paperclip,
   FileText,
@@ -454,6 +455,9 @@ export function NewIssueDialog() {
   const [workModeOpen, setWorkModeOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
   const [companyOpen, setCompanyOpen] = useState(false);
+  const [labelsOpen, setLabelsOpen] = useState(false);
+  const [labelSearch, setLabelSearch] = useState("");
+  const [selectedLabelIds, setSelectedLabelIds] = useState<string[]>([]);
   const descriptionEditorRef = useRef<MarkdownEditorRef>(null);
   const stageFileInputRef = useRef<HTMLInputElement | null>(null);
   const assigneeSelectorRef = useRef<HTMLButtonElement | null>(null);
@@ -468,6 +472,12 @@ export function NewIssueDialog() {
   const { data: projects } = useQuery({
     queryKey: queryKeys.projects.list(effectiveCompanyId!),
     queryFn: () => projectsApi.list(effectiveCompanyId!),
+    enabled: !!effectiveCompanyId && newIssueOpen,
+  });
+
+  const { data: companyLabels } = useQuery({
+    queryKey: queryKeys.issues.labels(effectiveCompanyId!),
+    queryFn: () => issuesApi.listLabels(effectiveCompanyId!),
     enabled: !!effectiveCompanyId && newIssueOpen,
   });
   const { data: reusableExecutionWorkspaces } = useQuery({
@@ -728,6 +738,7 @@ export function NewIssueDialog() {
     if (initializationKeyRef.current === initializationKey) return;
     initializationKeyRef.current = initializationKey;
     setDialogCompanyId(selectedCompanyId);
+    setSelectedLabelIds([]);
     executionWorkspaceDefaultProjectId.current = null;
 
     const draft = loadDraft();
@@ -942,6 +953,12 @@ export function NewIssueDialog() {
     closeNewIssue();
   }
 
+  function toggleLabel(labelId: string) {
+    setSelectedLabelIds((prev) =>
+      prev.includes(labelId) ? prev.filter((id) => id !== labelId) : [...prev, labelId],
+    );
+  }
+
   function handleSubmit() {
     const currentTitle = titleRef.current.trim();
     const currentDescription = descriptionRef.current.trim();
@@ -998,6 +1015,7 @@ export function NewIssueDialog() {
         : {}),
       ...(executionWorkspaceSettings ? { executionWorkspaceSettings } : {}),
       ...(executionPolicy ? { executionPolicy } : {}),
+      ...(selectedLabelIds.length > 0 ? { labelIds: selectedLabelIds } : {}),
     });
   }
 
@@ -1909,11 +1927,81 @@ export function NewIssueDialog() {
             </PopoverContent>
           </Popover>
 
-          {/* Labels chip — disabled, not wired up yet */}
-          {/* <button className="inline-flex items-center gap-1.5 rounded-md border border-border px-2 py-1 text-xs hover:bg-accent/50 transition-colors text-muted-foreground">
-            <Tag className="h-3 w-3" />
-            Labels
-          </button> */}
+          {/* Labels chip */}
+          <Popover
+            open={labelsOpen}
+            onOpenChange={(open) => {
+              setLabelsOpen(open);
+              if (!open) setLabelSearch("");
+            }}
+          >
+            <PopoverTrigger asChild>
+              <button
+                type="button"
+                className={cn(
+                  "inline-flex items-center gap-1.5 rounded-md border border-border px-2 py-1 text-xs transition-colors hover:bg-accent/50",
+                  selectedLabelIds.length > 0 ? "text-foreground" : "text-muted-foreground",
+                )}
+                disabled={createIssue.isPending}
+              >
+                <Tag className="h-3 w-3 shrink-0" />
+                <span className="max-w-[160px] truncate">
+                  {selectedLabelIds.length === 0
+                    ? t("newIssue.chips.labels")
+                    : (companyLabels ?? [])
+                        .filter((label) => selectedLabelIds.includes(label.id))
+                        .map((label) => label.name)
+                        .join(", ")}
+                </span>
+              </button>
+            </PopoverTrigger>
+            <PopoverContent className="w-60 p-1" align="start">
+              <input
+                className="w-full px-2 py-1.5 text-xs bg-transparent outline-none border-b border-border mb-1 placeholder:text-muted-foreground/50"
+                placeholder={t("newIssue.labels.search")}
+                value={labelSearch}
+                onChange={(e) => setLabelSearch(e.target.value)}
+                autoFocus
+              />
+              <div className="max-h-44 overflow-y-auto overscroll-contain space-y-0.5">
+                {(companyLabels ?? []).length === 0 ? (
+                  <p className="px-2 py-3 text-xs text-muted-foreground text-center">
+                    {t("newIssue.labels.empty")}
+                  </p>
+                ) : (
+                  (companyLabels ?? [])
+                    .filter((label) =>
+                      !labelSearch.trim()
+                        ? true
+                        : label.name.toLowerCase().includes(labelSearch.toLowerCase()),
+                    )
+                    .map((label) => {
+                      const selected = selectedLabelIds.includes(label.id);
+                      return (
+                        <button
+                          key={label.id}
+                          type="button"
+                          className={cn(
+                            "flex items-center gap-2 w-full px-2 py-1.5 text-xs rounded hover:bg-accent/50 text-left",
+                            selected && "bg-accent",
+                          )}
+                          onClick={() => toggleLabel(label.id)}
+                        >
+                          <span
+                            className="h-2.5 w-2.5 rounded-full shrink-0"
+                            style={{ backgroundColor: label.color }}
+                          />
+                          <span className="truncate flex-1">{label.name}</span>
+                          {selected ? (
+                            <Check className="h-3.5 w-3.5 shrink-0 text-foreground" aria-hidden="true" />
+                          ) : null}
+                        </button>
+                      );
+                    })
+                )}
+              </div>
+            </PopoverContent>
+          </Popover>
 
           <input
             ref={stageFileInputRef}

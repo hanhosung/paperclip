@@ -4132,7 +4132,12 @@
       "priority": "Priority",
       "upload": "Upload",
       "startDate": "Start date",
-      "dueDate": "Due date"
+      "dueDate": "Due date",
+      "labels": "Labels"
+    },
+    "labels": {
+      "search": "Search labels...",
+      "empty": "No labels in this company yet."
     },
     "backlogNote": "Assigning implies executable intent — leave status as Backlog only to deliberately park this. The assignee will not be woken until status moves to Todo or In Progress.",
     "footer": {
