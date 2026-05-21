@@ -10,31 +10,35 @@ export type RecoveryDisplayState =
 
 export type ActiveRecoveryDisplayState = Exclude<RecoveryDisplayState, "resolved">;
 
+/**
+ * Recovery chip tone tokens. `labelKey` is an i18n key — callers resolve it
+ * with their own `t()` (see wiki/runbooks/localization-glossary.md).
+ */
 export const RECOVERY_CHIP_DEFAULT_TONE: Record<
   ActiveRecoveryDisplayState,
-  { className: string; icon: typeof TriangleAlert; label: string }
+  { className: string; icon: typeof TriangleAlert; labelKey: string }
 > = {
   needed: {
     className:
       "border-amber-500/60 bg-amber-500/15 text-amber-700 dark:text-amber-300",
     icon: TriangleAlert,
-    label: "Recovery needed",
+    labelKey: "components.recovery.needed",
   },
   in_progress: {
     className:
       "border-sky-500/60 bg-sky-500/15 text-sky-700 dark:text-sky-300",
     icon: RefreshCw,
-    label: "Recovery in progress",
+    labelKey: "components.recovery.inProgress",
   },
   observe_only: {
     className: "border-border bg-muted text-muted-foreground",
     icon: Eye,
-    label: "Observing active run",
+    labelKey: "components.recovery.observeOnly",
   },
   escalated: {
     className: "border-red-500/60 bg-red-500/15 text-red-700 dark:text-red-300",
     icon: OctagonAlert,
-    label: "Recovery escalated",
+    labelKey: "components.recovery.escalated",
   },
 };
 

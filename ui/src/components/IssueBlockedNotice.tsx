@@ -21,17 +21,18 @@ function BlockerRecoveryIndicator({ action }: { action: IssueRecoveryAction }) {
   if (!state) return null;
   const tone = RECOVERY_CHIP_DEFAULT_TONE[state];
   const Icon = tone.icon;
+  const toneLabel = t(tone.labelKey);
   return (
     <span
       data-testid="issue-blocked-notice-recovery-indicator"
       data-recovery-state={state}
       role="status"
-      aria-label={tone.label}
-      title={t("issueChat.blockedNotice.recoveryIndicatorTitle", { label: tone.label })}
+      aria-label={toneLabel}
+      title={t("issueChat.blockedNotice.recoveryIndicatorTitle", { label: toneLabel })}
       className={`inline-flex shrink-0 items-center gap-0.5 rounded-full border px-1.5 py-0.5 text-[10px] font-medium ${tone.className}`}
     >
       <Icon className="h-2.5 w-2.5" aria-hidden />
-      {tone.label}
+      {toneLabel}
     </span>
   );
 }

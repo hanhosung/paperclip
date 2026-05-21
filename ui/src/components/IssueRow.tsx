@@ -11,7 +11,7 @@ import { cn } from "../lib/utils";
 import { useTranslation } from "@/i18n";
 import { deriveActiveRecoveryDisplayState, RECOVERY_CHIP_DEFAULT_TONE } from "../lib/recovery-display";
 import { StatusIcon } from "./StatusIcon";
-import { productivityReviewTriggerLabel } from "./ProductivityReviewBadge";
+import { productivityReviewTriggerLabelKey } from "./ProductivityReviewBadge";
 import { hasAssignedBacklogBlocker } from "../lib/issue-blockers";
 
 type UnreadState = "hidden" | "visible" | "fading";
@@ -75,7 +75,7 @@ export function IssueRow({
         "inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-amber-500/40 bg-amber-500/10 text-amber-600 dark:text-amber-300",
         selected ? "border-muted-foreground text-muted-foreground" : null,
       )}
-      title={t("issues.row.productivityReviewTitle", { trigger: productivityReviewTriggerLabel(productivityReview.trigger) })}
+      title={t("issues.row.productivityReviewTitle", { trigger: t(productivityReviewTriggerLabelKey(productivityReview.trigger)) })}
       aria-label={t("issues.row.productivityReviewOpen")}
     >
       <Eye className="h-2.5 w-2.5" aria-hidden />
@@ -247,21 +247,22 @@ function renderRecoveryChip(
   if (!state) return null;
   const tone = RECOVERY_CHIP_DEFAULT_TONE[state];
   const Icon = tone.icon;
+  const toneLabel = t(tone.labelKey);
   return (
     <span
       data-testid="issue-row-recovery-indicator"
       data-recovery-state={state}
       role="status"
-      aria-label={tone.label}
+      aria-label={toneLabel}
       className={cn(
         "ml-1.5 inline-flex shrink-0 items-center gap-0.5 rounded-full border px-2 py-0.5 text-[10px] font-medium",
         tone.className,
         selected ? "!border-muted-foreground !text-muted-foreground" : null,
       )}
-      title={t("issues.row.recoveryChipTitle", { label: tone.label })}
+      title={t("issues.row.recoveryChipTitle", { label: toneLabel })}
     >
       <Icon className="h-2.5 w-2.5" aria-hidden />
-      {tone.label}
+      {toneLabel}
     </span>
   );
 }

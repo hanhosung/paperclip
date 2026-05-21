@@ -4909,5 +4909,264 @@
       "current": "현재: {{name}} (종료됨)",
       "staleManager": "저장된 관리자가 이 회사에 존재하지 않습니다. 새 관리자를 선택하거나 지우세요."
     }
+  },
+  "components": {
+    "shortcuts": {
+      "title": "키보드 단축키",
+      "sectionInbox": "받은함",
+      "sectionIssueDetail": "이슈 상세",
+      "sectionGlobal": "전역",
+      "moveDown": "아래로 이동",
+      "moveUp": "위로 이동",
+      "collapseGroup": "선택한 그룹 접기",
+      "expandGroup": "선택한 그룹 펼치기",
+      "openItem": "선택한 항목 열기",
+      "archiveItem": "항목 보관",
+      "markRead": "읽음으로 표시",
+      "markUnread": "읽지 않음으로 표시",
+      "quickArchive": "받은함으로 빠른 보관",
+      "goToInbox": "받은함으로 이동",
+      "focusComposer": "댓글 작성란에 포커스",
+      "searchPage": "현재 페이지 검색 또는 빠른 검색",
+      "newIssue": "새 이슈",
+      "toggleSidebar": "사이드바 토글",
+      "togglePanel": "패널 토글",
+      "showShortcuts": "키보드 단축키 표시",
+      "then": "다음",
+      "footer": "<0>Esc</0> 키를 눌러 닫기 · 텍스트 필드에서는 단축키가 비활성화됩니다"
+    },
+    "pathModal": {
+      "title": "전체 경로 가져오는 방법",
+      "description": "절대 경로(예: <0>/Users/you/project</0>)를 입력 필드에 붙여넣으세요.",
+      "mac": "macOS",
+      "windows": "Windows",
+      "linux": "Linux",
+      "macStep1": "Finder를 열고 해당 폴더로 이동합니다.",
+      "macStep2": "폴더를 마우스 오른쪽 버튼으로(또는 Control-클릭) 클릭합니다.",
+      "macStep3": "Option(⌥) 키를 누르면 \"복사\"가 \"경로 이름으로 복사\"로 바뀝니다.",
+      "macStep4": "\"경로 이름으로 복사\"를 클릭한 다음 여기에 붙여넣습니다.",
+      "macTip": "터미널을 열고 cd를 입력한 뒤 폴더를 터미널 창으로 끌어다 놓고 Enter를 눌러도 됩니다. 그런 다음 pwd를 입력하면 전체 경로를 볼 수 있습니다.",
+      "windowsStep1": "파일 탐색기를 열고 해당 폴더로 이동합니다.",
+      "windowsStep2": "상단 주소 표시줄을 클릭하면 전체 경로가 나타납니다.",
+      "windowsStep3": "경로를 복사한 다음 여기에 붙여넣습니다.",
+      "windowsTip": "또는 Shift 키를 누른 채 폴더를 마우스 오른쪽 버튼으로 클릭한 뒤 \"경로로 복사\"를 선택합니다.",
+      "linuxStep1": "터미널을 열고 cd로 해당 디렉터리로 이동합니다.",
+      "linuxStep2": "pwd를 실행해 전체 경로를 출력합니다.",
+      "linuxStep3": "출력 결과를 복사해 여기에 붙여넣습니다.",
+      "linuxTip": "대부분의 파일 관리자에서 Ctrl+L을 누르면 주소 표시줄에 전체 경로가 표시됩니다.",
+      "choose": "선택"
+    },
+    "productivityReview": {
+      "triggerDefault": "생산성 검토",
+      "triggerNoCommentStreak": "댓글 없음 연속",
+      "triggerLongActiveDuration": "긴 활성 지속 시간",
+      "triggerHighChurn": "높은 변경량",
+      "statusOpen": "열림",
+      "statusInProgress": "진행 중",
+      "statusInReview": "검토 중",
+      "statusBlocked": "차단됨",
+      "underReview": "검토 중",
+      "ariaLabel": "검토 중 · 생산성 검토 {{identifier}} ({{label}})",
+      "tooltipTitle": "생산성 검토 열림",
+      "tooltipTrigger": "트리거:",
+      "tooltipNoCommentStreak": "댓글 없음 연속:",
+      "tooltipRuns": "{{count}}회 실행",
+      "tooltipReview": "검토:"
+    },
+    "systemNotice": {
+      "labelNotice": "시스템 알림",
+      "labelWarning": "시스템 경고",
+      "labelAlert": "시스템 경보",
+      "details": "상세",
+      "hideDetails": "상세 숨기기"
+    },
+    "outputFeedback": {
+      "helpful": "도움이 됨",
+      "needsWork": "개선 필요",
+      "whatBetter": "무엇이 더 나았을까요?",
+      "addNote": "간단한 메모를 추가하세요",
+      "dismiss": "닫기",
+      "saveNote": "메모 저장",
+      "saving": "저장 중...",
+      "dialogTitle": "피드백 공유 설정 저장",
+      "dialogDescription": "투표한 AI 출력을 Paperclip Labs와 공유할지 선택하세요. 이 답변은 이후의 좋아요 및 싫어요 투표의 기본값이 됩니다.",
+      "savedLocally": "이 투표는 항상 로컬에 저장됩니다.",
+      "shareExplain": "이 투표와 이후 투표한 AI 출력을 공유하려면 <0>항상 허용</0>을 선택하세요. 이 투표와 이후 투표를 로컬에만 유지하려면 <1>허용 안 함</1>을 선택하세요.",
+      "changeLater": "이 설정은 나중에 인스턴스 설정 > 일반에서 변경할 수 있습니다.",
+      "readTerms": "서비스 약관 읽기",
+      "dontAllow": "허용 안 함",
+      "alwaysAllow": "항상 허용"
+    },
+    "imageGallery": {
+      "imageFallback": "이미지",
+      "attachmentAlt": "첨부파일",
+      "download": "다운로드",
+      "close": "닫기",
+      "previous": "이전",
+      "next": "다음"
+    },
+    "documentDiff": {
+      "title": "비교",
+      "old": "이전",
+      "new": "새",
+      "selectRevision": "리비전 선택",
+      "revisionLabel": "리비전 {{number}} — {{time}} • {{actor}}",
+      "actorBoard": "보드",
+      "actorAgent": "에이전트",
+      "actorSystem": "시스템",
+      "loadingRevisions": "리비전을 불러오는 중...",
+      "selectTwo": "비교할 리비전 두 개를 선택하세요.",
+      "sameRevision": "양쪽이 동일한 리비전입니다.",
+      "content": "내용"
+    },
+    "cloudAccessGate": {
+      "setupTitle": "인스턴스 설정 필요",
+      "setupWithInvite": "아직 인스턴스 관리자가 없습니다. 부트스트랩 초대가 이미 활성 상태입니다. Paperclip 시작 로그에서 첫 관리자 초대 URL을 확인하거나, 다음 명령을 실행해 초대를 갱신하세요:",
+      "setupWithoutInvite": "아직 인스턴스 관리자가 없습니다. Paperclip 환경에서 다음 명령을 실행해 첫 관리자 초대 URL을 생성하세요:",
+      "noAccessTitle": "회사 접근 권한 없음",
+      "noAccessBody1": "이 계정은 로그인되어 있지만, 이 Paperclip 인스턴스에 활성 회사 멤버십이나 인스턴스 관리자 접근 권한이 없습니다.",
+      "noAccessBody2": "회사 초대를 사용하거나, 이 조직에 이미 속한 계정으로 로그인하세요.",
+      "loading": "불러오는 중...",
+      "loadStateFailed": "앱 상태를 불러오지 못했습니다"
+    },
+    "accountingModel": {
+      "title": "회계 모델",
+      "description": "Paperclip은 이제 요청 단위 추론 사용량과 계정 단위 재무 이벤트를 분리합니다. 그래서 청구 주체가 OpenRouter, Cloudflare, Bedrock 또는 다른 중개자일 때도 공급자 보고가 정확하게 유지됩니다.",
+      "inferenceTitle": "추론 원장",
+      "inferenceDesc": "cost_events에서 가져온 요청 단위 사용량 및 청구된 실행.",
+      "inferencePoint1": "토큰 + 청구 금액",
+      "inferencePoint2": "공급자, 청구 주체, 모델",
+      "inferencePoint3": "구독 및 초과분 인식",
+      "financeTitle": "재무 원장",
+      "financeDesc": "하나의 프롬프트-응답 쌍이 아닌 계정 단위 요금.",
+      "financePoint1": "충전, 환불, 수수료",
+      "financePoint2": "Bedrock 프로비저닝 또는 학습 요금",
+      "financePoint3": "크레딧 만료 및 조정",
+      "quotaTitle": "실시간 할당량",
+      "quotaDesc": "트래픽을 실시간으로 중단할 수 있는 공급자 또는 청구 주체 윈도.",
+      "quotaPoint1": "공급자 할당량 윈도",
+      "quotaPoint2": "청구 주체 크레딧 시스템",
+      "quotaPoint3": "오류 직접 표시"
+    },
+    "activeAgents": {
+      "defaultTitle": "에이전트",
+      "emptyMessage": "최근 에이전트 실행이 없습니다.",
+      "moreRuns_one": "활성/최근 실행 {{count}}건 더",
+      "moreRuns_other": "활성/최근 실행 {{count}}건 더",
+      "liveNow": "지금 실행 중",
+      "finished": "{{time}} 완료됨",
+      "started": "{{time}} 시작됨"
+    },
+    "blockedInbox": {
+      "loadFailed": "차단됨 탭을 불러올 수 없습니다.",
+      "otherTabsWork": "다른 받은함 탭은 계속 작동합니다. {{message}}",
+      "trying": "시도 중…",
+      "tryAgain": "다시 시도",
+      "emptyTitle": "중단된 작업이 없습니다.",
+      "emptyBody": "결정, 복구 또는 외부 조치가 필요한 이슈가 여기에 표시됩니다.",
+      "noSearchResults": "검색과 일치하는 중단된 항목이 없습니다."
+    },
+    "statusIcon": {
+      "blocked": "차단됨",
+      "waitingActiveSubIssue": "차단됨 · 활성 하위 이슈 {{identifier}} 대기 중",
+      "waitingOneSubIssue": "차단됨 · 활성 하위 이슈 1개 대기 중",
+      "waitingSubIssues": "차단됨 · 활성 하위 이슈 {{count}}개 대기 중",
+      "coveredDependency": "차단됨 · 활성 의존성 {{identifier}}에 의해 처리됨",
+      "coveredOneDependency": "차단됨 · 활성 의존성 1개에 의해 처리됨",
+      "coveredDependencies": "차단됨 · 활성 의존성 {{count}}개에 의해 처리됨",
+      "reviewStalledOn": "차단됨 · {{identifier}}에서 검토 정체",
+      "reviewStalledOne": "차단됨 · 다음 단계가 명확하지 않아 검토 정체",
+      "reviewsStalled": "차단됨 · 다음 단계가 명확하지 않아 검토 {{count}}건 정체",
+      "blockerNeedsAttention": "차단됨 · 차단 요인 {{count}}개에 주의 필요",
+      "blockersNeedAttention": "차단됨 · 차단 요인 {{count}}개에 주의 필요",
+      "blockerNeedsAttentionCovered": "차단됨 · 차단 요인 {{count}}개에 주의 필요; {{covered}}개는 활성 작업으로 처리됨",
+      "blockersNeedAttentionCovered": "차단됨 · 차단 요인 {{count}}개에 주의 필요; {{covered}}개는 활성 작업으로 처리됨"
+    },
+    "activityRow": {
+      "system": "시스템",
+      "board": "보드",
+      "unknown": "알 수 없음"
+    },
+    "agentActions": {
+      "runNow": "지금 실행",
+      "resume": "재개",
+      "pause": "일시중지"
+    },
+    "scrollToBottom": {
+      "ariaLabel": "맨 아래로 스크롤"
+    },
+    "toast": {
+      "dismiss": "알림 닫기"
+    },
+    "newAgent": {
+      "header": "새 에이전트 추가",
+      "recommendation": "에이전트 설정은 CEO에게 맡기는 것을 권장합니다 — CEO는 조직 구조를 알고 있어 보고 체계, 권한, 어댑터를 구성할 수 있습니다.",
+      "askCeo": "CEO에게 새 에이전트 생성 요청",
+      "advancedLink": "고급 구성을 직접 하고 싶습니다",
+      "back": "뒤로",
+      "chooseAdapter": "고급 설정을 위한 어댑터 유형을 선택하세요.",
+      "recommended": "권장",
+      "askCeoIssueTitle": "새 에이전트 생성",
+      "askCeoIssueDescription": "(원하는 에이전트 종류를 여기에 입력하세요)"
+    },
+    "agentIconPicker": {
+      "searchPlaceholder": "아이콘 검색...",
+      "noMatch": "일치하는 아이콘 없음"
+    },
+    "foldCurtain": {
+      "showMore": "더 보기",
+      "showLess": "간략히 보기"
+    },
+    "copyText": {
+      "copied": "복사됨!",
+      "copyFailed": "복사 실패"
+    },
+    "recovery": {
+      "needed": "복구 필요",
+      "inProgress": "복구 진행 중",
+      "observeOnly": "활성 실행 관찰 중",
+      "escalated": "복구 에스컬레이션됨",
+      "chipTitle": "{{label}} — 원본 이슈를 열어 조치하세요."
+    },
+    "retry": {
+      "transientFailure": "일시적 실패",
+      "missingIssueComment": "이슈 댓글 누락",
+      "processLost": "프로세스 손실",
+      "assignmentRecovery": "할당 복구",
+      "issueContinuationNeeded": "이어가기 필요",
+      "maxTurnsContinuation": "최대 턴 이어가기",
+      "continuationScheduled": "이어가기 예약됨",
+      "retryScheduled": "재시도 예약됨",
+      "continuationExhausted": "이어가기 소진됨",
+      "retryExhausted": "재시도 소진됨",
+      "continuedRun": "이어진 실행",
+      "retriedRun": "재시도된 실행",
+      "attempt": "{{count}}번째 시도",
+      "automaticRetriesExhausted": "자동 재시도 소진됨",
+      "nextContinuation": "다음 이어가기 {{time}}",
+      "nextRetry": "다음 재시도 {{time}}",
+      "nextContinuationPending": "다음 이어가기 예약 대기 중",
+      "nextRetryPending": "다음 재시도 예약 대기 중",
+      "manualInterventionRequired": "{{reason}} 수동 개입이 필요합니다."
+    },
+    "transcript": {
+      "intent": "의도",
+      "path": "경로",
+      "directory": "디렉터리",
+      "query": "쿼리",
+      "target": "대상",
+      "prompt": "프롬프트",
+      "pattern": "패턴",
+      "name": "이름",
+      "paths": "경로",
+      "command": "명령",
+      "input": "입력",
+      "executingCommand": "명령 실행 중",
+      "toolFailed": "도구 실패",
+      "waitingForResult": "결과 대기 중",
+      "completed": "완료됨",
+      "failed": "실패",
+      "failedExitCode": "종료 코드 {{code}}로 실패"
+    }
   }
 }

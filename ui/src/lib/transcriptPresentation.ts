@@ -6,8 +6,17 @@ type TranscriptActivity = {
   status: "running" | "completed";
 };
 
+/**
+ * Optional translator (matches `useTranslation().t`). When omitted, the helpers
+ * fall back to English so non-React callers and tests stay simple.
+ */
+type Translate = (key: string, options?: Record<string, unknown>) => string;
+
 export interface ToolInputDetail {
+  /** Stable English identifier — used for filtering (e.g. `label === "Intent"`). */
   label: string;
+  /** i18n key under `components.transcript.*` for the displayed label. */
+  labelKey: string;
   value: string;
   tone?: "default" | "code";
 }
@@ -117,8 +126,10 @@ export function isCommandTool(name: string, input: unknown): boolean {
   return Boolean(record && (typeof record.command === "string" || typeof record.cmd === "string"));
 }
 
-export function displayToolName(name: string, input: unknown): string {
-  if (isCommandTool(name, input)) return "Executing command";
+export function displayToolName(name: string, input: unknown, t?: Translate): string {
+  if (isCommandTool(name, input)) {
+    return t ? t("components.transcript.executingCommand") : "Executing command";
+  }
   return humanizeLabel(name);
 }
 
@@ -183,10 +194,28 @@ function readToolDetailValue(value: unknown, max = 200): string | null {
   return null;
 }
 
+/** Stable English label → i18n key under `components.transcript.*`. */
+const TOOL_DETAIL_LABEL_KEYS: Record<string, string> = {
+  Intent: "components.transcript.intent",
+  Path: "components.transcript.path",
+  Directory: "components.transcript.directory",
+  Query: "components.transcript.query",
+  Target: "components.transcript.target",
+  Prompt: "components.transcript.prompt",
+  Pattern: "components.transcript.pattern",
+  Name: "components.transcript.name",
+  Paths: "components.transcript.paths",
+  Command: "components.transcript.command",
+  Input: "components.transcript.input",
+};
+
 export function describeToolInput(name: string, input: unknown): ToolInputDetail[] {
   if (typeof input === "string") {
+    const label = isCommandTool(name, input) ? "Command" : "Input";
     const summary = compactWhitespace(isCommandTool(name, input) ? stripWrappedShell(input) : input);
-    return summary ? [{ label: isCommandTool(name, input) ? "Command" : "Input", value: truncate(summary, 200), tone: "code" }] : [];
+    return summary
+      ? [{ label, labelKey: TOOL_DETAIL_LABEL_KEYS[label], value: truncate(summary, 200), tone: "code" }]
+      : [];
   }
 
   const record = asRecord(input);
@@ -199,7 +228,7 @@ export function describeToolInput(name: string, input: unknown): ToolInputDetail
     const key = `${label}:${value}`;
     if (seen.has(key)) return;
     seen.add(key);
-    details.push({ label, value, tone });
+    details.push({ label, labelKey: TOOL_DETAIL_LABEL_KEYS[label], value, tone });
   };
 
   pushDetail(
@@ -241,16 +270,22 @@ export function summarizeToolResult(
   result: string | undefined,
   isError: boolean | undefined,
   density: TranscriptDensity = "comfortable",
+  t?: Translate,
 ): string {
-  if (!result) return isError ? "Tool failed" : "Waiting for result";
+  const tr: Translate = t ?? ((key, options) => transcriptFallback(key, options));
+  if (!result) {
+    return isError ? tr("components.transcript.toolFailed") : tr("components.transcript.waitingForResult");
+  }
   const structured = parseStructuredToolResult(result);
   if (structured) {
     if (structured.body) {
       return truncate(structured.body.split("\n")[0] ?? structured.body, density === "compact" ? 84 : 140);
     }
-    if (structured.status === "completed") return "Completed";
+    if (structured.status === "completed") return tr("components.transcript.completed");
     if (structured.status === "failed" || structured.status === "error") {
-      return structured.exitCode ? `Failed with exit code ${structured.exitCode}` : "Failed";
+      return structured.exitCode
+        ? tr("components.transcript.failedExitCode", { code: structured.exitCode })
+        : tr("components.transcript.failed");
     }
   }
   const lines = result
@@ -278,4 +313,22 @@ export function shouldHideNiceModeStderr(text: string): boolean {
 
 export function summarizeNotice(text: string, max = 160): string {
   return truncate(compactWhitespace(text), max);
+}
+
+/** English fallback used by `summarizeToolResult` when no `t` is supplied. */
+function transcriptFallback(key: string, options?: Record<string, unknown>): string {
+  switch (key) {
+    case "components.transcript.toolFailed":
+      return "Tool failed";
+    case "components.transcript.waitingForResult":
+      return "Waiting for result";
+    case "components.transcript.completed":
+      return "Completed";
+    case "components.transcript.failed":
+      return "Failed";
+    case "components.transcript.failedExitCode":
+      return `Failed with exit code ${options?.code ?? ""}`;
+    default:
+      return key;
+  }
 }

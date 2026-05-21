@@ -11,6 +11,8 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { ThumbsDown, ThumbsUp } from "lucide-react";
+import { Trans } from "react-i18next";
+import { useTranslation } from "@/i18n";
 import { cn } from "../lib/utils";
 
 export function OutputFeedbackButtons({
@@ -41,6 +43,7 @@ export function OutputFeedbackButtons({
   const [downvoteAllowSharing, setDownvoteAllowSharing] = useState<boolean | undefined>(undefined);
   const [optimisticVote, setOptimisticVote] = useState<FeedbackVoteValue | null>(null);
   const visibleVote = optimisticVote ?? activeVote ?? null;
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (optimisticVote && activeVote === optimisticVote) {
@@ -124,7 +127,7 @@ export function OutputFeedbackButtons({
           onClick={() => handleVote("up")}
         >
           <ThumbsUp className="mr-1.5 h-3.5 w-3.5" />
-          Helpful
+          {t("components.outputFeedback.helpful")}
         </Button>
         <Button
           type="button"
@@ -135,17 +138,17 @@ export function OutputFeedbackButtons({
           onClick={() => handleVote("down")}
         >
           <ThumbsDown className="mr-1.5 h-3.5 w-3.5" />
-          Needs work
+          {t("components.outputFeedback.needsWork")}
         </Button>
         {rightSlot ? <div className="ml-auto">{rightSlot}</div> : null}
       </div>
       {collectingDownvoteReason ? (
         <div className="mt-2 rounded-md border border-border/60 bg-accent/20 p-3">
-          <div className="mb-2 text-sm font-medium">What could have been better?</div>
+          <div className="mb-2 text-sm font-medium">{t("components.outputFeedback.whatBetter")}</div>
           <Textarea
             value={downvoteReason}
             onChange={(event) => setDownvoteReason(event.target.value)}
-            placeholder="Add a short note"
+            placeholder={t("components.outputFeedback.addNote")}
             className="min-h-20 resize-y bg-background"
             disabled={disabled || isSaving}
           />
@@ -161,7 +164,7 @@ export function OutputFeedbackButtons({
                 setDownvoteAllowSharing(undefined);
               }}
             >
-              Dismiss
+              {t("components.outputFeedback.dismiss")}
             </Button>
             <Button
               type="button"
@@ -174,7 +177,7 @@ export function OutputFeedbackButtons({
                 });
               }}
             >
-              {isSaving ? "Saving..." : "Save note"}
+              {isSaving ? t("components.outputFeedback.saving") : t("components.outputFeedback.saveNote")}
             </Button>
           </div>
         </div>
@@ -191,24 +194,26 @@ export function OutputFeedbackButtons({
       >
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Save your feedback sharing preference</DialogTitle>
+            <DialogTitle>{t("components.outputFeedback.dialogTitle")}</DialogTitle>
             <DialogDescription>
-              Choose whether voted AI outputs can be shared with Paperclip Labs. This
-              answer becomes the default for future thumbs up and thumbs down votes.
+              {t("components.outputFeedback.dialogDescription")}
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-3 text-sm text-muted-foreground">
             <p>
-              This vote is always saved locally.
+              {t("components.outputFeedback.savedLocally")}
             </p>
             <p>
-              Choose <span className="font-medium text-foreground">Always allow</span> to share
-              this vote and future voted AI outputs. Choose{" "}
-              <span className="font-medium text-foreground">Don't allow</span> to keep this vote
-              and future votes local.
+              <Trans
+                i18nKey="components.outputFeedback.shareExplain"
+                components={[
+                  <span key="allow" className="font-medium text-foreground" />,
+                  <span key="deny" className="font-medium text-foreground" />,
+                ]}
+              />
             </p>
             <p>
-              You can change this later in Instance Settings &gt; General.
+              {t("components.outputFeedback.changeLater")}
             </p>
             {termsUrl ? (
               <a
@@ -217,7 +222,7 @@ export function OutputFeedbackButtons({
                 rel="noreferrer"
                 className="inline-flex text-sm text-foreground underline underline-offset-4"
               >
-                Read our terms of service
+                {t("components.outputFeedback.readTerms")}
               </a>
             ) : null}
           </div>
@@ -238,7 +243,7 @@ export function OutputFeedbackButtons({
                 );
               }}
             >
-              {isSaving ? "Saving..." : "Don't allow"}
+              {isSaving ? t("components.outputFeedback.saving") : t("components.outputFeedback.dontAllow")}
             </Button>
             <Button
               type="button"
@@ -258,7 +263,7 @@ export function OutputFeedbackButtons({
                 );
               }}
             >
-              {isSaving ? "Saving..." : "Always allow"}
+              {isSaving ? t("components.outputFeedback.saving") : t("components.outputFeedback.alwaysAllow")}
             </Button>
           </DialogFooter>
         </DialogContent>

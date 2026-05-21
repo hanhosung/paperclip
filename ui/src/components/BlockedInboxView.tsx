@@ -22,6 +22,7 @@ import { IssueRow } from "./IssueRow";
 import { Identity } from "./Identity";
 import { StatusIcon } from "./StatusIcon";
 import { Button } from "@/components/ui/button";
+import { useTranslation } from "@/i18n";
 
 interface BlockedInboxViewProps {
   companyId: string;
@@ -58,6 +59,7 @@ export function BlockedInboxView({
   showIdentifierColumn,
   showUpdatedColumn,
 }: BlockedInboxViewProps) {
+  const { t } = useTranslation();
   const [collapsedVariants, setCollapsedVariants] = useState<Set<string>>(() => new Set());
 
   const {
@@ -136,7 +138,7 @@ export function BlockedInboxView({
 
   if (error) {
     const message =
-      error instanceof Error ? error.message : "Couldn't load the Blocked tab.";
+      error instanceof Error ? error.message : t("components.blockedInbox.loadFailed");
     return (
       <div
         data-testid="blocked-inbox-error"
@@ -146,9 +148,9 @@ export function BlockedInboxView({
         <div className="flex items-start gap-2">
           <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
           <div className="flex-1 space-y-1">
-            <p className="text-sm font-medium">Couldn't load the Blocked tab.</p>
+            <p className="text-sm font-medium">{t("components.blockedInbox.loadFailed")}</p>
             <p className="text-xs opacity-80">
-              Other Inbox tabs still work. {message}
+              {t("components.blockedInbox.otherTabsWork", { message })}
             </p>
           </div>
           <Button
@@ -159,7 +161,7 @@ export function BlockedInboxView({
             onClick={() => void refetch()}
             disabled={isFetching}
           >
-            {isFetching ? "Trying…" : "Try again"}
+            {isFetching ? t("components.blockedInbox.trying") : t("components.blockedInbox.tryAgain")}
           </Button>
         </div>
       </div>

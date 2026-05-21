@@ -951,7 +951,7 @@ export function IssueProperties({
   const scheduledRetryShortDate = scheduledRetry?.scheduledRetryAt
     ? formatDate(new Date(scheduledRetry.scheduledRetryAt))
     : null;
-  const scheduledRetryReasonLabel = formatRetryReason(scheduledRetry?.scheduledRetryReason);
+  const scheduledRetryReasonLabel = formatRetryReason(scheduledRetry?.scheduledRetryReason, t);
   const scheduledRetryAttempt =
     typeof scheduledRetry?.scheduledRetryAttempt === "number"
     && Number.isFinite(scheduledRetry.scheduledRetryAttempt)

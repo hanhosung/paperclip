@@ -41,7 +41,7 @@ export function IssueScheduledRetryCard({
   const absolute = scheduledRetry.scheduledRetryAt
     ? formatDateTime(scheduledRetry.scheduledRetryAt)
     : null;
-  const reason = formatRetryReason(scheduledRetry.scheduledRetryReason);
+  const reason = formatRetryReason(scheduledRetry.scheduledRetryReason, t);
   const attempt =
     typeof scheduledRetry.scheduledRetryAttempt === "number"
     && Number.isFinite(scheduledRetry.scheduledRetryAttempt)

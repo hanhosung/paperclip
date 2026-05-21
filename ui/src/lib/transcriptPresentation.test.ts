@@ -21,8 +21,8 @@ describe("describeToolInput", () => {
         cwd: "/workspace/paperclip",
       }),
     ).toEqual([
-      { label: "Intent", value: "Inspect the issue chat thread layout classes", tone: "default" },
-      { label: "Directory", value: "/workspace/paperclip", tone: "default" },
+      { label: "Intent", labelKey: "components.transcript.intent", value: "Inspect the issue chat thread layout classes", tone: "default" },
+      { label: "Directory", labelKey: "components.transcript.directory", value: "/workspace/paperclip", tone: "default" },
     ]);
   });
 
@@ -32,7 +32,7 @@ describe("describeToolInput", () => {
         path: "ui/src/lib/issue-chat-messages.ts",
       }),
     ).toEqual([
-      { label: "Path", value: "ui/src/lib/issue-chat-messages.ts", tone: "default" },
+      { label: "Path", labelKey: "components.transcript.path", value: "ui/src/lib/issue-chat-messages.ts", tone: "default" },
     ]);
   });
 });

@@ -814,8 +814,11 @@ function toolCountSummary(
   return parts.join(", ");
 }
 
-function cleanToolDisplayText(tool: ToolCallMessagePart): string {
-  const name = displayToolName(tool.toolName, tool.args);
+function cleanToolDisplayText(
+  tool: ToolCallMessagePart,
+  t: ReturnType<typeof useTranslation>["t"],
+): string {
+  const name = displayToolName(tool.toolName, tool.args, t);
   if (isCommandTool(tool.toolName, tool.args)) return name;
   const summary = tool.result === undefined
     ? summarizeToolInput(tool.toolName, tool.args)
@@ -993,10 +996,11 @@ function IssueChatReasoningPart({ text }: { text: string }) {
 }
 
 function IssueChatRollingToolPart({ toolParts }: { toolParts: ToolCallMessagePart[] }) {
+  const { t } = useTranslation();
   const latest = toolParts[toolParts.length - 1];
   if (!latest) return null;
 
-  const fullText = cleanToolDisplayText(latest);
+  const fullText = cleanToolDisplayText(latest, t);
 
   const prevRef = useRef(fullText);
   const [ticker, setTicker] = useState<{
@@ -1108,13 +1112,13 @@ function IssueChatToolPart({
         ? ""
         : formatToolPayload(result);
   const inputDetails = describeToolInput(toolName, parsedArgs);
-  const displayName = displayToolName(toolName, parsedArgs);
+  const displayName = displayToolName(toolName, parsedArgs, t);
   const isCommand = isCommandTool(toolName, parsedArgs);
   const summary = isCommand
     ? null
     : result === undefined
       ? summarizeToolInput(toolName, parsedArgs)
-      : summarizeToolResult(resultText, false);
+      : summarizeToolResult(resultText, false, "comfortable", t);
   const ToolIcon = getToolIcon(toolName);
 
   const intentDetail = inputDetails.find((d) => d.label === "Intent");
@@ -1155,7 +1159,7 @@ function IssueChatToolPart({
                   {nonIntentDetails.map((detail) => (
                     <div key={`${detail.label}:${detail.value}`}>
                       <dt className="text-[10px] font-medium text-muted-foreground/60">
-                        {detail.label}
+                        {detail.labelKey ? t(detail.labelKey) : detail.label}
                       </dt>
                       <dd className={cn("text-xs leading-5 text-foreground/70", detail.tone === "code" && "font-mono text-[11px]")}>
                         {detail.value}

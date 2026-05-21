@@ -4909,5 +4909,264 @@
       "current": "Current: {{name}} (terminated)",
       "staleManager": "Saved manager is missing from this company. Choose a new manager or clear."
     }
+  },
+  "components": {
+    "shortcuts": {
+      "title": "Keyboard shortcuts",
+      "sectionInbox": "Inbox",
+      "sectionIssueDetail": "Issue detail",
+      "sectionGlobal": "Global",
+      "moveDown": "Move down",
+      "moveUp": "Move up",
+      "collapseGroup": "Collapse selected group",
+      "expandGroup": "Expand selected group",
+      "openItem": "Open selected item",
+      "archiveItem": "Archive item",
+      "markRead": "Mark as read",
+      "markUnread": "Mark as unread",
+      "quickArchive": "Quick-archive back to inbox",
+      "goToInbox": "Go to inbox",
+      "focusComposer": "Focus comment composer",
+      "searchPage": "Search current page or quick search",
+      "newIssue": "New issue",
+      "toggleSidebar": "Toggle sidebar",
+      "togglePanel": "Toggle panel",
+      "showShortcuts": "Show keyboard shortcuts",
+      "then": "then",
+      "footer": "Press <0>Esc</0> to close · Shortcuts are disabled in text fields"
+    },
+    "pathModal": {
+      "title": "How to get a full path",
+      "description": "Paste the absolute path (e.g. <0>/Users/you/project</0>) into the input field.",
+      "mac": "macOS",
+      "windows": "Windows",
+      "linux": "Linux",
+      "macStep1": "Open Finder and navigate to the folder.",
+      "macStep2": "Right-click (or Control-click) the folder.",
+      "macStep3": "Hold the Option (⌥) key — \"Copy\" changes to \"Copy as Pathname\".",
+      "macStep4": "Click \"Copy as Pathname\", then paste here.",
+      "macTip": "You can also open Terminal, type cd, drag the folder into the terminal window, and press Enter. Then type pwd to see the full path.",
+      "windowsStep1": "Open File Explorer and navigate to the folder.",
+      "windowsStep2": "Click in the address bar at the top — the full path will appear.",
+      "windowsStep3": "Copy the path, then paste here.",
+      "windowsTip": "Alternatively, hold Shift and right-click the folder, then select \"Copy as path\".",
+      "linuxStep1": "Open a terminal and navigate to the directory with cd.",
+      "linuxStep2": "Run pwd to print the full path.",
+      "linuxStep3": "Copy the output and paste here.",
+      "linuxTip": "In most file managers, Ctrl+L reveals the full path in the address bar.",
+      "choose": "Choose"
+    },
+    "productivityReview": {
+      "triggerDefault": "Productivity review",
+      "triggerNoCommentStreak": "No-comment streak",
+      "triggerLongActiveDuration": "Long active duration",
+      "triggerHighChurn": "High churn",
+      "statusOpen": "Open",
+      "statusInProgress": "In progress",
+      "statusInReview": "In review",
+      "statusBlocked": "Blocked",
+      "underReview": "Under review",
+      "ariaLabel": "Under review · productivity review {{identifier}} ({{label}})",
+      "tooltipTitle": "Productivity review open",
+      "tooltipTrigger": "Trigger:",
+      "tooltipNoCommentStreak": "No-comment streak:",
+      "tooltipRuns": "{{count}} runs",
+      "tooltipReview": "Review:"
+    },
+    "systemNotice": {
+      "labelNotice": "System notice",
+      "labelWarning": "System warning",
+      "labelAlert": "System alert",
+      "details": "Details",
+      "hideDetails": "Hide details"
+    },
+    "outputFeedback": {
+      "helpful": "Helpful",
+      "needsWork": "Needs work",
+      "whatBetter": "What could have been better?",
+      "addNote": "Add a short note",
+      "dismiss": "Dismiss",
+      "saveNote": "Save note",
+      "saving": "Saving...",
+      "dialogTitle": "Save your feedback sharing preference",
+      "dialogDescription": "Choose whether voted AI outputs can be shared with Paperclip Labs. This answer becomes the default for future thumbs up and thumbs down votes.",
+      "savedLocally": "This vote is always saved locally.",
+      "shareExplain": "Choose <0>Always allow</0> to share this vote and future voted AI outputs. Choose <1>Don't allow</1> to keep this vote and future votes local.",
+      "changeLater": "You can change this later in Instance Settings > General.",
+      "readTerms": "Read our terms of service",
+      "dontAllow": "Don't allow",
+      "alwaysAllow": "Always allow"
+    },
+    "imageGallery": {
+      "imageFallback": "Image",
+      "attachmentAlt": "attachment",
+      "download": "Download",
+      "close": "Close",
+      "previous": "Previous",
+      "next": "Next"
+    },
+    "documentDiff": {
+      "title": "Diff",
+      "old": "Old",
+      "new": "New",
+      "selectRevision": "Select revision",
+      "revisionLabel": "rev {{number}} — {{time}} • {{actor}}",
+      "actorBoard": "board",
+      "actorAgent": "agent",
+      "actorSystem": "system",
+      "loadingRevisions": "Loading revisions...",
+      "selectTwo": "Select two revisions to compare.",
+      "sameRevision": "Both sides are the same revision.",
+      "content": "Content"
+    },
+    "cloudAccessGate": {
+      "setupTitle": "Instance setup required",
+      "setupWithInvite": "No instance admin exists yet. A bootstrap invite is already active. Check your Paperclip startup logs for the first admin invite URL, or run this command to rotate it:",
+      "setupWithoutInvite": "No instance admin exists yet. Run this command in your Paperclip environment to generate the first admin invite URL:",
+      "noAccessTitle": "No company access",
+      "noAccessBody1": "This account is signed in, but it does not have an active company membership or instance-admin access on this Paperclip instance.",
+      "noAccessBody2": "Use a company invite or sign in with an account that already belongs to this org.",
+      "loading": "Loading...",
+      "loadStateFailed": "Failed to load app state"
+    },
+    "accountingModel": {
+      "title": "Accounting model",
+      "description": "Paperclip now separates request-level inference usage from account-level finance events. That keeps provider reporting honest when the biller is OpenRouter, Cloudflare, Bedrock, or another intermediary.",
+      "inferenceTitle": "Inference ledger",
+      "inferenceDesc": "Request-scoped usage and billed runs from cost_events.",
+      "inferencePoint1": "tokens + billed dollars",
+      "inferencePoint2": "provider, biller, model",
+      "inferencePoint3": "subscription and overage aware",
+      "financeTitle": "Finance ledger",
+      "financeDesc": "Account-level charges that are not one prompt-response pair.",
+      "financePoint1": "top-ups, refunds, fees",
+      "financePoint2": "Bedrock provisioned or training charges",
+      "financePoint3": "credit expiries and adjustments",
+      "quotaTitle": "Live quotas",
+      "quotaDesc": "Provider or biller windows that can stop traffic in real time.",
+      "quotaPoint1": "provider quota windows",
+      "quotaPoint2": "biller credit systems",
+      "quotaPoint3": "errors surfaced directly"
+    },
+    "activeAgents": {
+      "defaultTitle": "Agents",
+      "emptyMessage": "No recent agent runs.",
+      "moreRuns_one": "{{count}} more active/recent run",
+      "moreRuns_other": "{{count}} more active/recent runs",
+      "liveNow": "Live now",
+      "finished": "Finished {{time}}",
+      "started": "Started {{time}}"
+    },
+    "blockedInbox": {
+      "loadFailed": "Couldn't load the Blocked tab.",
+      "otherTabsWork": "Other Inbox tabs still work. {{message}}",
+      "trying": "Trying…",
+      "tryAgain": "Try again",
+      "emptyTitle": "No work is stopped.",
+      "emptyBody": "Issues that need a decision, recovery, or external action will appear here.",
+      "noSearchResults": "No stopped items match your search."
+    },
+    "statusIcon": {
+      "blocked": "Blocked",
+      "waitingActiveSubIssue": "Blocked · waiting on active sub-issue {{identifier}}",
+      "waitingOneSubIssue": "Blocked · waiting on 1 active sub-issue",
+      "waitingSubIssues": "Blocked · waiting on {{count}} active sub-issues",
+      "coveredDependency": "Blocked · covered by active dependency {{identifier}}",
+      "coveredOneDependency": "Blocked · covered by 1 active dependency",
+      "coveredDependencies": "Blocked · covered by {{count}} active dependencies",
+      "reviewStalledOn": "Blocked · review stalled on {{identifier}}",
+      "reviewStalledOne": "Blocked · review stalled with no clear next step",
+      "reviewsStalled": "Blocked · {{count}} reviews stalled with no clear next step",
+      "blockerNeedsAttention": "Blocked · {{count}} blocker needs attention",
+      "blockersNeedAttention": "Blocked · {{count}} blockers need attention",
+      "blockerNeedsAttentionCovered": "Blocked · {{count}} blocker needs attention; {{covered}} covered by active work",
+      "blockersNeedAttentionCovered": "Blocked · {{count}} blockers need attention; {{covered}} covered by active work"
+    },
+    "activityRow": {
+      "system": "System",
+      "board": "Board",
+      "unknown": "Unknown"
+    },
+    "agentActions": {
+      "runNow": "Run now",
+      "resume": "Resume",
+      "pause": "Pause"
+    },
+    "scrollToBottom": {
+      "ariaLabel": "Scroll to bottom"
+    },
+    "toast": {
+      "dismiss": "Dismiss notification"
+    },
+    "newAgent": {
+      "header": "Add a new agent",
+      "recommendation": "We recommend letting your CEO handle agent setup — they know the org structure and can configure reporting, permissions, and adapters.",
+      "askCeo": "Ask the CEO to create a new agent",
+      "advancedLink": "I want advanced configuration myself",
+      "back": "Back",
+      "chooseAdapter": "Choose your adapter type for advanced setup.",
+      "recommended": "Recommended",
+      "askCeoIssueTitle": "Create a new agent",
+      "askCeoIssueDescription": "(type in what kind of agent you want here)"
+    },
+    "agentIconPicker": {
+      "searchPlaceholder": "Search icons...",
+      "noMatch": "No icons match"
+    },
+    "foldCurtain": {
+      "showMore": "Show more",
+      "showLess": "Show less"
+    },
+    "copyText": {
+      "copied": "Copied!",
+      "copyFailed": "Copy failed"
+    },
+    "recovery": {
+      "needed": "Recovery needed",
+      "inProgress": "Recovery in progress",
+      "observeOnly": "Observing active run",
+      "escalated": "Recovery escalated",
+      "chipTitle": "{{label}} — open the source issue to act."
+    },
+    "retry": {
+      "transientFailure": "Transient failure",
+      "missingIssueComment": "Missing issue comment",
+      "processLost": "Process lost",
+      "assignmentRecovery": "Assignment recovery",
+      "issueContinuationNeeded": "Continuation needed",
+      "maxTurnsContinuation": "Max-turn continuation",
+      "continuationScheduled": "Continuation scheduled",
+      "retryScheduled": "Retry scheduled",
+      "continuationExhausted": "Continuation exhausted",
+      "retryExhausted": "Retry exhausted",
+      "continuedRun": "Continued run",
+      "retriedRun": "Retried run",
+      "attempt": "Attempt {{count}}",
+      "automaticRetriesExhausted": "Automatic retries exhausted",
+      "nextContinuation": "Next continuation {{time}}",
+      "nextRetry": "Next retry {{time}}",
+      "nextContinuationPending": "Next continuation pending schedule",
+      "nextRetryPending": "Next retry pending schedule",
+      "manualInterventionRequired": "{{reason}} Manual intervention required."
+    },
+    "transcript": {
+      "intent": "Intent",
+      "path": "Path",
+      "directory": "Directory",
+      "query": "Query",
+      "target": "Target",
+      "prompt": "Prompt",
+      "pattern": "Pattern",
+      "name": "Name",
+      "paths": "Paths",
+      "command": "Command",
+      "input": "Input",
+      "executingCommand": "Executing command",
+      "toolFailed": "Tool failed",
+      "waitingForResult": "Waiting for result",
+      "completed": "Completed",
+      "failed": "Failed",
+      "failedExitCode": "Failed with exit code {{code}}"
+    }
   }
 }

@@ -709,7 +709,7 @@ export function IssueRunLedgerContent({
             const duration = formatDuration(run.startedAt, run.finishedAt);
             const exhausted = hasExhaustedContinuation(run);
             const continuation = continuationLabel(run, t);
-            const retryState = describeRunRetryState(run);
+            const retryState = describeRunRetryState(run, t);
             const agentName = compactAgentName(run, agentMap);
             return (
               <article
