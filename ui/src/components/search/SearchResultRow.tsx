@@ -1,27 +1,40 @@
 import { memo, type ComponentType, type SVGProps } from "react";
 import { Bot, FileText, Hexagon, MessageSquare, Quote } from "lucide-react";
 import type { Agent, CompanySearchResult } from "@paperclipai/shared";
+import type { TFunction } from "i18next";
 import { Link } from "@/lib/router";
 import { cn } from "@/lib/utils";
+import { useTranslation } from "@/i18n";
 import { StatusIcon } from "../StatusIcon";
 import { Identity } from "../Identity";
 import { HighlightedText, type HighlightedTextProps } from "./HighlightedText";
 
-type SnippetStyle = {
+type SnippetIconStyle = {
   Icon: ComponentType<SVGProps<SVGSVGElement>>;
-  label: string;
+  /** i18n key for the snippet label, or null when the backend-supplied label is used. */
+  labelKey: string | null;
 };
 
-const SNIPPET_STYLES: Record<string, SnippetStyle> = {
-  comment: { Icon: MessageSquare, label: "Comment" },
-  document: { Icon: FileText, label: "Doc" },
-  description: { Icon: Quote, label: "Description" },
+const SNIPPET_STYLES: Record<string, SnippetIconStyle> = {
+  comment: { Icon: MessageSquare, labelKey: "search.snippet.comment" },
+  document: { Icon: FileText, labelKey: "search.snippet.document" },
+  description: { Icon: Quote, labelKey: "search.snippet.description" },
 };
 
-function snippetStyle(field: string, fallbackLabel: string): SnippetStyle {
-  return SNIPPET_STYLES[field] ?? { Icon: Quote, label: fallbackLabel };
+/** Resolve the icon + accessible label for a snippet, falling back to backend data. */
+function snippetStyle(
+  field: string,
+  fallbackLabel: string,
+  t: TFunction,
+): { Icon: ComponentType<SVGProps<SVGSVGElement>>; label: string } {
+  const style = SNIPPET_STYLES[field];
+  if (style) return { Icon: style.Icon, label: style.labelKey ? t(style.labelKey) : fallbackLabel };
+  return { Icon: Quote, label: fallbackLabel };
 }
 
+// NOTE: relative-time formatting (abbreviations, "just now") is centralized in
+// Phase 3 (P3-1) alongside lib/timeAgo.ts. Kept as-is here to avoid divergence
+// from the future shared ko-KR formatter.
 function formatRelativeTime(input: string | null): string {
   if (!input) return "";
   const value = new Date(input);
@@ -59,6 +72,7 @@ function SearchResultRowImpl({
   isActive,
   className,
 }: SearchResultRowProps) {
+  const { t } = useTranslation();
   if (result.type === "agent") {
     return (
       <Link
@@ -78,7 +92,7 @@ function SearchResultRowImpl({
               text={result.snippets[0]?.text ?? result.snippet}
               highlights={result.snippets[0]?.highlights}
               field="agent"
-              fallbackLabel={result.sourceLabel ?? "Agent"}
+              fallbackLabel={result.sourceLabel ?? t("search.snippet.agent")}
             />
           ) : null}
         </div>
@@ -101,7 +115,7 @@ function SearchResultRowImpl({
               text={result.snippets[0]?.text ?? result.snippet}
               highlights={result.snippets[0]?.highlights}
               field="project"
-              fallbackLabel={result.sourceLabel ?? "Project"}
+              fallbackLabel={result.sourceLabel ?? t("search.snippet.project")}
             />
           ) : null}
         </div>
@@ -194,7 +208,8 @@ interface SnippetLineProps {
 }
 
 function SnippetLine({ text, highlights, field, fallbackLabel, multiline = false }: SnippetLineProps) {
-  const { Icon, label } = snippetStyle(field, fallbackLabel);
+  const { t } = useTranslation();
+  const { Icon, label } = snippetStyle(field, fallbackLabel, t);
   return (
     <div
       className={cn(

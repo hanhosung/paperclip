@@ -3824,5 +3824,77 @@
     "error": {
       "noCompanySelected": "선택된 회사가 없습니다"
     }
+  },
+  "search": {
+    "title": "검색",
+    "input": {
+      "placeholder": "이슈, 댓글, 문서, 에이전트, 프로젝트 검색…",
+      "ariaLabel": "검색어",
+      "clear": "검색어 지우기"
+    },
+    "scopes": {
+      "all": "전체",
+      "issues": "이슈",
+      "comments": "댓글",
+      "documents": "문서",
+      "agents": "에이전트",
+      "projects": "프로젝트",
+      "allScopes": "전체 범위"
+    },
+    "groups": {
+      "issues": "이슈",
+      "comments": "댓글",
+      "documents": "문서",
+      "agents": "에이전트",
+      "projects": "프로젝트"
+    },
+    "snippet": {
+      "comment": "댓글",
+      "document": "문서",
+      "description": "설명",
+      "agent": "에이전트",
+      "project": "프로젝트"
+    },
+    "initial": {
+      "heading": "회사 메모리를 검색하려면 입력하세요.",
+      "subheading": "이슈, 댓글, 계획 문서, 에이전트, 프로젝트 — 동일한 표면에서 관련도순으로 정렬됩니다.",
+      "recentSearches": "최근 검색",
+      "tips": {
+        "identifierLabel": "식별자 조회:",
+        "identifierBefore": "다음을 입력하면",
+        "identifierAfter": "바로 해당 이슈로 이동합니다.",
+        "quotedLabel": "따옴표 구문:",
+        "quotedText": "구문을 따옴표로 감싸면 정확한 순서로 일치시킵니다.",
+        "paletteLabel": "⌘K:",
+        "paletteText": "현재 검색어가 미리 채워진 명령 팔레트를 다시 엽니다."
+      }
+    },
+    "error": {
+      "heading": "검색을 실행하지 못했습니다",
+      "serverReturned": "서버가 {{status}}을(를) 반환했습니다.",
+      "requestFailed": "요청이 실패했습니다.",
+      "body": "입력값과 필터는 그대로 남아 있으므로, 다시 시도하거나 이슈 필터로 대체할 수 있습니다.",
+      "retry": "다시 시도",
+      "openIssuesFilter": "이슈 필터 보기 열기"
+    },
+    "loading": "“{{query}}” 검색 중…",
+    "empty": {
+      "heading": "“{{query}}”에 대한 결과 없음",
+      "body": "{{scope}}에서 일치하는 항목을 찾지 못했습니다. 범위를 넓히거나 검색어를 바꿔 보세요.",
+      "searchAllScopes": "전체 범위 검색",
+      "createIssue": "이 검색어로 이슈 만들기",
+      "openIssuesFilter": "이슈 필터 보기 열기",
+      "tips": {
+        "fewerTokens": "토큰을 줄이거나 한 가지 두드러진 용어를 사용해 보세요.",
+        "identifierBefore": "다음과 같은 식별자 단축어를 사용하세요",
+        "quotes": "여러 단어로 된 구문은 따옴표로 감싸세요."
+      }
+    },
+    "results": {
+      "count_one": "결과 {{count}}건",
+      "count_other": "결과 {{count}}건",
+      "sortedByRelevance": "관련도순 정렬",
+      "updating": "갱신 중…"
+    }
   }
 }
