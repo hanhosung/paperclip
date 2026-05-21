@@ -179,6 +179,30 @@
       "plugins": "플러그인",
       "adapters": "어댑터"
     },
+    "profile": {
+      "title": "프로필",
+      "description": "사이드바와 다른 보드 화면에 계정이 어떻게 표시될지 관리합니다.",
+      "loading": "프로필 불러오는 중...",
+      "loadError": "프로필을 불러오지 못했습니다.",
+      "updateError": "프로필을 업데이트하지 못했습니다.",
+      "uploadError": "아바타를 업로드하지 못했습니다.",
+      "removeError": "아바타를 삭제하지 못했습니다.",
+      "selectCompanyToUpload": "프로필 아바타를 업로드하기 전에 회사를 선택하세요.",
+      "uploadHintCompany": "{{company}}의 Paperclip 파일 저장소에 저장됩니다.",
+      "uploadHintNoCompany": "Paperclip 저장소에 아바타를 업로드하려면 회사를 선택하세요.",
+      "avatarHint": "아바타를 클릭하여 새 이미지를 업로드하세요.",
+      "changePhoto": "사진 변경",
+      "uploadPhoto": "사진 업로드",
+      "remove": "삭제",
+      "noEmail": "이메일 없음",
+      "displayName": "표시 이름",
+      "displayNamePlaceholder": "Board",
+      "displayNameHint": "사이드바 계정 푸터와 댓글 작성자 화면에 표시됩니다.",
+      "email": "이메일",
+      "emailHint": "이메일은 인증 세션에서 관리되며 여기서는 읽기 전용입니다.",
+      "saveProfile": "프로필 저장",
+      "saving": "저장 중..."
+    },
     "general": {
       "breadcrumb": "일반",
       "title": "일반",
@@ -394,7 +418,16 @@
       "enableNesting": "상위-하위 중첩 켜기",
       "disableNesting": "상위-하위 중첩 끄기",
       "sort": "정렬",
-      "group": "그룹"
+      "group": "그룹",
+      "useComfortableCards": "넓은 카드 사용",
+      "useCompactCards": "좁은 카드 사용",
+      "expandColdLanes": "비활성 레인 펼치기",
+      "collapseColdLanes": "비활성 레인 접기",
+      "cardsPerColumn": "열당 카드 수",
+      "cardsPerColumnOption": "열당 {{count}}개",
+      "resetBoardDensity": "보드 밀도 초기화",
+      "columnPickerTitle": "표시할 이슈 열을 선택하세요",
+      "newIssueInGroup": "{{group}}에 새 이슈"
     },
     "list": {
       "breadcrumb": "이슈",
@@ -446,7 +479,10 @@
       "productivityReviewOpen": "생산성 검토 진행 중",
       "markAsRead": "읽음으로 표시",
       "dismissFromInbox": "받은함에서 제외",
-      "recoveryChipTitle": "{{label}} — 조치하려면 원본 이슈를 여세요."
+      "recoveryChipTitle": "{{label}} — 조치하려면 원본 이슈를 여세요.",
+      "assignee": "담당자",
+      "searchAssignees": "담당자 검색...",
+      "noAssignee": "담당자 없음"
     },
     "board": {
       "showMore": "{{count}}개 더 보기",
@@ -464,7 +500,14 @@
       "blocked": "차단됨",
       "all": "전체"
     },
-    "searchPlaceholder": "받은함 검색…"
+    "searchPlaceholder": "받은함 검색…",
+    "toolbar": {
+      "group": "그룹",
+      "sort": "정렬",
+      "columnPickerTitle": "표시할 받은함 열을 선택하세요",
+      "categoryPlaceholder": "카테고리",
+      "approvalStatusPlaceholder": "승인 상태"
+    }
   },
   "status": {
     "backlog": "백로그",
@@ -1020,7 +1063,21 @@
     "started": "시작일",
     "completed": "완료일",
     "created": "생성일",
-    "updated": "수정일"
+    "updated": "수정일",
+    "modelLabel": "모델",
+    "defaultModel": "기본 모델",
+    "searchModels": "모델 검색...",
+    "noModelsFound": "모델을 찾을 수 없습니다.",
+    "monitorNotesPlaceholder": "에이전트가 무엇을 다시 확인해야 하나요?",
+    "monitorServicePlaceholder": "외부 서비스",
+    "searchLabels": "라벨 검색...",
+    "newLabel": "새 라벨",
+    "searchAssignees": "담당자 검색...",
+    "searchReviewers": "검토자 검색...",
+    "searchApprovers": "승인자 검색...",
+    "searchProjects": "프로젝트 검색...",
+    "searchIssues": "이슈 검색...",
+    "noParent": "상위 이슈 없음"
   },
   "issueDetail": {
     "tabs": {
@@ -1037,7 +1094,17 @@
     "upload": "업로드",
     "uploading": "업로드 중...",
     "newSubIssue": "새 하위 이슈",
-    "subIssue": "하위 이슈"
+    "subIssue": "하위 이슈",
+    "productivityReview": "생산성 검토",
+    "productivityReviewTitle": "이 작업은 생산성 검토입니다.",
+    "copyAsMarkdown": "이슈를 마크다운으로 복사",
+    "properties": "속성",
+    "showProperties": "속성 표시",
+    "deleteAttachment": "첨부파일 삭제",
+    "descriptionPlaceholder": "설명 추가...",
+    "treeControlReasonLabel": "사유 (선택)",
+    "treeControlReasonPlaceholder": "이 하위 트리 제어를 적용하는 이유를 설명하세요...",
+    "treeControlCancelWarning": "하위 트리 취소는 파괴적입니다. 종료되지 않은 이슈는 취소됨으로 표시되며, 실행 중이거나 대기 중인 작업은 가능한 한 중단됩니다."
   },
   "issueFilter": {
     "filter": "필터",

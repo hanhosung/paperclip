@@ -179,6 +179,30 @@
       "plugins": "Plugins",
       "adapters": "Adapters"
     },
+    "profile": {
+      "title": "Profile",
+      "description": "Control how your account appears in the sidebar and other board surfaces.",
+      "loading": "Loading profile...",
+      "loadError": "Failed to load profile.",
+      "updateError": "Failed to update profile.",
+      "uploadError": "Failed to upload avatar.",
+      "removeError": "Failed to remove avatar.",
+      "selectCompanyToUpload": "Select a company before uploading a profile avatar.",
+      "uploadHintCompany": "Stored in Paperclip file storage for {{company}}.",
+      "uploadHintNoCompany": "Select a company to upload an avatar into Paperclip storage.",
+      "avatarHint": "Click the avatar to upload a new image.",
+      "changePhoto": "Change photo",
+      "uploadPhoto": "Upload photo",
+      "remove": "Remove",
+      "noEmail": "No email",
+      "displayName": "Display name",
+      "displayNamePlaceholder": "Board",
+      "displayNameHint": "Shown in the sidebar account footer and comment author surfaces.",
+      "email": "Email",
+      "emailHint": "Email is managed by your auth session and is read-only here.",
+      "saveProfile": "Save profile",
+      "saving": "Saving..."
+    },
     "general": {
       "breadcrumb": "General",
       "title": "General",
@@ -394,7 +418,16 @@
       "enableNesting": "Enable parent-child nesting",
       "disableNesting": "Disable parent-child nesting",
       "sort": "Sort",
-      "group": "Group"
+      "group": "Group",
+      "useComfortableCards": "Use comfortable cards",
+      "useCompactCards": "Use compact cards",
+      "expandColdLanes": "Expand cold lanes",
+      "collapseColdLanes": "Collapse cold lanes",
+      "cardsPerColumn": "Cards per column",
+      "cardsPerColumnOption": "{{count}} per column",
+      "resetBoardDensity": "Reset board density",
+      "columnPickerTitle": "Choose which issue columns stay visible",
+      "newIssueInGroup": "New issue in {{group}}"
     },
     "list": {
       "breadcrumb": "Issues",
@@ -446,7 +479,10 @@
       "productivityReviewOpen": "Productivity review open",
       "markAsRead": "Mark as read",
       "dismissFromInbox": "Dismiss from inbox",
-      "recoveryChipTitle": "{{label}} — open the source issue to act."
+      "recoveryChipTitle": "{{label}} — open the source issue to act.",
+      "assignee": "Assignee",
+      "searchAssignees": "Search assignees...",
+      "noAssignee": "No assignee"
     },
     "board": {
       "showMore": "Show {{count}} more",
@@ -464,7 +500,14 @@
       "blocked": "Blocked",
       "all": "All"
     },
-    "searchPlaceholder": "Search inbox…"
+    "searchPlaceholder": "Search inbox…",
+    "toolbar": {
+      "group": "Group",
+      "sort": "Sort",
+      "columnPickerTitle": "Choose which inbox columns stay visible",
+      "categoryPlaceholder": "Category",
+      "approvalStatusPlaceholder": "Approval status"
+    }
   },
   "status": {
     "backlog": "Backlog",
@@ -1020,7 +1063,21 @@
     "started": "Started",
     "completed": "Completed",
     "created": "Created",
-    "updated": "Updated"
+    "updated": "Updated",
+    "modelLabel": "Model",
+    "defaultModel": "Default model",
+    "searchModels": "Search models...",
+    "noModelsFound": "No models found.",
+    "monitorNotesPlaceholder": "What should the agent re-check?",
+    "monitorServicePlaceholder": "External service",
+    "searchLabels": "Search labels...",
+    "newLabel": "New label",
+    "searchAssignees": "Search assignees...",
+    "searchReviewers": "Search reviewers...",
+    "searchApprovers": "Search approvers...",
+    "searchProjects": "Search projects...",
+    "searchIssues": "Search issues...",
+    "noParent": "No parent"
   },
   "issueDetail": {
     "tabs": {
@@ -1037,7 +1094,17 @@
     "upload": "Upload",
     "uploading": "Uploading...",
     "newSubIssue": "New Sub-issue",
-    "subIssue": "Sub-issue"
+    "subIssue": "Sub-issue",
+    "productivityReview": "Productivity review",
+    "productivityReviewTitle": "This task is a productivity review.",
+    "copyAsMarkdown": "Copy issue as markdown",
+    "properties": "Properties",
+    "showProperties": "Show properties",
+    "deleteAttachment": "Delete attachment",
+    "descriptionPlaceholder": "Add a description...",
+    "treeControlReasonLabel": "Reason (optional)",
+    "treeControlReasonPlaceholder": "Explain why this subtree control is being applied...",
+    "treeControlCancelWarning": "Cancelling a subtree is destructive. Non-terminal issues will be marked cancelled, and running or queued work will be interrupted where possible."
   },
   "issueFilter": {
     "filter": "Filter",
