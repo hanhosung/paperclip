@@ -913,7 +913,21 @@
     "cancelled": "취소됨"
   },
   "common": {
-    "none": "없음"
+    "none": "없음",
+    "requestFailed": "요청 실패: {{status}}"
+  },
+  "a11y": {
+    "modelLane": "모델 레인",
+    "addLabel": "라벨 추가",
+    "clearAdapterOptions": "어댑터 옵션 지우기",
+    "subIssuesProgress": "하위 이슈 완료 진행률",
+    "paused": "일시중지됨",
+    "needsNextStep": "다음 단계 필요",
+    "needsNextStepTitle": "이 이슈에 다음 단계가 필요합니다",
+    "moreIssueActions": "이슈 추가 작업",
+    "markAsRead": "읽음으로 표시",
+    "dismissFromInbox": "받은함에서 제거",
+    "dismiss": "닫기"
   },
   "time": {
     "justNow": "방금",

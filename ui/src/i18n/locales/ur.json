@@ -913,7 +913,21 @@
     "cancelled": "Cancelled"
   },
   "common": {
-    "none": "None"
+    "none": "None",
+    "requestFailed": "Request failed: {{status}}"
+  },
+  "a11y": {
+    "modelLane": "Model lane",
+    "addLabel": "Add label",
+    "clearAdapterOptions": "Clear adapter options",
+    "subIssuesProgress": "Sub-issues completion progress",
+    "paused": "Paused",
+    "needsNextStep": "Needs next step",
+    "needsNextStepTitle": "This issue needs a next step",
+    "moreIssueActions": "More issue actions",
+    "markAsRead": "Mark as read",
+    "dismissFromInbox": "Dismiss from inbox",
+    "dismiss": "Dismiss"
   },
   "time": {
     "justNow": "just now",

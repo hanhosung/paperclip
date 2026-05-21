@@ -5,6 +5,7 @@ import {
   type CurrentUserProfile,
   type UpdateCurrentUserProfile,
 } from "@paperclipai/shared";
+import { t } from "@/i18n";
 
 type AuthErrorBody =
   | {
@@ -55,7 +56,7 @@ function extractAuthError(payload: AuthErrorBody, status: number) {
         ? payload.message
         : typeof payload?.error === "string" && payload.error.trim().length > 0
           ? payload.error
-          : `Request failed: ${status}`;
+          : t("common.requestFailed", { status });
 
   return new AuthApiError(message, status, payload, code);
 }

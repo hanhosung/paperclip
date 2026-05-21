@@ -540,7 +540,7 @@ function SubIssueProgressSummaryStrip({
           </div>
           <div
             role="progressbar"
-            aria-label="Sub-issues completion progress"
+            aria-label={t("a11y.subIssuesProgress")}
             aria-valuemin={0}
             aria-valuenow={summary.doneCount}
             aria-valuemax={summary.totalCount}
@@ -1733,8 +1733,8 @@ export function IssuesList({
                               issueBadge === "Paused" ? (
                                 <span
                                   className={cn("ml-1.5 inline-flex items-center gap-1 rounded-full px-1.5 py-0.5 text-[10px] font-medium", statusBadge.paused)}
-                                  aria-label="Paused"
-                                  title="Paused"
+                                  aria-label={t("a11y.paused")}
+                                  title={t("a11y.paused")}
                                 >
                                   <CircleSlash2 className="h-3 w-3" />
                                   Paused
@@ -1748,8 +1748,8 @@ export function IssuesList({
                             {isSuccessfulRunHandoffRequired(issue) ? (
                               <span
                                 className="ml-1.5 inline-flex items-center gap-1 rounded-full border border-amber-400/45 bg-amber-50/60 px-1.5 py-0.5 text-[10px] font-medium text-amber-700 dark:border-amber-300/35 dark:bg-amber-400/10 dark:text-amber-300"
-                                aria-label="Needs next step"
-                                title="This issue needs a next step"
+                                aria-label={t("a11y.needsNextStep")}
+                                title={t("a11y.needsNextStepTitle")}
                               >
                                 <CircleDot className="h-3 w-3" />
                                 Needs next step
