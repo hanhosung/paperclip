@@ -26,6 +26,11 @@ export function fieldKey(field: string): string {
   return `field.${field}`;
 }
 
+/** i18n key for a project status (`backlog` | `planned` | `in_progress` | `completed` | `cancelled`). */
+export function projectStatusKey(status: string): string {
+  return `projectStatus.${status}`;
+}
+
 /** i18n key for a billing type (`metered_api`, `subscription_included`, …). */
 export function billingTypeKey(billingType: string): string {
   return `billingType.${billingType}`;
