@@ -18,6 +18,7 @@ import type { IssueTimelineEvent } from "./issue-timeline-events";
 import {
   summarizeNotice,
 } from "./transcriptPresentation";
+import { t } from "@/i18n";
 
 type JsonValue = null | string | number | boolean | JsonValue[] | { [key: string]: JsonValue };
 type JsonObject = { [key: string]: JsonValue };
@@ -372,7 +373,7 @@ function authorNameForComment(
 }
 
 function formatStatusLabel(status: string) {
-  return status.replace(/_/g, " ");
+  return t(`issueChat.runStatusLabel.${status}`, { defaultValue: status.replace(/_/g, " ") });
 }
 
 function createCommentMessage(args: {
@@ -569,18 +570,18 @@ export function formatDurationWords(ms: number | null) {
   if (ms === null || !Number.isFinite(ms) || ms <= 0) return null;
   const totalSeconds = Math.max(1, Math.round(ms / 1000));
   if (totalSeconds < 60) {
-    return `${totalSeconds} second${totalSeconds === 1 ? "" : "s"}`;
+    return t("time.duration.seconds", { count: totalSeconds });
   }
   const totalMinutes = Math.round(totalSeconds / 60);
   if (totalMinutes < 60) {
-    return `${totalMinutes} minute${totalMinutes === 1 ? "" : "s"}`;
+    return t("time.duration.minutes", { count: totalMinutes });
   }
   const hours = Math.floor(totalMinutes / 60);
   const minutes = totalMinutes % 60;
   if (minutes === 0) {
-    return `${hours} hour${hours === 1 ? "" : "s"}`;
+    return t("time.duration.hours", { count: hours });
   }
-  return `${hours} hour${hours === 1 ? "" : "s"} ${minutes} minute${minutes === 1 ? "" : "s"}`;
+  return `${t("time.duration.hours", { count: hours })} ${t("time.duration.minutes", { count: minutes })}`;
 }
 
 function runDurationLabel(run: {
@@ -597,21 +598,31 @@ function runDurationLabel(run: {
   const stopReason = typeof run.resultJson?.stopReason === "string" ? run.resultJson.stopReason : null;
   switch (run.status) {
     case "succeeded":
-      return durationText ? `Worked for ${durationText}` : "Finished work";
+      return durationText
+        ? t("issueChat.runLabel.workedFor", { duration: durationText })
+        : t("issueChat.runLabel.finishedWork");
     case "failed":
     case "error":
-      return durationText ? `Failed after ${durationText}` : "Run failed";
+      return durationText
+        ? t("issueChat.runLabel.failedAfter", { duration: durationText })
+        : t("issueChat.runLabel.runFailed");
     case "timed_out":
-      return durationText ? `Timed out after ${durationText}` : "Run timed out";
+      return durationText
+        ? t("issueChat.runLabel.timedOutAfter", { duration: durationText })
+        : t("issueChat.runLabel.runTimedOut");
     case "cancelled":
       if (stopReason === "paused") {
-        return durationText ? `Paused by board after ${durationText}` : "Paused by board";
+        return durationText
+          ? t("issueChat.runLabel.pausedByBoardAfter", { duration: durationText })
+          : t("issueChat.runLabel.pausedByBoard");
       }
-      return durationText ? `Cancelled after ${durationText}` : "Run cancelled";
+      return durationText
+        ? t("issueChat.runLabel.cancelledAfter", { duration: durationText })
+        : t("issueChat.runLabel.runCancelled");
     case "queued":
-      return "Queued";
+      return t("issueChat.runLabel.queued");
     case "running":
-      return "Working...";
+      return t("issueChat.runLabel.working");
     default:
       return formatStatusLabel(run.status);
   }
@@ -623,7 +634,7 @@ function createHistoricalRunMessage(run: IssueChatLinkedRun, agentMap?: Map<stri
     id: `run:${run.runId}`,
     role: "system",
     createdAt: toDate(runTimestamp(run)),
-    content: [{ type: "text", text: `${agentName} run ${run.runId.slice(0, 8)} ${formatStatusLabel(run.status)}` }],
+    content: [{ type: "text", text: t("issueChat.historicalRunSummary", { agent: agentName, id: run.runId.slice(0, 8), status: formatStatusLabel(run.status) }) }],
     metadata: {
       custom: {
         kind: "run",

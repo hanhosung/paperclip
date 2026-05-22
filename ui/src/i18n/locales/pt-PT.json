@@ -412,6 +412,13 @@
   "issues": {
     "searchPlaceholder": "Search issues...",
     "search": "Search issues",
+    "createButton": "New Issue",
+    "createButtonNamed": "New {{label}}",
+    "createAction": "Create Issue",
+    "createActionNamed": "Create {{label}}",
+    "loadingMore": "Loading more issues...",
+    "renderingCount": "Rendering {{shown}} of {{total}} issues",
+    "scrollToLoadMore": "Scroll to load more issues",
     "view": {
       "list": "List view",
       "board": "Board view",
@@ -493,12 +500,27 @@
     }
   },
   "inbox": {
+    "breadcrumb": "Inbox",
     "tabs": {
       "mine": "Mine",
       "recent": "Recent",
       "unread": "Unread",
       "blocked": "Blocked",
       "all": "All"
+    },
+    "section": {
+      "earlier": "Earlier",
+      "archived": "Archived",
+      "otherResults": "Other results"
+    },
+    "error": {
+      "archiveFailed": "Failed to archive issue",
+      "undoArchiveFailed": "Failed to undo inbox archive"
+    },
+    "swipeArchive": "Archive",
+    "approvalMeta": {
+      "requestedBy": "requested by {{name}}",
+      "updated": "updated {{time}}"
     },
     "searchPlaceholder": "Search inbox…",
     "toolbar": {
@@ -1013,7 +1035,16 @@
     "moreIssueActions": "More issue actions",
     "markAsRead": "Mark as read",
     "dismissFromInbox": "Dismiss from inbox",
-    "dismiss": "Dismiss"
+    "dismiss": "Dismiss",
+    "dnd": {
+      "instructions": "To pick up a draggable item, press the space bar. While dragging, use the arrow keys to move the item. Press space again to drop the item in its new position, or press escape to cancel.",
+      "onDragStart": "Picked up draggable item {{id}}.",
+      "onDragOver": "Draggable item {{id}} was moved over droppable area {{over}}.",
+      "onDragOverNoTarget": "Draggable item {{id}} is no longer over a droppable area.",
+      "onDragEnd": "Draggable item {{id}} was dropped over droppable area {{over}}.",
+      "onDragEndNoTarget": "Draggable item {{id}} was dropped.",
+      "onDragCancel": "Dragging was cancelled. Draggable item {{id}} was dropped."
+    }
   },
   "time": {
     "justNow": "just now",
@@ -1021,7 +1052,15 @@
     "hoursAgo": "{{count}}h ago",
     "daysAgo": "{{count}}d ago",
     "weeksAgo": "{{count}}w ago",
-    "monthsAgo": "{{count}}mo ago"
+    "monthsAgo": "{{count}}mo ago",
+    "duration": {
+      "seconds_one": "{{count}} second",
+      "seconds_other": "{{count}} seconds",
+      "minutes_one": "{{count}} minute",
+      "minutes_other": "{{count}} minutes",
+      "hours_one": "{{count}} hour",
+      "hours_other": "{{count}} hours"
+    }
   },
   "misc": {
     "activityRow": {
@@ -1390,6 +1429,8 @@
     }
   },
   "commandPalette": {
+    "dialogTitle": "Command Palette",
+    "dialogDescription": "Search for a command to run...",
     "searchPlaceholder": "Search issues, agents, projects...",
     "emptyHintBefore": "No quick issue matches. Press ",
     "emptyHintAction": "search all",
@@ -1437,6 +1478,181 @@
       "comment": "Comment",
       "join_request": "Join request",
       "cost_event": "Cost event"
+    },
+    "line": "{{actor}} <v>{{verb}}</v> <n>{{name}}</n><s> — {{title}}</s>",
+    "lineNoTitle": "{{actor}} <v>{{verb}}</v> <n>{{name}}</n>",
+    "lineNoName": "{{actor}} <v>{{verb}}</v>",
+    "actor": {
+      "you": "You",
+      "agent": "agent",
+      "user": "user {{id}}",
+      "issue": "issue",
+      "document": "document"
+    },
+    "entity": {
+      "blockerSingular": "blocker",
+      "blockerPlural": "blockers",
+      "reviewerSingular": "reviewer",
+      "reviewerPlural": "reviewers",
+      "approverSingular": "approver",
+      "approverPlural": "approvers",
+      "changedSingle": "{{singular}} {{label}}",
+      "changedMultiple": "{{count}} {{plural}}"
+    },
+    "verb": {
+      "issue": {
+        "created": "created",
+        "updated": "updated",
+        "checked_out": "checked out",
+        "released": "released",
+        "comment_added": "commented on",
+        "comment_cancelled": "cancelled a queued comment on",
+        "attachment_added": "attached file to",
+        "attachment_removed": "removed attachment from",
+        "document_created": "created document for",
+        "document_updated": "updated document on",
+        "document_locked": "locked document on",
+        "document_unlocked": "unlocked document on",
+        "document_deleted": "deleted document from",
+        "monitor_scheduled": "scheduled monitor on",
+        "monitor_triggered": "triggered monitor for",
+        "monitor_cleared": "cleared monitor on",
+        "monitor_skipped": "skipped monitor for",
+        "monitor_exhausted": "exhausted monitor on",
+        "monitor_recovery_wake_queued": "queued monitor recovery for",
+        "monitor_recovery_issue_created": "created monitor recovery for",
+        "monitor_escalated_to_board": "escalated monitor for",
+        "commented": "commented on",
+        "deleted": "deleted",
+        "successful_run_handoff_required": "flagged missing next step on",
+        "successful_run_handoff_resolved": "recorded next step chosen on",
+        "successful_run_handoff_escalated": "escalated missing next step on",
+        "recovery_action_opened": "opened a recovery action on",
+        "recovery_action_resolved": "resolved the recovery action on",
+        "recovery_action_escalated": "escalated the recovery action on",
+        "read_marked": "marked as read"
+      },
+      "agent": {
+        "created": "created",
+        "updated": "updated",
+        "paused": "paused",
+        "resumed": "resumed",
+        "terminated": "terminated",
+        "key_created": "created API key for",
+        "budget_updated": "updated budget for",
+        "runtime_session_reset": "reset session for"
+      },
+      "inbox": {
+        "dismissed": "dismissed"
+      },
+      "environment": {
+        "lease_acquired": "acquired an environment lease",
+        "lease_released": "released an environment lease"
+      },
+      "heartbeat": {
+        "invoked": "invoked heartbeat for",
+        "cancelled": "cancelled heartbeat for"
+      },
+      "approval": {
+        "created": "requested approval",
+        "approved": "approved",
+        "rejected": "rejected"
+      },
+      "project": {
+        "created": "created",
+        "updated": "updated",
+        "deleted": "deleted"
+      },
+      "goal": {
+        "created": "created",
+        "updated": "updated",
+        "deleted": "deleted"
+      },
+      "cost": {
+        "reported": "reported cost for",
+        "recorded": "recorded cost for"
+      },
+      "company": {
+        "created": "created company",
+        "updated": "updated company",
+        "archived": "archived",
+        "budget_updated": "updated budget for"
+      }
+    },
+    "verbDynamic": {
+      "statusFromTo": "changed status from {{from}} to {{to}} on",
+      "statusTo": "changed status to {{to}} on",
+      "priorityFromTo": "changed priority from {{from}} to {{to}} on",
+      "priorityTo": "changed priority to {{to}} on",
+      "addedTo": "added {{label}} to",
+      "removedFrom": "removed {{label}} from",
+      "updatedParticipantsOn": "updated {{plural}} on"
+    },
+    "issueAction": {
+      "issue": {
+        "created": "created the issue",
+        "updated": "updated the issue",
+        "checked_out": "checked out the issue",
+        "released": "released the issue",
+        "comment_added": "added a comment",
+        "comment_cancelled": "cancelled a queued comment",
+        "feedback_vote_saved": "saved feedback on an AI output",
+        "attachment_added": "added an attachment",
+        "attachment_removed": "removed an attachment",
+        "document_created": "created a document",
+        "document_updated": "updated a document",
+        "document_locked": "locked a document",
+        "document_unlocked": "unlocked a document",
+        "document_deleted": "deleted a document",
+        "monitor_scheduled": "scheduled a monitor",
+        "monitor_triggered": "triggered a monitor",
+        "monitor_cleared": "cleared a monitor",
+        "monitor_skipped": "skipped a monitor",
+        "monitor_exhausted": "exhausted a monitor",
+        "monitor_recovery_wake_queued": "queued a monitor recovery wake",
+        "monitor_recovery_issue_created": "created a monitor recovery issue",
+        "monitor_escalated_to_board": "escalated a monitor to the board",
+        "deleted": "deleted the issue",
+        "successful_run_handoff_required": "Run finished without a clear next step",
+        "successful_run_handoff_resolved": "Next step chosen",
+        "successful_run_handoff_escalated": "Run finished without a next step - recovery escalated",
+        "recovery_action_opened": "Opened a source-scoped recovery action",
+        "recovery_action_resolved": "Resolved the recovery action",
+        "recovery_action_escalated": "Escalated the recovery action",
+        "read_marked": "marked the issue as read"
+      },
+      "agent": {
+        "created": "created an agent",
+        "updated": "updated the agent",
+        "paused": "paused the agent",
+        "resumed": "resumed the agent",
+        "terminated": "terminated the agent"
+      },
+      "heartbeat": {
+        "invoked": "invoked a heartbeat",
+        "cancelled": "cancelled a heartbeat"
+      },
+      "approval": {
+        "created": "requested approval",
+        "approved": "approved",
+        "rejected": "rejected"
+      }
+    },
+    "issueActionDynamic": {
+      "statusFromTo": "changed the status from {{from}} to {{to}}",
+      "statusTo": "changed the status to {{to}}",
+      "priorityFromTo": "changed the priority from {{from}} to {{to}}",
+      "priorityTo": "changed the priority to {{to}}",
+      "assignedTo": "assigned the issue to {{name}}",
+      "unassigned": "unassigned the issue",
+      "updatedTitle": "updated the title",
+      "updatedDescription": "updated the description",
+      "added": "added {{label}}",
+      "removed": "removed {{label}}",
+      "updatedParticipants": "updated {{plural}}",
+      "monitorForService": "{{base}} for {{service}}",
+      "documentWithKey": "{{base}} {{key}}",
+      "documentWithKeyTitle": "{{base}} {{key}} ({{title}})"
     }
   },
   "org": {
@@ -3369,6 +3585,31 @@
     "runStatus": {
       "timedOut": "timed out"
     },
+    "runStatusLabel": {
+      "succeeded": "succeeded",
+      "failed": "failed",
+      "error": "error",
+      "timed_out": "timed out",
+      "cancelled": "cancelled",
+      "queued": "queued",
+      "running": "running",
+      "pending": "pending"
+    },
+    "runLabel": {
+      "workedFor": "Worked for {{duration}}",
+      "finishedWork": "Finished work",
+      "failedAfter": "Failed after {{duration}}",
+      "runFailed": "Run failed",
+      "timedOutAfter": "Timed out after {{duration}}",
+      "runTimedOut": "Run timed out",
+      "pausedByBoardAfter": "Paused by board after {{duration}}",
+      "pausedByBoard": "Paused by board",
+      "cancelledAfter": "Cancelled after {{duration}}",
+      "runCancelled": "Run cancelled",
+      "queued": "Queued",
+      "working": "Working..."
+    },
+    "historicalRunSummary": "{{agent}} run {{id}} {{status}}",
     "agentPaused": {
       "byBudget": "It was paused by a budget hard stop.",
       "bySystem": "It was paused by the system.",

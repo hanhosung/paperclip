@@ -40,6 +40,7 @@ import { cn } from "@/lib/utils";
 import { useSidebar } from "../context/SidebarContext";
 import { CompanyPatternIcon } from "./CompanyPatternIcon";
 import { useTranslation } from "@/i18n";
+import { buildDndAccessibility } from "@/lib/dnd-accessibility";
 
 interface SidebarCompanyMenuProps {
   open?: boolean;
@@ -258,6 +259,7 @@ export function SidebarCompanyMenu({ open: controlledOpen, onOpenChange }: Sideb
         </div>
         <div className="max-h-96 overflow-y-auto">
           <DndContext
+            accessibility={buildDndAccessibility(t)}
             sensors={sensors}
             collisionDetection={closestCenter}
             onDragEnd={handleDragEnd}

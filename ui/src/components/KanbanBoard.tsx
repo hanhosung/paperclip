@@ -24,6 +24,7 @@ import type { Issue, IssueStatus } from "@paperclipai/shared";
 import { AlertTriangle } from "lucide-react";
 import { isSuccessfulRunHandoffRequired } from "../lib/successful-run-handoff";
 import { useTranslation } from "@/i18n";
+import { buildDndAccessibility } from "@/lib/dnd-accessibility";
 import { issueStatusKey } from "../lib/enum-labels";
 
 export const KANBAN_BOARD_HIGH_VOLUME_THRESHOLD = 100;
@@ -285,6 +286,7 @@ export function KanbanBoard({
   revealIncrement = KANBAN_COLUMN_REVEAL_INCREMENT,
   onUpdateIssue,
 }: KanbanBoardProps) {
+  const { t } = useTranslation();
   const [activeId, setActiveId] = useState<string | null>(null);
   const [visibleCountByStatus, setVisibleCountByStatus] = useState<Record<string, number>>({});
   const collapsedStatusSet = useMemo(() => new Set(collapsedStatuses), [collapsedStatuses]);
@@ -343,6 +345,7 @@ export function KanbanBoard({
 
   return (
     <DndContext
+      accessibility={buildDndAccessibility(t)}
       sensors={sensors}
       onDragStart={handleDragStart}
       onDragOver={handleDragOver}

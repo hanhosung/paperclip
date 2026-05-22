@@ -118,7 +118,11 @@ export function CommandPalette() {
   const showEmptyHint = showSearchAll && visibleIssues.length === 0;
 
   return (
-    <CommandDialog open={open} onOpenChange={(v) => {
+    <CommandDialog
+      title={t("commandPalette.dialogTitle")}
+      description={t("commandPalette.dialogDescription")}
+      open={open}
+      onOpenChange={(v) => {
         setOpen(v);
         if (v && isMobile) setSidebarOpen(false);
       }}>

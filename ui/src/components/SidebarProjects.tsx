@@ -25,6 +25,7 @@ import { BudgetSidebarMarker } from "./BudgetSidebarMarker";
 import { SidebarSection, type SidebarSectionRadioChoice } from "./SidebarSection";
 import { PluginSlotMount, usePluginSlots } from "@/plugins/slots";
 import { useTranslation } from "@/i18n";
+import { buildDndAccessibility } from "@/lib/dnd-accessibility";
 import {
   getProjectSortModeStorageKey,
   PROJECT_SORT_MODE_UPDATED_EVENT,
@@ -315,6 +316,7 @@ export function SidebarProjects() {
     >
       {isTopMode ? (
         <DndContext
+          accessibility={buildDndAccessibility(t)}
           sensors={sensors}
           collisionDetection={closestCenter}
           onDragEnd={handleDragEnd}

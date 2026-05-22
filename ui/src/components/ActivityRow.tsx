@@ -5,6 +5,7 @@ import { IssueReferenceActivitySummary } from "./IssueReferenceActivitySummary";
 import { timeAgo } from "../lib/timeAgo";
 import { cn } from "../lib/utils";
 import { useTranslation } from "@/i18n";
+import { Trans } from "react-i18next";
 import { formatActivityVerb } from "../lib/activity-format";
 import { deriveProjectUrlKey, type ActivityEvent, type Agent } from "@paperclipai/shared";
 import type { CompanyUserProfile } from "../lib/company-members";
@@ -53,6 +54,10 @@ export function ActivityRow({ event, agentMap, userProfileMap, entityNameMap, en
   const actorName = actor?.name ?? (event.actorType === "system" ? t("misc.activityRow.system") : userProfile?.label ?? (event.actorType === "user" ? t("misc.activityRow.board") : event.actorId || t("misc.activityRow.unknown")));
   const actorAvatarUrl = userProfile?.image ?? null;
 
+  const lineKey = name
+    ? (entityTitle ? "activity.line" : "activity.lineNoTitle")
+    : "activity.lineNoName";
+
   const inner = (
     <div className="space-y-2">
       <div className="flex items-center gap-3">
@@ -62,10 +67,16 @@ export function ActivityRow({ event, agentMap, userProfileMap, entityNameMap, en
             <AvatarFallback>{deriveInitials(actorName)}</AvatarFallback>
           </Avatar>
           <p className="min-w-0 flex-1 truncate">
-            <span>{actorName}</span>
-            <span className="text-muted-foreground"> {verb} </span>
-            {name && <span className="font-medium">{name}</span>}
-            {entityTitle && <span className="text-muted-foreground"> — {entityTitle}</span>}
+            <Trans
+              t={t}
+              i18nKey={lineKey}
+              values={{ actor: actorName, verb, name: name ?? "", title: entityTitle ?? "" }}
+              components={{
+                v: <span className="text-muted-foreground" />,
+                n: <span className="font-medium" />,
+                s: <span className="text-muted-foreground" />,
+              }}
+            />
           </p>
         </div>
         <span className="text-xs text-muted-foreground shrink-0">{timeAgo(event.createdAt)}</span>
