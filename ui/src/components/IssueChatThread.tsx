@@ -1340,6 +1340,13 @@ function IssueChatUserMessage({
     userProfileMap,
     t,
   });
+  const copyText = getThreadMessageCopyText(message);
+  const { exportMarkdown, exportPdf, printPortal } = useReportExport();
+  // Board synthesis / other authored reports get export; the viewer's own
+  // request messages do not.
+  const canExportReport = !isCurrentUser && copyText.trim().length > 0;
+  const reportSubtitle = message.createdAt ? formatDateTime(message.createdAt) : "";
+  const reportFilename = `${reportExportSlug(resolvedAuthorName)}-${reportExportTimestamp(message.createdAt)}.md`;
   const authorAvatar = (
     <Avatar size="sm" className="shrink-0">
       {avatarUrl ? <AvatarImage src={avatarUrl} alt={resolvedAuthorName} /> : null}
@@ -1405,7 +1412,8 @@ function IssueChatUserMessage({
       ) : (
         <div
           className={cn(
-            "mt-1 flex items-center gap-1.5 px-1 opacity-0 transition-opacity group-hover:opacity-100",
+            "mt-1 flex items-center gap-1.5 px-1 transition-opacity",
+            canExportReport ? "" : "opacity-0 group-hover:opacity-100",
             isCurrentUser ? "justify-end" : "justify-start",
           )}
         >
@@ -1428,11 +1436,7 @@ function IssueChatUserMessage({
             title={t("issueChat.message.copyMessage")}
             aria-label={t("issueChat.message.copyMessage")}
             onClick={() => {
-              const text = message.content
-                .filter((p): p is { type: "text"; text: string } => p.type === "text")
-                .map((p) => p.text)
-                .join("\n\n");
-              void navigator.clipboard.writeText(text).then(() => {
+              void navigator.clipboard.writeText(copyText).then(() => {
                 setCopied(true);
                 setTimeout(() => setCopied(false), 2000);
               });
@@ -1440,6 +1444,30 @@ function IssueChatUserMessage({
           >
             {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
           </button>
+          {canExportReport ? (
+            <>
+              <button
+                type="button"
+                className="inline-flex h-6 items-center gap-1 rounded-md px-1.5 text-[11px] font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                title={t("issueChat.message.exportMarkdown")}
+                aria-label={t("issueChat.message.exportMarkdown")}
+                onClick={() => exportMarkdown(reportFilename, copyText)}
+              >
+                <FileDown className="h-3.5 w-3.5" />
+                MD
+              </button>
+              <button
+                type="button"
+                className="inline-flex h-6 items-center gap-1 rounded-md px-1.5 text-[11px] font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                title={t("issueChat.message.exportPdf")}
+                aria-label={t("issueChat.message.exportPdf")}
+                onClick={() => exportPdf({ title: resolvedAuthorName, subtitle: reportSubtitle, markdown: copyText })}
+              >
+                <Printer className="h-3.5 w-3.5" />
+                PDF
+              </button>
+            </>
+          ) : null}
         </div>
       )}
     </div>
@@ -1447,6 +1475,7 @@ function IssueChatUserMessage({
 
   return (
     <div id={anchorId}>
+      {printPortal}
       <div className={cn("group flex items-start gap-2.5", isCurrentUser && "justify-end")}>
         {isCurrentUser ? (
           <>
