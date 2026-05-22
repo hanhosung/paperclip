@@ -508,13 +508,13 @@ export function OrgChart() {
           onClick={() => setOrientation(orientation === "vertical" ? "horizontal" : "vertical")}
         >
           {orientation === "vertical" ? (
-            <Columns3 className="mr-1.5 h-3.5 w-3.5" />
-          ) : (
             <Rows3 className="mr-1.5 h-3.5 w-3.5" />
+          ) : (
+            <Columns3 className="mr-1.5 h-3.5 w-3.5" />
           )}
           {orientation === "vertical"
-            ? t("org.chart.viewHorizontal")
-            : t("org.chart.viewVertical")}
+            ? t("org.chart.viewVertical")
+            : t("org.chart.viewHorizontal")}
         </Button>
       </div>
       <div
