@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { EmptyState } from "../components/EmptyState";
 import { PageSkeleton } from "../components/PageSkeleton";
 import { AgentIcon } from "../components/AgentIconPicker";
-import { Download, Maximize2, Minus, Network, Plus, Upload } from "lucide-react";
+import { Columns3, Download, Maximize2, Minus, Network, Plus, Rows3, Upload } from "lucide-react";
 import { AGENT_ROLE_LABELS, type Agent } from "@paperclipai/shared";
 import { useTranslation } from "@/i18n";
 
@@ -23,6 +23,9 @@ const PADDING = 60;
 const MIN_ZOOM = 0.2;
 const MAX_ZOOM = 2;
 const TOUCH_MOVE_THRESHOLD = 6;
+
+/** localStorage key for the user's chosen org-chart orientation. */
+const ORG_ORIENTATION_STORAGE_KEY = "paperclip.orgOrientation";
 
 // ── Tree layout types ───────────────────────────────────────────────────
 
@@ -53,60 +56,83 @@ interface TouchGesture {
 
 // ── Layout algorithm ────────────────────────────────────────────────────
 
-/** Compute the width each subtree needs. */
-function subtreeWidth(node: OrgNode): number {
-  if (node.reports.length === 0) return CARD_W;
-  const childrenW = node.reports.reduce((sum, c) => sum + subtreeWidth(c), 0);
-  const gaps = (node.reports.length - 1) * GAP_X;
-  return Math.max(CARD_W, childrenW + gaps);
+/** Chart orientation — the tree either grows downward or rightward. */
+export type OrgOrientation = "vertical" | "horizontal";
+
+/** Card extent along the sibling-spread (breadth) axis for an orientation. */
+function nodeBreadth(orientation: OrgOrientation): number {
+  return orientation === "vertical" ? CARD_W : CARD_H;
 }
 
-/** Recursively assign x,y positions. */
-function layoutTree(node: OrgNode, x: number, y: number): LayoutNode {
-  const totalW = subtreeWidth(node);
+/** Distance between successive tree levels along the depth axis. */
+function depthStep(orientation: OrgOrientation): number {
+  return (orientation === "vertical" ? CARD_H : CARD_W) + GAP_Y;
+}
+
+/** Compute the breadth each subtree needs. */
+function subtreeBreadth(node: OrgNode, orientation: OrgOrientation): number {
+  if (node.reports.length === 0) return nodeBreadth(orientation);
+  const childrenB = node.reports.reduce((sum, c) => sum + subtreeBreadth(c, orientation), 0);
+  const gaps = (node.reports.length - 1) * GAP_X;
+  return Math.max(nodeBreadth(orientation), childrenB + gaps);
+}
+
+/** Recursively assign breadth/depth positions, then map them to x,y. */
+function layoutTree(
+  node: OrgNode,
+  breadthPos: number,
+  depthPos: number,
+  orientation: OrgOrientation,
+): LayoutNode {
+  const totalB = subtreeBreadth(node, orientation);
   const layoutChildren: LayoutNode[] = [];
 
   if (node.reports.length > 0) {
-    const childrenW = node.reports.reduce((sum, c) => sum + subtreeWidth(c), 0);
+    const childrenB = node.reports.reduce((sum, c) => sum + subtreeBreadth(c, orientation), 0);
     const gaps = (node.reports.length - 1) * GAP_X;
-    let cx = x + (totalW - childrenW - gaps) / 2;
+    let cb = breadthPos + (totalB - childrenB - gaps) / 2;
 
     for (const child of node.reports) {
-      const cw = subtreeWidth(child);
-      layoutChildren.push(layoutTree(child, cx, y + CARD_H + GAP_Y));
-      cx += cw + GAP_X;
+      const cw = subtreeBreadth(child, orientation);
+      layoutChildren.push(layoutTree(child, cb, depthPos + depthStep(orientation), orientation));
+      cb += cw + GAP_X;
     }
   }
 
+  const selfBreadth = breadthPos + (totalB - nodeBreadth(orientation)) / 2;
   return {
     id: node.id,
     name: node.name,
     role: node.role,
     status: node.status,
-    x: x + (totalW - CARD_W) / 2,
-    y,
+    x: orientation === "vertical" ? selfBreadth : depthPos,
+    y: orientation === "vertical" ? depthPos : selfBreadth,
     children: layoutChildren,
   };
 }
 
-/** Layout all root nodes side by side. */
-function layoutForest(roots: OrgNode[]): LayoutNode[] {
+/** Layout all root nodes side by side along the breadth axis. */
+function layoutForest(roots: OrgNode[], orientation: OrgOrientation): LayoutNode[] {
   if (roots.length === 0) return [];
 
-  const totalW = roots.reduce((sum, r) => sum + subtreeWidth(r), 0);
-  const gaps = (roots.length - 1) * GAP_X;
-  let x = PADDING;
-  const y = PADDING;
-
   const result: LayoutNode[] = [];
+  let breadthPos = PADDING;
   for (const root of roots) {
-    const w = subtreeWidth(root);
-    result.push(layoutTree(root, x, y));
-    x += w + GAP_X;
+    result.push(layoutTree(root, breadthPos, PADDING, orientation));
+    breadthPos += subtreeBreadth(root, orientation) + GAP_X;
   }
-
-  // Compute bounds and return
   return result;
+}
+
+/** Resolve the saved orientation, defaulting to the classic vertical tree. */
+function resolveInitialOrientation(): OrgOrientation {
+  try {
+    const saved = window.localStorage.getItem(ORG_ORIENTATION_STORAGE_KEY);
+    if (saved === "vertical" || saved === "horizontal") return saved;
+  } catch {
+    // localStorage unavailable — fall through to default
+  }
+  return "vertical";
 }
 
 /** Flatten layout tree to list of nodes. */
@@ -199,8 +225,19 @@ export function OrgChart() {
     setBreadcrumbs([{ label: t("org.breadcrumb") }]);
   }, [setBreadcrumbs, t]);
 
+  // Orientation — user-chosen, persisted to localStorage.
+  const [orientation, setOrientationState] = useState<OrgOrientation>(resolveInitialOrientation);
+  const setOrientation = useCallback((next: OrgOrientation) => {
+    setOrientationState(next);
+    try {
+      window.localStorage.setItem(ORG_ORIENTATION_STORAGE_KEY, next);
+    } catch {
+      // ignore persistence failure — orientation still changes for this session
+    }
+  }, []);
+
   // Layout computation
-  const layout = useMemo(() => layoutForest(orgTree ?? []), [orgTree]);
+  const layout = useMemo(() => layoutForest(orgTree ?? [], orientation), [orgTree, orientation]);
   const allNodes = useMemo(() => flattenLayout(layout), [layout]);
   const edges = useMemo(() => collectEdges(layout), [layout]);
 
@@ -330,6 +367,14 @@ export function OrgChart() {
     setPan({ x: (cW - chartW) / 2, y: (cH - chartH) / 2 });
   }, [bounds]);
 
+  // Re-fit the chart whenever the user switches orientation.
+  const prevOrientation = useRef(orientation);
+  useEffect(() => {
+    if (prevOrientation.current === orientation) return;
+    prevOrientation.current = orientation;
+    if (hasInitialized.current) fitToScreen();
+  }, [orientation, fitToScreen]);
+
   const handleTouchStart = useCallback((e: React.TouchEvent<HTMLDivElement>) => {
     if (e.touches.length >= 2 && containerRef.current) {
       const [first, second] = [e.touches[0]!, e.touches[1]!];
@@ -457,6 +502,20 @@ export function OrgChart() {
             {t("org.chart.exportCompany")}
           </Button>
         </Link>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => setOrientation(orientation === "vertical" ? "horizontal" : "vertical")}
+        >
+          {orientation === "vertical" ? (
+            <Columns3 className="mr-1.5 h-3.5 w-3.5" />
+          ) : (
+            <Rows3 className="mr-1.5 h-3.5 w-3.5" />
+          )}
+          {orientation === "vertical"
+            ? t("org.chart.viewHorizontal")
+            : t("org.chart.viewVertical")}
+        </Button>
       </div>
       <div
         ref={containerRef}
@@ -531,16 +590,27 @@ export function OrgChart() {
         >
           <g transform={`translate(${pan.x}, ${pan.y}) scale(${zoom})`}>
             {edges.map(({ parent, child }) => {
-              const x1 = parent.x + CARD_W / 2;
-              const y1 = parent.y + CARD_H;
-              const x2 = child.x + CARD_W / 2;
-              const y2 = child.y;
-              const midY = (y1 + y2) / 2;
+              let d: string;
+              if (orientation === "vertical") {
+                const x1 = parent.x + CARD_W / 2;
+                const y1 = parent.y + CARD_H;
+                const x2 = child.x + CARD_W / 2;
+                const y2 = child.y;
+                const midY = (y1 + y2) / 2;
+                d = `M ${x1} ${y1} L ${x1} ${midY} L ${x2} ${midY} L ${x2} ${y2}`;
+              } else {
+                const x1 = parent.x + CARD_W;
+                const y1 = parent.y + CARD_H / 2;
+                const x2 = child.x;
+                const y2 = child.y + CARD_H / 2;
+                const midX = (x1 + x2) / 2;
+                d = `M ${x1} ${y1} L ${midX} ${y1} L ${midX} ${y2} L ${x2} ${y2}`;
+              }
 
               return (
                 <path
                   key={`${parent.id}-${child.id}`}
-                  d={`M ${x1} ${y1} L ${x1} ${midY} L ${x2} ${midY} L ${x2} ${y2}`}
+                  d={d}
                   fill="none"
                   stroke="var(--border)"
                   strokeWidth={1.5}

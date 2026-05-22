@@ -1676,6 +1676,8 @@
       "empty": "No organizational hierarchy defined.",
       "importCompany": "Import company",
       "exportCompany": "Export company",
+      "viewHorizontal": "Horizontal view",
+      "viewVertical": "Vertical view",
       "zoomIn": "Zoom in",
       "zoomOut": "Zoom out",
       "fitToScreen": "Fit to screen",

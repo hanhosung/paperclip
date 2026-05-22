@@ -1676,6 +1676,8 @@
       "empty": "정의된 조직 계층이 없습니다.",
       "importCompany": "회사 가져오기",
       "exportCompany": "회사 내보내기",
+      "viewHorizontal": "가로로 보기",
+      "viewVertical": "세로로 보기",
       "zoomIn": "확대",
       "zoomOut": "축소",
       "fitToScreen": "화면에 맞추기",
