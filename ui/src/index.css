@@ -1018,3 +1018,67 @@ span.paperclip-project-mention-chip {
 [class*="_toolbarNodeKindSelectContainer_"] {
   z-index: 81 !important;
 }
+
+/* ── Report export (print-to-PDF) ──────────────────────────────────────────
+   The export portal is rendered off-screen (not display:none, so embedded
+   diagrams measure correctly). @media print hides the app and promotes the
+   portal to the page, forcing light colors regardless of the active theme. */
+.report-print-portal {
+  position: fixed;
+  left: -100000px;
+  top: 0;
+  width: 794px; /* ~A4 width at 96dpi */
+  z-index: -1;
+  background: #ffffff;
+  color: #111111;
+}
+
+.report-print-head {
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #d4d4d4;
+}
+
+.report-print-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.report-print-subtitle {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+@media print {
+  #root {
+    display: none !important;
+  }
+  .report-print-portal {
+    position: static;
+    left: auto;
+    top: auto;
+    width: auto;
+    z-index: auto;
+    padding: 0;
+  }
+  /* Force a clean light report regardless of the app's (possibly dark) theme. */
+  .report-print-portal,
+  .report-print-portal * {
+    background-color: transparent !important;
+    color: #111111 !important;
+    border-color: #d4d4d4 !important;
+    box-shadow: none !important;
+  }
+  .report-print-portal pre,
+  .report-print-portal code {
+    background-color: #f4f4f5 !important;
+  }
+  .report-print-portal a {
+    color: #1d4ed8 !important;
+  }
+  .report-print-portal .report-print-subtitle {
+    color: #6b7280 !important;
+  }
+}

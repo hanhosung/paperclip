@@ -3650,6 +3650,8 @@
       "running": "Running",
       "sending": "Sending...",
       "copyMessage": "Copy message",
+      "exportMarkdown": "Export as Markdown",
+      "exportPdf": "Export as PDF",
       "moreActions": "More actions",
       "viewRun": "View run",
       "stopRun": "Stop run",

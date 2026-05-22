@@ -134,7 +134,8 @@ import { issueStatusKey } from "../lib/enum-labels";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Textarea } from "@/components/ui/textarea";
-import { AlertTriangle, ArrowRight, Brain, Check, ChevronDown, ClipboardList, Copy, Hammer, Loader2, MoreHorizontal, Paperclip, PauseCircle, Search, Square, ThumbsDown, ThumbsUp } from "lucide-react";
+import { AlertTriangle, ArrowRight, Brain, Check, ChevronDown, ClipboardList, Copy, FileDown, Hammer, Loader2, MoreHorizontal, Paperclip, PauseCircle, Printer, Search, Square, ThumbsDown, ThumbsUp } from "lucide-react";
+import { useReportExport } from "@/hooks/useReportExport";
 import { IssueBlockedNotice } from "./IssueBlockedNotice";
 import { IssueAssignedBacklogNotice } from "./IssueAssignedBacklogNotice";
 import { IssueRecoveryActionCard, type RecoveryResolveOutcome } from "./IssueRecoveryActionCard";
@@ -1198,6 +1199,18 @@ function getThreadMessageCopyText(message: ThreadMessage) {
     .join("\n\n");
 }
 
+/** Compact `YYYYMMDD-HHmm` stamp for export filenames. */
+function reportExportTimestamp(value?: Date | string | null): string {
+  const date = value ? new Date(value) : new Date();
+  const pad = (n: number) => String(n).padStart(2, "0");
+  return `${date.getFullYear()}${pad(date.getMonth() + 1)}${pad(date.getDate())}-${pad(date.getHours())}${pad(date.getMinutes())}`;
+}
+
+/** Filesystem-safe slug from an author name (keeps Korean and alphanumerics). */
+function reportExportSlug(name: string): string {
+  return name.replace(/[^\p{L}\p{N}]+/gu, "_").replace(/^_+|_+$/g, "") || "report";
+}
+
 const IssueChatTextParts = memo(function IssueChatTextParts({
   message,
   recessed = false,
@@ -1503,6 +1516,10 @@ function IssueChatAssistantMessage({
   const [prevFoldKey, setPrevFoldKey] = useState({ messageId: message.id, isFoldable });
   const [copied, setCopied] = useState(false);
   const copyText = getThreadMessageCopyText(message);
+  const { exportMarkdown, exportPdf, printPortal } = useReportExport();
+  const canExportReport = copyText.trim().length > 0;
+  const reportSubtitle = message.createdAt ? formatDateTime(message.createdAt) : "";
+  const reportFilename = `${reportExportSlug(authorName)}-${reportExportTimestamp(message.createdAt)}.md`;
 
   // Derive fold state synchronously during render (not in useEffect) so the
   // browser never paints the un-folded intermediate state — prevents the
@@ -1533,6 +1550,7 @@ function IssueChatAssistantMessage({
 
   return (
     <div id={anchorId}>
+      {printPortal}
       <div className="flex items-start gap-2.5 py-1.5">
         <Avatar size="sm" className="shrink-0">
           {agentIcon ? (
@@ -1664,6 +1682,20 @@ function IssueChatAssistantMessage({
                       <Copy className="mr-2 h-3.5 w-3.5" />
                       {t("issueChat.message.copyMessage")}
                     </DropdownMenuItem>
+                    {canExportReport ? (
+                      <>
+                        <DropdownMenuItem onClick={() => exportMarkdown(reportFilename, copyText)}>
+                          <FileDown className="mr-2 h-3.5 w-3.5" />
+                          {t("issueChat.message.exportMarkdown")}
+                        </DropdownMenuItem>
+                        <DropdownMenuItem
+                          onClick={() => exportPdf({ title: authorName, subtitle: reportSubtitle, markdown: copyText })}
+                        >
+                          <Printer className="mr-2 h-3.5 w-3.5" />
+                          {t("issueChat.message.exportPdf")}
+                        </DropdownMenuItem>
+                      </>
+                    ) : null}
                     {canStopRun && onStopRun && runId ? (
                       <DropdownMenuItem
                         disabled={isStoppingRun}

@@ -3650,6 +3650,8 @@
       "running": "실행 중",
       "sending": "전송 중...",
       "copyMessage": "메시지 복사",
+      "exportMarkdown": "Markdown으로 내보내기",
+      "exportPdf": "PDF로 내보내기",
       "moreActions": "추가 작업",
       "viewRun": "실행 보기",
       "stopRun": "실행 중지",
