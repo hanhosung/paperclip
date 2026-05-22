@@ -1640,6 +1640,30 @@ function IssueChatAssistantMessage({
                 >
                   {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
                 </button>
+                {canExportReport ? (
+                  <>
+                    <button
+                      type="button"
+                      className="inline-flex h-7 items-center gap-1 rounded-md px-1.5 text-[11px] font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                      title={t("issueChat.message.exportMarkdown")}
+                      aria-label={t("issueChat.message.exportMarkdown")}
+                      onClick={() => exportMarkdown(reportFilename, copyText)}
+                    >
+                      <FileDown className="h-3.5 w-3.5" />
+                      MD
+                    </button>
+                    <button
+                      type="button"
+                      className="inline-flex h-7 items-center gap-1 rounded-md px-1.5 text-[11px] font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                      title={t("issueChat.message.exportPdf")}
+                      aria-label={t("issueChat.message.exportPdf")}
+                      onClick={() => exportPdf({ title: authorName, subtitle: reportSubtitle, markdown: copyText })}
+                    >
+                      <Printer className="h-3.5 w-3.5" />
+                      PDF
+                    </button>
+                  </>
+                ) : null}
                 {commentId && onVote ? (
                   <IssueChatFeedbackButtons
                     activeVote={activeVote}
@@ -1682,20 +1706,6 @@ function IssueChatAssistantMessage({
                       <Copy className="mr-2 h-3.5 w-3.5" />
                       {t("issueChat.message.copyMessage")}
                     </DropdownMenuItem>
-                    {canExportReport ? (
-                      <>
-                        <DropdownMenuItem onClick={() => exportMarkdown(reportFilename, copyText)}>
-                          <FileDown className="mr-2 h-3.5 w-3.5" />
-                          {t("issueChat.message.exportMarkdown")}
-                        </DropdownMenuItem>
-                        <DropdownMenuItem
-                          onClick={() => exportPdf({ title: authorName, subtitle: reportSubtitle, markdown: copyText })}
-                        >
-                          <Printer className="mr-2 h-3.5 w-3.5" />
-                          {t("issueChat.message.exportPdf")}
-                        </DropdownMenuItem>
-                      </>
-                    ) : null}
                     {canStopRun && onStopRun && runId ? (
                       <DropdownMenuItem
                         disabled={isStoppingRun}
