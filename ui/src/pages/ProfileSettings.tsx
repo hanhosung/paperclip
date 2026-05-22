@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { LanguageSelector } from "@/components/LanguageSelector";
+import { CurrencySelector } from "@/components/CurrencySelector";
 import { useTranslation } from "@/i18n";
 
 function deriveInitials(name: string) {
@@ -277,6 +278,14 @@ export function ProfileSettings() {
           <p className="text-xs text-muted-foreground">
             {t("settings.language.description")}
           </p>
+        </div>
+
+        <div className="space-y-2 border-t border-border/60 pt-6">
+          <Label htmlFor="profile-currency">{t("settings.currency.label")}</Label>
+          <p className="text-xs text-muted-foreground">
+            {t("settings.currency.description")}
+          </p>
+          <CurrencySelector id="profile-currency" />
         </div>
       </section>
     </div>

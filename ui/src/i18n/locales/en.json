@@ -167,6 +167,16 @@
       "label": "Language",
       "description": "Choose the display language for the dashboard."
     },
+    "currency": {
+      "label": "Currency",
+      "description": "Choose the display currency for costs and budgets.",
+      "option": {
+        "USD": "US Dollar (US$)",
+        "KRW": "Korean Won (₩)"
+      },
+      "fxRateLabel": "Manual exchange rate (per 1 USD)",
+      "fxRateDescription": "KRW shown for 1 USD. Edit anytime; applied only when the currency is Korean Won."
+    },
     "shell": {
       "title": "Instance Settings"
     },

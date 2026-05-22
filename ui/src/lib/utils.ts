@@ -3,6 +3,7 @@ import { twMerge } from "tailwind-merge";
 import { deriveAgentUrlKey, deriveProjectUrlKey, normalizeProjectUrlKey, hasNonAsciiContent } from "@paperclipai/shared";
 import type { BillingType } from "@paperclipai/shared";
 import { i18n, t } from "@/i18n";
+import { getCurrency, getFxRate } from "./currency";
 
 /** Active BCP-47 locale tag for Intl formatting — follows the chosen UI language. */
 function activeLocale(): string {
@@ -31,12 +32,20 @@ export function asFiniteNumber(value: unknown, fallback: number) {
 }
 
 export function formatCents(cents: number): string {
+  const dollars = cents / 100;
+  if (getCurrency() === "KRW") {
+    return new Intl.NumberFormat(activeLocale(), {
+      style: "currency",
+      currency: "KRW",
+      maximumFractionDigits: 0,
+    }).format(dollars * getFxRate());
+  }
   return new Intl.NumberFormat(activeLocale(), {
     style: "currency",
     currency: "USD",
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
-  }).format(cents / 100);
+  }).format(dollars);
 }
 
 export function formatNumber(n: number): string {
