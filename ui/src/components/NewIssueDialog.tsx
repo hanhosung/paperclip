@@ -469,6 +469,9 @@ export function NewIssueDialog() {
     enabled: !!effectiveCompanyId && newIssueOpen,
   });
 
+  /** New issues default to the CEO so analysis requests reach it without a manual step. */
+  const ceoAgent = useMemo(() => (agents ?? []).find((agent) => agent.role === "ceo"), [agents]);
+
   const { data: projects } = useQuery({
     queryKey: queryKeys.projects.list(effectiveCompanyId!),
     queryFn: () => projectsApi.list(effectiveCompanyId!),
@@ -734,12 +737,17 @@ export function NewIssueDialog() {
       initializationKeyRef.current = null;
       return;
     }
-    const initializationKey = `${selectedCompanyId ?? ""}:${JSON.stringify(newIssueDefaults)}`;
+    const initializationKey = `${selectedCompanyId ?? ""}:${ceoAgent?.id ?? ""}:${JSON.stringify(newIssueDefaults)}`;
     if (initializationKeyRef.current === initializationKey) return;
     initializationKeyRef.current = initializationKey;
     setDialogCompanyId(selectedCompanyId);
     setSelectedLabelIds([]);
     executionWorkspaceDefaultProjectId.current = null;
+
+    const ceoFallbackAssignee = ceoAgent
+      ? assigneeValueFromSelection({ assigneeAgentId: ceoAgent.id })
+      : "";
+    const defaultAssigneeValue = assigneeValueFromSelection(newIssueDefaults) || ceoFallbackAssignee;
 
     const draft = loadDraft();
     if (newIssueDefaults.parentId) {
@@ -755,7 +763,7 @@ export function NewIssueDialog() {
       setPriority(newIssueDefaults.priority ?? "");
       setProjectId(defaultProjectId);
       setProjectWorkspaceId(defaultProjectWorkspaceId);
-      setAssigneeValue(assigneeValueFromSelection(newIssueDefaults));
+      setAssigneeValue(defaultAssigneeValue);
       setAssigneeModelLane("primary");
       setAssigneeModelOverride("");
       setAssigneeThinkingEffort("");
@@ -776,7 +784,7 @@ export function NewIssueDialog() {
       const hasExplicitProjectWorkspaceId = newIssueDefaults.projectWorkspaceId !== undefined;
       setProjectId(defaultProjectId);
       setProjectWorkspaceId(newIssueDefaults.projectWorkspaceId ?? defaultProjectWorkspaceIdForProject(defaultProject));
-      setAssigneeValue(assigneeValueFromSelection(newIssueDefaults));
+      setAssigneeValue(defaultAssigneeValue);
       setReviewerValue("");
       setApproverValue("");
       setShowReviewerRow(false);
@@ -803,7 +811,7 @@ export function NewIssueDialog() {
       setAssigneeValue(
         newIssueDefaults.assigneeAgentId || newIssueDefaults.assigneeUserId
           ? assigneeValueFromSelection(newIssueDefaults)
-          : (draft.assigneeValue ?? draft.assigneeId ?? ""),
+          : (draft.assigneeValue ?? draft.assigneeId ?? ceoFallbackAssignee),
       );
       setReviewerValue(draft.reviewerValue ?? "");
       setApproverValue(draft.approverValue ?? "");
@@ -846,7 +854,7 @@ export function NewIssueDialog() {
       setPriority(newIssueDefaults.priority ?? "");
       setProjectId(defaultProjectId);
       setProjectWorkspaceId(newIssueDefaults.projectWorkspaceId ?? defaultProjectWorkspaceIdForProject(defaultProject));
-      setAssigneeValue(assigneeValueFromSelection(newIssueDefaults));
+      setAssigneeValue(defaultAssigneeValue);
       setReviewerValue("");
       setApproverValue("");
       setShowReviewerRow(false);
@@ -860,7 +868,7 @@ export function NewIssueDialog() {
         ? defaultProjectId || null
         : null;
     }
-  }, [newIssueOpen, newIssueDefaults, orderedProjects, selectedCompanyId, setIssueText]);
+  }, [newIssueOpen, newIssueDefaults, orderedProjects, selectedCompanyId, setIssueText, ceoAgent]);
 
   useEffect(() => {
     if (!supportsAssigneeOverrides) {
